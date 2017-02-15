@@ -1,0 +1,47 @@
+<div class="modal fade" id="skillagogo-newsletter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="vertical-alignment-helper">
+    <div class="modal-dialog vertical-align-center" role="document">
+      <div class="modal-content">
+        <div class="box-newsletter">
+          <div class="body-white-newsletter">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="pull-right">
+                  <a class="close close-modal" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="title">
+                  {{ line('title', 'subscribe_newsletter') }}
+                </div>
+                <div class="description">
+                  {{ line('sub', 'subscribe_newsletter') }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="body-footer">
+            <div class="row">
+              <div class="col-md-12">
+                {{ form_open('/', {id: 'form-newsletter-popup'}) }}
+                  <div class="input-group">
+                    <input type="email" name="email" class="form-control input-lg" placeholder="{{line('email', 'field')}}" required>
+                    <span class="input-group-btn">
+                      <button class="btn btn-default btn-lg" type="submit">
+                        <i class="fa fa-send"></i>&nbsp;
+                        {{ line('subscribe', 'subscribe_newsletter') }}
+                      </button>
+                    </span>
+                  </div>
+                  <label for="email" class="error" style="display: none;"></label>
+                {{ form_close() }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

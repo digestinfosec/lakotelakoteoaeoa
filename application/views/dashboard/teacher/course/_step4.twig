@@ -1,0 +1,84 @@
+<div class="setup-content" id="step-4">
+  <div class="col-md-12">
+    <div class="box-create-class-wrapper">
+      <div class="box-form-create">
+        <div class="box-title-top">
+          <div class="title">
+            {{ line('step_other_class_info','create_course') }}
+          </div>
+        </div>
+        <div class="box-input">
+          <div class="row">
+            <div class="col-md-6 break">
+              <label for="class_title">
+                <span>{{ line('class_pack','create_course') }}</span>
+                <a tabindex="0" data-toggle="popover" data-trigger="focus" data-content="{{line('class_pack_tooltip','field')}}">
+                  <img src="{{ base_url() }}assets/images/tooltips other.png" alt="">
+                </a>
+              </label>
+              <label class="select-create-class">
+                {% set options = {
+                '0': { 'label': line('yes','button'), 'value': 1 },
+                '1': { 'label': line('no','button'), 'value': 0 }} %}
+                {{ sg_field('select', 'pack', course.pack, {id: 'class_pack', class: 'form-control'}, '', options) }}
+              </label>
+              <input type="text" name="package_detail" id="package_detail" value="{{ course.package_detail }}" class="form-control" placeholder="{{line('package_detail','field')}}">
+            </div>
+            <div class="col-md-6 break">
+              <label for="level">
+                <span>{{ line('level','create_course') }}</span>
+                {#<a tabindex="0" data-toggle="popover" data-trigger="focus" data-content="{{line('level_tooltip','field')}}">#}
+                  {#<img src="{{ base_url() }}assets/images/tooltips other.png" alt="">#}
+                {#</a>#}
+              </label>
+              <label class="select-create-class">
+                {% set options = {
+                '0': { 'label': line('beginner','field'), 'value': '1' },
+                '1': { 'label': line('intermediate','field'), 'value': '2' },
+                '3': { 'label': line('advanced','field'), 'value': '3' }} %}
+                {{ sg_field('select', 'level', course.level, attr, '', options) }}
+              </label>
+            </div>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-12 break">
+                  <label for="special_equipment">
+                    <span>{{ line('special_equipment_to_bring','create_course') }}</span>
+                    {#<a tabindex="0" data-toggle="popover" data-trigger="focus" data-content="{{line('special_equipment_to_bring_tooltip','field')}}">#}
+                      {#<img src="{{ base_url() }}assets/images/tooltips other.png" alt="">#}
+                    {#</a>#}
+                  </label>
+                  <textarea class="form-control tinymce-class textarea class-equipment" name="special_equipment" rows="5" cols="10">{{ course.special_equipment }}</textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="box-button-create">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-center">
+              <button class="btn btn-prev-c-class btn-prev my-btn-step bg-sgogo-red" data-color="red" type="button">
+                {{ line('dashboard_110', 'dashboard') }}
+              </button>
+              <button class="btn btn-c-next-1 no-border btn-preview btn-lg bg-sgogo-yellow enabled-action-preview4" type="button">
+                {{ line('dashboard_106', 'dashboard') }}
+              </button>
+              &nbsp;
+              {% if not session.class_admin_edit %}
+              <button class="btn btn-c-next-1 no-border btn-save-draft btn-lg bg-sgogo-yellow enabled-action-draft4" type="submit" value="draft">
+                {{ line('dashboard_107', 'dashboard') }}
+              </button>
+              &nbsp;
+              {% endif %}
+              <button class="btn btn-next-c-class btn-next my-btn-step bg-sgogo-purple-light"data-color="purple-light" data-next-class="step-5">
+                {{ line('dashboard_109', 'dashboard') }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

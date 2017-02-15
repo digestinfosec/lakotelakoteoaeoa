@@ -1,0 +1,224 @@
+<?php
+
+$lang['user-menu'] = 'User Menu';
+$lang['profile'] = 'Profile';
+$lang['forgot'] = 'reset password';
+$lang['no-acc'] = 'Don\'t have an account?';
+$lang['enter_email'] = 'Enter the email address associated with your account, and we\'ll email you a link to reset your password.';
+$lang['send_email'] = 'Send reset link';
+$lang['teacher-menu'] = 'Teacher Menu';
+$lang['class-sched'] = 'Class & Schedule';
+$lang['reviews'] = 'Reviews';
+$lang['comments'] = 'Comments';
+$lang['payout'] = 'Payout';
+$lang['student-menu'] = 'Learner Menu';
+$lang['payments'] = 'Payments';
+$lang['credits'] = 'Credits';
+
+$lang['please_wait'] = 'Please wait...';
+
+$lang['look_other_reviews'] = "Look other reviews";
+$lang['list_comments_class'] = "Comments";
+
+$lang['on_average_all_class'] = "on average of all delivered classes";
+
+// titleName
+$lang['title_1'] = "Cart";
+$lang['title_2'] = "Checkout Payment";
+$lang['title_3'] = "Finish Payment";
+$lang['title_4'] = "Payment Confirmation";
+$lang['title_5'] = "Rating and Review";
+$lang['title_6'] = "Change Price";
+$lang['title_7'] = "Change Schedule";
+$lang['title_8'] = "Change Venue";
+$lang['title_9'] = "Create a Class";
+$lang['title_10'] = "Forgot Password";
+$lang['title_11'] = "Login";
+$lang['title_12'] = "Resend Confirmation";
+$lang['title_13'] = "Reset Password";
+$lang['title_14'] = "Comments";
+$lang['title_15'] = "Class Profile";
+$lang['title_16'] = "Class Directory";
+$lang['title_17'] = "Class Profile";
+$lang['title_18'] = "About Us";
+$lang['title_19'] = "Careers";
+$lang['title_20'] = "Contact Us";
+$lang['title_21'] = "FAQ";
+$lang['title_22'] = "How to Learn";
+$lang['title_23'] = "How to Teach";
+$lang['title_24'] = "Privacy Policy";
+$lang['title_25'] = "Terms of Service";
+$lang['title_26'] = "Rating and Review Class";
+$lang['title_27'] = "Teacher Profile";
+$lang['title_28'] = "Register";
+
+// subTitleHeader
+$lang['subtitle_1'] = "Class Booking";
+$lang['subtitle_2'] = "Order Summary";
+$lang['subtitle_3'] = "Finish Payment";
+$lang['subtitle_4'] = "Review Class";
+$lang['subtitle_5'] = "Modify Class Price";
+$lang['subtitle_6'] = "Modify Class schedule";
+$lang['subtitle_7'] = "Modify Class venue";
+$lang['subtitle_8'] = "Create a Class";
+$lang['subtitle_9'] = "Comment";
+$lang['subtitle_10'] = "Careers";
+$lang['subtitle_11'] = "Faq";
+$lang['subtitle_12'] = "Review";
+
+$lang['dashboard_shared_title'] = "Dashboard";
+$lang['dashboard_shared_subtitle'] = "Your Dashboard";
+
+// student
+$lang['dashboard_1'] = "commented classes";
+$lang['dashboard_2'] = "Current classes";
+$lang['dashboard_3'] = "Previous classes";
+$lang['dashboard_4'] = "history";
+$lang['dashboard_5'] = "PERSONAL INFO";
+$lang['dashboard_6'] = "password settings";
+$lang['dashboard_7'] = "Payment history";
+$lang['dashboard_8'] = "payment settings";
+$lang['dashboard_9'] = "reviewed classes";
+$lang['dashboard_10'] = "your wishlist";
+$lang['dashboard_11'] = "NOTIFICATIONS";
+$lang['dashboard_12'] = "Comments On";
+$lang['dashboard_13'] = "There are no comments yet.";
+$lang['dashboard_14'] = "There is no schedule yet, but it doesn't have to be!";
+$lang['dashboard_15'] = "CHECKOUT";
+$lang['dashboard_16'] = "BROWSE MORE CLASSES";
+$lang['dashboard_17'] = "Payment Method";
+$lang['dashboard_18'] = "Pay with bank transfer";
+$lang['dashboard_19'] = "Pay with PayPal";
+$lang['dashboard_20'] = "ITEMS IN MY CART";
+$lang['dashboard_21'] = "Browse classes";
+$lang['dashboard_22'] = "Finish";
+$lang['dashboard_23'] = "Thank you for your order";
+$lang['dashboard_24'] = "Receipt Code";
+$lang['dashboard_25'] = "Total payment";
+$lang['dashboard_26'] = "This document has been sent to your email";
+$lang['dashboard_27'] = "Download Receipt";
+$lang['dashboard_28'] = "Your order";
+$lang['dashboard_29'] = "Your payment method is";
+$lang['dashboard_30'] = "bank transfer";
+$lang['dashboard_31'] = "PayPal";
+$lang['dashboard_32'] = "There are no receipts yet.";
+$lang['dashboard_33'] = "RECEIPT";
+$lang['dashboard_34'] = "Issue Date :";
+$lang['dashboard_35'] = "Payment Method :";
+$lang['dashboard_36'] = "Service";
+$lang['dashboard_37'] = "Quantity";
+$lang['dashboard_38'] = "Category";
+$lang['dashboard_39'] = "Price";
+$lang['dashboard_40'] = "If you have any questions or concerns, please contact us at studentcare@skillagogo.com";
+$lang['dashboard_41'] = "Print";
+$lang['dashboard_42'] = "Download";
+$lang['dashboard_43'] = "There are no reviews yet.";
+// $lang['dashboard_43'] = "Reviews will be published once the class has taken place.";
+$lang['dashboard_44'] = "Your wishlist is still empty.";
+$lang['dashboard_45'] = "I hereby certify that this review is on my experience and actually my personal opinion on the class, and I do not have a personal relationship or a business with that class, and not accept the offer of incentives as well as any payment to write this review.";
+$lang['dashboard_46'] = "Number of Pax";
+$lang['dashboard_47'] = "More Comments";
+$lang['dashboard_48'] = "Would you like to use skillagogo credits?";
+$lang['dashboard_49'] = "Your cart";
+$lang['dashboard_50'] = "PROFESSIONAL INFO";
+$lang['dashboard_51'] = "Print Voucher";
+$lang['dashboard_52'] = "Due Date :";
+$lang['dashboard_53'] = "Customer Details :";
+$lang['dashboard_54'] = "Issued by: Skillagogo Pte Ltd, a company registered in Singapore, reg no: 201507746N";
+$lang['dashboard_55'] = "There are no drafts yet.";
+$lang['dashboard_56'] = "There are no comments yet, or perhaps your comment for this class has not been accepted yet.";
+$lang['dashboard_57'] = "There are no reviews yet, or perhaps your review for this class has not been accepted yet.";
+$lang['dashboard_58'] = "There is no credit usage yet.";
+$lang['dashboard_59'] = "Do you really want to delete this class?";
+$lang['dashboard_60'] = "Delete";
+$lang['dashboard_61'] = "Teacher Details :";
+$lang['dashboard_62'] = "PAYOUT DETAILS";
+$lang['dashboard_63'] = "If you have any questions or concerns, please contact us at teachercare@skillagogo.com";
+$lang['dashboard_64'] = "There are no reviews yet for this class";
+$lang['cancelled_class'] = "Cancelled Class";
+$lang['cancelled'] = "Cancelled";
+$lang['finished'] = "Finished";
+
+// teacher
+$lang['dashboard_101'] = "change schedule";
+$lang['dashboard_102'] = "Add more";
+$lang['dashboard_103'] = "Remove";
+$lang['dashboard_104'] = "Save";
+$lang['dashboard_1044'] = "Cancel";
+$lang['dashboard_105'] = "Select category";
+$lang['dashboard_106'] = "preview";
+$lang['dashboard_107'] = "Save as draft";
+$lang['dashboard_108'] = "Publish";
+$lang['dashboard_109'] = "Next";
+$lang['dashboard_110'] = "Previous";
+$lang['dashboard_111'] = "By clicking on the \"Publish\" button, you accept skillagogo's";
+$lang['dashboard_112'] = "if you are having trouble using this CREATE A CLASS feature, contact us at support@skillagogo.com";
+$lang['dashboard_113'] = "Delete";
+$lang['dashboard_114'] = "Edit draft";
+$lang['dashboard_115'] = "Preview";
+$lang['dashboard_116'] = "New schedule";
+$lang['dashboard_117'] = "New price";
+$lang['dashboard_118'] = "Cancel Class";
+$lang['dashboard_119'] = "your previous classes";
+$lang['dashboard_120'] = "Reviews of";
+$lang['dashboard_121'] = "More Reviews";
+$lang['dashboard_122'] = "Published";
+$lang['dashboard_123'] = "Drafts";
+$lang['dashboard_124'] = "payment history";
+$lang['dashboard_125'] = "Voucher";
+$lang['dashboard_126'] = "Ratings of";
+$lang['dashboard_127'] = "Review of";
+$lang['dashboard_128'] = "Redeemed Vouchers";
+$lang['dashboard_129'] = "New venue";
+$lang['dashboard_130'] = "There are no payouts yet.";
+$lang['dashboard_131'] = "There are no vouchers yet.";
+
+// shared
+$lang['dashboard_201'] = "NOTIFY ME WHEN";
+$lang['dashboard_202'] = "Someone registers to my class";
+$lang['dashboard_203'] = "Someone adds my class to their wishlist";
+$lang['dashboard_204'] = "SKILLAGOGO NEWSLETTER";
+$lang['dashboard_205'] = "I'd like to subscribe to skillagogo Newsletter";
+$lang['dashboard_206'] = "Add Rating";
+$lang['dashboard_207'] = "GENERAL INFO";
+$lang['dashboard_208'] = "BILLING ADDRESS";
+
+$lang['cancellation_by_teacher'] = "Cancellation by teacher";
+$lang['cancellation_by_student'] = "Cancellation by student";
+$lang['not_attending'] = "No attendance";
+$lang['used_for_payment'] = "Payment";
+$lang['credit_expired'] = "Expired";
+
+// voucher
+$lang['dashboard_301'] = "Your Balance";
+$lang['dashboard_302'] = "PAYMENT DATE";
+$lang['dashboard_303'] = "VOUCHER CODE";
+$lang['dashboard_304'] = "STATUS";
+$lang['dashboard_305'] = "Current Month Class Voucher Redeem";
+$lang['dashboard_306'] = "CLASS";
+$lang['dashboard_307'] = "CLASS PRICE";
+$lang['dashboard_308'] = "ATTENDEE";
+$lang['dashboard_309'] = "IS REDEEMED";
+$lang['dashboard_310'] = "Not Attended";
+$lang['dashboard_311'] = "Paid";
+$lang['dashboard_312'] = "Pending";
+$lang['dashboard_313'] = "Yes";
+$lang['dashboard_314'] = "AMOUNT";
+$lang['dashboard_315'] = "DESCRIPTION";
+$lang['dashboard_316'] = "STATUS";
+$lang['dashboard_317'] = "Previous month balance";
+$lang['dashboard_318'] = "Current month balance";
+$lang['dashboard_319'] = "Cancelled";
+
+// payment confirmation
+$lang['dashboard_401'] = "Payment Confirmation";
+$lang['dashboard_402'] = "Payment Confirmation Form";
+$lang['dashboard_403'] = "Thank you for registering to:";
+$lang['dashboard_404'] = "If you have processed your payment via Bank/ATM Transfer, please fill this form so we can confirm your payment to process your class registration.";
+$lang['dashboard_405'] = "Bank Transaction Code:";
+$lang['dashboard_406'] = "Bank Destination:";
+$lang['dashboard_407'] = "Your Bank Name:";
+$lang['dashboard_408'] = "Your Bank Account Holder Name:";
+$lang['dashboard_409'] = "Transfer Amount:";
+$lang['dashboard_410'] = "Transfer Date:";
+$lang['dashboard_411'] = "Transfer Receipt (if any)";

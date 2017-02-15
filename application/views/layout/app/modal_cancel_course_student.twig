@@ -1,0 +1,51 @@
+<div class="modal fade" id="skillagogo-cancel-class-teacher" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="vertical-alignment-helper">
+    <div class="modal-dialog vertical-align-center" role="document">
+      <div class="modal-content">
+        {{ form_open('dashboard/student/course/cancel') }}
+        <div class="box-newsletter box-cancellation">
+          <div class="body-white">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="pull-right">
+                  <a class="close close-modal" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="title">
+                  {{line('class_cancellation','field')}}
+                </div>
+              </div>
+              <div class="col-md-12">
+                {{ form_open('', {id: 'form-newsletter-popup'}) }}
+                  <div class="col-md-12">
+                    <label>{{line('class_cancellation_1','field')}}</label>
+                    <textarea name="cancel_reason" id="change_reason" cols="10" rows="5" class="form-control" required placeholder="{{line('class_cancellation_2','field')}}"></textarea>
+                  </div>
+                {{ form_close() }}
+              </div>
+            </div>
+          </div>
+          <input type="hidden" id="voucher_code" name="voucher_code">
+          <div class="footer-cancellation bg-sgogo-red">
+            <div class="pull-right">
+              <button class="btn btn-lg btn-lg-red-dark brd-50" type="submit" onsubmit="return confirm('{{line('class_cancellation_3','field')}}');">
+                <i class="fa fa-send"></i>
+                {{ line('submit', 'button') }}
+              </button>
+            </div>
+            <div class="pull-left">
+              <button class="btn btn-lg btn-lg-yellow-dark brd-50" data-dismiss="modal" aria-hidden="true">
+                <i class="fa fa-times"></i>
+                {{ line('cancel', 'button') }}
+              </button>
+            </div>
+          </div>
+        </div>
+        {{ form_close() }}
+      </div>
+    </div>
+  </div>
+</div>

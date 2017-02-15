@@ -1,0 +1,72 @@
+{% extends 'layout/app/master.twig' %}
+{% set titleName = line('title_1', 'dashboard') %}
+{% set ClassHeader1Color = "bg-sgogo-gray-dark" %}
+{% set ClassHeader2Color = "bg-sgogo-gray-dark" %}
+{% set SubTitleHeader = line('subtitle_1', 'dashboard') %}
+{% set header0, header1, header2, header3 = true, true, true, true %}
+{% set footer = true %}
+
+{% block content %}
+
+  <section class="checkout-payment cart">
+    <div class="container">
+      <div class="col-md-8">
+        <div class="box-checkout-wrapper">
+          <div class="box-form-create">
+            <div class="box-title-top">
+              <div class="title">{{ line('dashboard_49', 'dashboard') }}</div>
+            </div>
+            <div class="body-cart">
+              <div class="box-listing-classes">
+                <div class="row">
+                  {% for course in courses %}
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                      {% include 'card/cart_card.twig' %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="sidebar-cart">
+          <div class="box-price">
+            <div class="total">Total</div>
+            <div class="price">
+              {% if courses %}
+                {% set course = courses|first %}
+                <span>{{ delimiter_number(course.currency, total) }}</span>
+              {% else %}
+                <span>0</span>
+              {% endif %}
+            </div>
+          </div>
+          <div class="break"></div>
+          <div class="text-center">
+            <a href="{{ base_url('dashboard/student/order/checkout') }}" class="btn btn-lg-red">{{ line('dashboard_15', 'dashboard') }}</a>
+            <div class="break5"></div>
+            <a href="{{ base_url('course') }}" class="btn btn-lg-gray">{{ line('dashboard_16', 'dashboard') }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% include 'layout/app/modal_confirm_delete_cart_class.twig' %}
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+  function confirmDeleteModal(id){
+    $('#deleteModal').modal();
+    $('#deleteButton').html('<a class="btn btn-lg-blue" href="{{ base_url("dashboard/student/order/delete") }}?id='+id+'"><i class="fa fa-times"></i>&nbsp;{{ line("dashboard_60", "dashboard") }}</a>');
+  }
+
+  function deleteData(id){
+    $('#deleteModal').modal('hide');
+  }  
+</script>
+{% include('shared/app/_include_wishlist_js_script.twig') %}
+{% endblock %}

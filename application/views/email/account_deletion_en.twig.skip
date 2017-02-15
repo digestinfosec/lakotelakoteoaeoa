@@ -1,0 +1,71 @@
+{% extends 'email/shared/body.twig' %}
+
+
+{% block content %}
+    <tr>
+      <td align="center" valign="top" class="fix-box">
+        <table width="600" align="center" border="0" cellspacing="0" cellpadding="0" class="container" bgcolor="#ffffff" style="background-color: #ffffff; border-bottom:1px solid #c7c7c7; ">
+          <tbody>
+            <tr>
+              <td valign="top">
+                <table width="100%" align="center" border="0" cellspacing="0" cellpadding="0" class="full-width" bgcolor="#ffffff" style="background-color:#ffffff;">
+                  <tbody>
+                    <tr>
+                      <td height="20">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td valign="top">
+                        <table border="0" cellspacing="0" cellpadding="0" align="left">
+                          <tbody>
+                            <tr>
+                              <td style="font-size: 18px; line-height: 22px; font-family:Roboto,Open Sans, Arial,Tahoma, Helvetica, sans-serif; color:#555555; font-weight:300; text-align:left;">
+                                <span style="color: #555555; font-weight:300;">
+                                  <a href="#" style="text-decoration: none; color: #555555; font-weight: 300;">
+                                    {{ line('a1', 'email') }} {{ first_name }},
+                                  </a>
+                                </span>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="15">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="font-size: 13px; line-height: 22px; font-family:Arial,Tahoma, Helvetica, sans-serif; color:#a3a2a2; font-weight:300; text-align:left; ">
+                                {{ line('a9', 'email') }}
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="30">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="font-size: 13px; line-height: 22px; font-family:Arial,Tahoma, Helvetica, sans-serif; color:#a3a2a2; font-weight:300; text-align:left; ">
+                                {{ line('a10', 'email') }}
+                                <br>
+                                <br>
+                                <br>
+                                {{ line('a11', 'email') }}
+                                <br>
+                                <br>
+                                The skillagogo team
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td height="20">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+{% endblock %}

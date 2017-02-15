@@ -1,0 +1,52 @@
+{% set schedule = course.schedules|last %}
+{% set course_date_start = strtotime(schedule.date ~ ' ' ~ schedule.start_time) %}
+{% set course_date_end = strtotime(schedule.date ~ ' ' ~ schedule.end_time) %}
+
+<a href="{{ site_url('course/detail/' ~ course.course_id) }}">
+<div class="box-schedule">
+  <div class="date-left bg-sgogo-red">
+    <div class="date">{{ date('j', course_date_start) }}</div>
+    <div class="month">{{ date('F', course_date_start) }}</div>
+    <div class="year">{{ date('Y', course_date_start) }}</div>
+  </div>
+  <div class="description-right">
+    <div class="title">
+      {{ course.title }}
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="date-location">
+          <div class="icon">
+            <i class="fa fa-clock-o"></i>
+          </div>
+          <div class="description">
+            {{ date('j F Y', course_date_start) }}<br>
+            {{ date('g.ia', course_date_start) }} - {{ date('g.ia', course_date_end) }}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="date-location">
+          <div class="icon">
+            <i class="fa fa-map-marker"></i>
+          </div>
+          <div class="description">
+            {{ schedule.address_line1 }}
+          </div>
+        </div>
+      </div>
+      {% if is_class_schedule %}
+        <div class="col-md-12">
+          <div class="pull-right">
+            <div class="break5"></div>
+            <a href="{{ base_url('dashboard/rating/new_rating') }}/{{ course.id }}" class="btn btn-xs btn-xs-white">
+              <i class="fa fa-edit"></i>
+              {{ line('dashboard_206', 'dashboard') }}
+            </a>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+</a>

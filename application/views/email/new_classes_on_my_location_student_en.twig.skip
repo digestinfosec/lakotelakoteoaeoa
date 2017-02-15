@@ -1,0 +1,192 @@
+{% extends 'email/shared/body.twig' %}
+
+
+{% block content %}
+    <tr>
+      <td align="center" valign="top" class="fix-box">
+        <table width="600" align="center" border="0" cellspacing="0" cellpadding="0" class="container" bgcolor="#ffffff" style="background-color: #ffffff; border-bottom:1px solid #c7c7c7; ">
+          <tbody>
+            <tr>
+              <td valign="top">
+                <table width="560" align="center" border="0" cellspacing="0" cellpadding="0" class="full-width" bgcolor="#ffffff" style="background-color:#ffffff;">
+                  <tbody>
+                    <tr>
+                      <td height="20">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td valign="top">
+                        <table border="0" cellspacing="0" cellpadding="0" align="left">
+                          <tbody>
+                            <tr>
+                              <td style="font-size: 18px; line-height: 22px; font-family:Roboto,Open Sans, Arial,Tahoma, Helvetica, sans-serif; color:#555555; font-weight:300; text-align:left;">
+                                <span style="color: #555555; font-weight:300;">
+                                  <a href="#" style="text-decoration: none; color: #555555; font-weight: 300;">
+                                    {{ line('a1', 'email') }} {{first_name}},
+                                  </a>
+                                </span>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="15">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="font-size: 13px; line-height: 22px; font-family:Arial,Tahoma, Helvetica, sans-serif; color:#a3a2a2; font-weight:300; text-align:left; ">
+                                {{ line('a67', 'email') }}
+                                <br>
+                                <br>
+                                {# (using template to display new classes) #}
+                                <br>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <table align="left" border="0" cellspacing="0" cellpadding="0" class="container2" width="auto" style="mso-table-lspace:0pt; mso-table-rspace:0pt; border-color: #F5F5F5;">
+                                  <tr>
+                                    <td style="font-size: 14px; font-weight: bold; font-family: arial; margin-bottom: 10px; width: 100%; display: inline-block; border-bottom: 1px solid #CCCCCC; padding: 10px 0px; letter-spacing: 1px;">
+                                      BERIKUT KELAS KAMI LAINNYA YANG COCOK UNTUK ANDA
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      <table align="left" border="0" cellspacing="0" cellpadding="0" class="container2"style="width: 48%;">
+                                        <tr>
+                                          <td>
+                                            <img src="{{ base_url() }}assets/images/email/new/class.jpg" width="100%" style="height: 150px!important;">
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td style="  width: 91.4%; height: 85px; background-color: #F5F5F5; padding: 10px; margin-bottom: 20px;display: inline-block;border: 1px solid #E4E1E1;">
+                                            <span style="font-size: 14px; font-weight: bold; font-family: arial; margin-bottom: 10px; width: 100%; display: inline-block;">Belajar Angular JS untuk pemula</span><br>
+                                            <span style="font-size: 12px; color: #FF4754; font-family: arial; margin-bottom: 10px; width: 100%; display: inline-block;">Rp. 20.000.000,-</span><br>
+                                            <span style="font-size: 12px; font-family: arial; margin-bottom: 10px; width: 100%; display: inline-block;">
+                                              <img src="{{ base_url() }}assets/images/email/new/location.png" style="width: 15px; padding-left: 0px; float: left;">
+                                              &nbsp;Sukabumi
+                                            </span>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                      <table align="right" border="0" cellspacing="0" cellpadding="0" class="container2"style="width: 48%;">
+                                        <tr>
+                                          <td>
+                                            <img src="{{ base_url() }}assets/images/email/new/class.jpg" width="100%" style="height: 150px!important;">
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td style="  width: 91.4%; height: 85px; background-color: #F5F5F5; padding: 10px; margin-bottom: 20px;display: inline-block;border: 1px solid #E4E1E1;">
+                                            <span style="font-size: 14px; font-weight: bold; font-family: arial; margin-bottom: 10px; width: 100%; display: inline-block;">Belajar Angular JS untuk intermidate yakin bisa</span><br>
+                                            <span style="font-size: 12px; color: #FF4754; font-family: arial; margin-bottom: 10px; width: 100%; display: inline-block;">Rp. 20.000.000,-</span><br>
+                                            <span style="font-size: 12px; font-family: arial; margin-bottom: 10px; width: 100%; display: inline-block;">
+                                              <img src="{{ base_url() }}assets/images/email/new/location.png" style="width: 15px; padding-left: 0px; float: left;">
+                                              &nbsp;Depok
+                                            </span>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                      <table align="left" border="0" cellspacing="0" cellpadding="0" class="container2"style="width: 48%;">
+                                        <tr>
+                                          <td>
+                                            <img src="{{ base_url() }}assets/images/email/new/class.jpg" width="100%" style="height: 150px!important;">
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td style="  width: 91.4%; height: 85px; background-color: #F5F5F5; padding: 10px; margin-bottom: 20px;display: inline-block;border: 1px solid #E4E1E1;">
+                                            <span style="font-size: 14px; font-weight: bold; font-family: arial; margin-bottom: 10px; width: 100%; display: inline-block;">Belajar Angular JS untuk pemula</span><br>
+                                            <span style="font-size: 12px; color: #FF4754; font-family: arial; margin-bottom: 10px; width: 100%; display: inline-block;">Rp. 20.000.000,-</span><br>
+                                            <span style="font-size: 12px; font-family: arial; margin-bottom: 10px; width: 100%; display: inline-block;">
+                                              <img src="{{ base_url() }}assets/images/email/new/location.png" style="width: 15px; padding-left: 0px; float: left;">
+                                              &nbsp;Jakarta Barat
+                                            </span>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                      <table align="right" border="0" cellspacing="0" cellpadding="0" class="container2"style="width: 48%;">
+                                        <tr>
+                                          <td>
+                                            <img src="{{ base_url() }}assets/images/slide-1.jpg" width="100%" style="height: 150px!important;">
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td style="  width: 91.4%; height: 85px; background-color: #F5F5F5; padding: 10px; margin-bottom: 20px;display: inline-block;border: 1px solid #E4E1E1;">
+                                            <span style="font-size: 14px; font-weight: bold; font-family: arial; margin-bottom: 10px; width: 100%; display: inline-block;">Belajar Angular JS untuk intermidate yakin bisa</span><br>
+                                            <span style="font-size: 12px; color: #FF4754; font-family: arial; margin-bottom: 10px; width: 100%; display: inline-block;">Rp. 20.000.000,-</span><br>
+                                            <span style="font-size: 12px; font-family: arial; margin-bottom: 10px; width: 100%; display: inline-block;">
+                                              <img src="{{ base_url() }}assets/images/email/new/location.png" style="width: 15px; padding-left: 0px; float: left;">
+                                              &nbsp;Jakarta Pusat
+                                            </span>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                      <table align="left" border="0" cellspacing="0" cellpadding="0" class="container2"style="width: 48%;">
+                                        <tr>
+                                          <td>
+                                            <img src="{{ base_url() }}assets/images/slide-2.jpg" width="100%" style="height: 150px!important;">
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td style="  width: 91.4%; height: 85px; background-color: #F5F5F5; padding: 10px; margin-bottom: 20px;display: inline-block;border: 1px solid #E4E1E1;">
+                                            <span style="font-size: 14px; font-weight: bold; font-family: arial; margin-bottom: 10px; width: 100%; display: inline-block;">Belajar Angular JS untuk pemula</span><br>
+                                            <span style="font-size: 12px; color: #FF4754; font-family: arial; margin-bottom: 10px; width: 100%; display: inline-block;">Rp. 20.000.000,-</span><br>
+                                            <span style="font-size: 12px; font-family: arial; margin-bottom: 10px; width: 100%; display: inline-block;">
+                                              <img src="{{ base_url() }}assets/images/email/new/location.png" style="width: 15px; padding-left: 0px; float: left;">
+                                              &nbsp;Jakarta Timur
+                                            </span>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                      <table align="right" border="0" cellspacing="0" cellpadding="0" class="container2"style="width: 48%;">
+                                        <tr>
+                                          <td>
+                                            <img src="{{ base_url() }}assets/images/slide-2.jpg" width="100%" style="height: 150px!important;">
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td style="  width: 91.4%; height: 85px; background-color: #F5F5F5; padding: 10px; margin-bottom: 20px;display: inline-block;border: 1px solid #E4E1E1;">
+                                            <span style="font-size: 14px; font-weight: bold; font-family: arial; margin-bottom: 10px; width: 100%; display: inline-block;">Belajar Angular JS untuk intermidate yakin bisa</span><br>
+                                            <span style="font-size: 12px; color: #FF4754; font-family: arial; margin-bottom: 10px; width: 100%; display: inline-block;">Rp. 20.000.000,-</span><br>
+                                            <span style="font-size: 12px; font-family: arial; margin-bottom: 10px; width: 100%; display: inline-block;">
+                                              <img src="{{ base_url() }}assets/images/email/new/location.png" style="width: 15px; padding-left: 0px; float: left;">
+                                              &nbsp;Jakarta Selatan
+                                            </span>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="30">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="font-size: 13px; line-height: 22px; font-family:Arial,Tahoma, Helvetica, sans-serif; color:#a3a2a2; font-weight:300; text-align:left; ">
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                {{ line('a1', 'email') }}
+                                <br>
+                                <br>
+                                The skillagogo team
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td height="20">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+{% endblock %}

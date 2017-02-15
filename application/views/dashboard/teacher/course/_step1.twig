@@ -1,0 +1,176 @@
+<div class="setup-content" id="step-1">
+  <div class="col-md-12">
+    <div class="box-create-class-wrapper">
+      <div class="box-form-create">
+        <div class="box-title-top">
+          <div class="title">
+            {{ line('class_details','create_course') }}
+          </div>
+        </div>
+        <div class="box-input">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="col-md-12 break">
+                <div class="row form-create-class">
+                  <label for="title">
+                    <span>{{ line('class_title','create_course') }}<sup class="required-sag">*</sup></span>
+                    <a tabindex="0" data-toggle="popover" data-trigger="focus" data-content="{{line('class_title_tooltip','field')}}">
+                      <img src="{{ base_url() }}assets/images/tooltips details.png">
+                    </a>
+                  </label>
+                  <input type="text" name="title" value="{{ course.title }}" class="form-control"  required="required">
+                </div>
+              </div>
+              <div class="col-md-12 break">
+                <div class="row form-create-class">
+                  <label for="class_categories">
+                    <span>{{ line('class_categories','create_course') }}<sup class="required-sag">*</sup></span>
+                    {#<a tabindex="0" data-toggle="popover" data-trigger="focus" data-content="{{line('class_categories_tooltip','field')}}">#}
+                      {#<img src="{{ base_url() }}assets/images/tooltips details.png">#}
+                    {#</a>#}
+                  </label>
+                  <div class="select-create-class">
+                    <select name="category_id" class="form-control" value="" required="required">
+                      <option value="">{{ line('select_please', 'categories') }}</option>
+                      {% for category in categories %}
+                      <optgroup label="{{ line('categories_' ~ category.id, 'categories') }}">
+                        {% for child in category.child %}
+                        <option value="{{ child.id }}" {{ child.id == course.category_id ? 'selected="selected"' : '' }}>{{ line('categories_' ~ child.id, 'categories') }}</option>
+                        {% endfor %}
+                      </optgroup>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="col-md-12 break">
+                <div class="row form-create-class">
+                  <label for="class_descriptions">
+                    <span>{{ line('class_description','create_course') }}<sup class="required-sag">*</sup></span>
+                    <a tabindex="0" data-toggle="popover" data-trigger="focus" data-content="{{line('class_description_tooltip','field')}}">
+                      <img src="{{ base_url() }}assets/images/tooltips details.png">
+                    </a>
+                  </label>
+                  <textarea class="form-control tinymce-class class-description textarea" name="description" placeholder="{{line('class_description_tooltip','field')}}" rows="5" cols="10" required>{{ course.description }}</textarea>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="col-md-12 break">
+                <div class="row form-create-class">
+                  <label for="class_content">
+                    <span>{{ line('class_content','create_course') }}<sup class="required-sag">*</sup></span>
+                    <a tabindex="0" data-toggle="popover" data-trigger="focus" data-content="{{line('class_content_tooltip','field')}}">
+                      <img src="{{ base_url() }}assets/images/tooltips details.png">
+                    </a>
+                  </label>
+                  <textarea class="form-control tinymce-class textarea class-content" name="content" placeholder="{{line('class_content_tooltip','field')}}" required>{{ course.content }}</textarea>
+                  <input type="hidden" class="error-bubble">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="col-md-12">
+                <div class="row form-create-class">
+                  <label for="class_leader">
+                    <span>{{ line('class_leader','create_course') }}<sup class="required-sag">*</sup></span>
+                    {#<a tabindex="0" data-toggle="popover" data-trigger="focus" data-content="{{line('class_leader_tooltip','field')}}">#}
+                      {#<img src="{{ base_url() }}assets/images/tooltips details.png">#}
+                    {#</a>#}
+                  </label>
+                  <input type="text" name="class_leader" required value="{{ course.class_leader }}" class="form-control" placeholder="{{line('class_leader_tooltip','field')}}">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="col-md-12 break">
+                <div class="row form-create-class">
+                  <label for="prerequisite_skill">
+                    <span>{{ line('prerequisite_skills','create_course') }}<sup class="required-sag">*</sup></span>
+                    {#<a tabindex="0" data-toggle="popover" data-trigger="focus" data-content="{{line('prerequisite_skills_tooltip','field')}}">#}
+                      {#<img src="{{ base_url() }}assets/images/tooltips details.png">#}
+                    {#</a>#}
+                  </label>
+                  <label class="select-create-class">
+                    <select name="prerequisite_skill" value="{{ course.prerequisite_skill }}" required class="form-control" id="prerequisite_skill">
+                      <option value="0" {{ course.prerequisite_skill == 0 ? 'selected="selected"'}}>{{line('no','button')}}</option>
+                      <option value="1" {{ course.prerequisite_skill == 1 ? 'selected="selected"'}}>{{line('yes','button')}}</option>
+                    </select>
+                  </label>
+                  <input type="text" name="prerequisite_detail" id="prerequisite_detail" value="{{ course.prerequisite_detail }}" class="form-control" placeholder="{{line('prerequisite_skills_tooltip_2','field')}}">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="col-md-12 break">
+                <div class="row form-create-class">
+                  <label for="about_leader">
+                    <span>{{ line('about_the_class_leader','create_course') }}<sup class="required-sag">*</sup></span>
+                    <a tabindex="0" data-toggle="popover" data-trigger="focus" data-content="{{line('about_leader_tooltip','field')}}">
+                      <img src="{{ base_url() }}assets/images/tooltips details.png">
+                    </a>
+                  </label>
+                  <textarea class="form-control tinymce-class textarea" name="about_leader" placeholder="{{line('about_leader_tooltip','field')}}" rows="10" cols="10" required>{{ course.about_leader }}</textarea>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="col-md-12 break">
+                <div class="row form-create-class">
+                  <label for="end_goal">
+                    <span>{{ line('class_objectives','create_course') }}<sup class="required-sag">*</sup></span>
+                    <a tabindex="0" data-toggle="popover" data-trigger="focus" data-content="{{line('class_objectives_tooltip','field')}}">
+                      <img src="{{ base_url() }}assets/images/tooltips details.png">
+                    </a>
+                  </label>
+                  <textarea class="form-control tinymce-class textarea" name="end_goal" placeholder="Mandatory" rows="10" cols="10" required>{{ course.end_goal }}</textarea>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 break">
+              <label for="file_image">
+                <span>{{ line('upload_media','create_course') }}</span>
+                <a tabindex="0" data-toggle="popover" data-trigger="focus" data-content="{{line('upload_media_tooltip','field')}}">
+                  <img src="{{ base_url() }}assets/images/tooltips details.png">
+                </a>
+              </label>
+
+              {% if images %}
+              {% for image in images %}
+                <input type="hidden" name="image_ids[]" value="{{ image.id }}" id="image_ids">
+              {% endfor %}
+              {% else %}
+                <input type="hidden" name="image_ids[]" value="" id="image_ids">
+              {% endif %}
+
+              <input id="file-upload-create-class" type="file" multiple class="file" data-overwrite-initial="false" data-min-file-count="1">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="box-button-create">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-center">
+              <button class="btn btn-c-next-1 no-border btn-preview btn-lg bg-sgogo-purple enabled-action-preview1" type="button">
+                {{ line('dashboard_115', 'dashboard') }}
+              </button>
+              &nbsp;
+              {% if not session.class_admin_edit %}
+              <button class="btn btn-c-next-1 no-border btn-save-draft btn-lg bg-sgogo-purple enabled-action-draft1" type="submit" value="draft">
+                {{ line('dashboard_107', 'dashboard') }}
+              </button>
+              &nbsp;
+              {% endif %}
+              <button class="btn btn-next-c-class btn-next my-btn-step bg-sgogo-blue-light" data-color="blue-light" data-next-class="step-2" type="button">
+                {{ line('dashboard_109', 'dashboard') }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

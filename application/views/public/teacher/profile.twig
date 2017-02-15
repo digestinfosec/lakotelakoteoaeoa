@@ -1,0 +1,264 @@
+{% extends 'layout/app/master.twig' %}
+{% set titleName = line('title_27', 'dashboard') %}
+{% set ClassHeader1Color = "bg-sgogo-gray-dark" %}
+{% set ClassHeader2Color = "bg-sgogo-gray-dark" %}
+{% set ClassBoxRightTitleColor = "gray" %}
+{% set SubTitleHeader = line('sub_header', 'teacher') %}
+{% set header0, header1, header2, header3 = true, true, true, true %}
+{% set footer = true %}
+
+  {% block seo_fb %}
+    <!-- START SEO META SHARE FACEBOOK -->
+    <meta property="og:url" content="{{ current_url() }}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="{{ meta_title ?: "skillagogo" }}"/>
+    <meta property="og:description" content="{{ (meta_description ?: "skillagogo website") | striptags}}"/>
+    <meta property="og:image" content="{{ meta_image ?: '' }}"/>
+    <meta property="fb:app_id" content="275035462828886"/>
+    <meta property="fb:admins" content="1406217450"/>
+  {% endblock %}
+
+{% block content %}
+  {% if course.category_parent == 1 %}
+    {% set colorCategories = "purple" %}
+  {% elseif course.category_parent == 15 %}
+    {% set colorCategories = "blue-light" %}
+  {% elseif course.category_parent == 21 %}
+    {% set colorCategories = "red" %}
+  {% elseif course.category_parent == 25 %}
+    {% set colorCategories = "yellow" %}
+  {% elseif course.category_parent == 30 %}
+    {% set colorCategories = "purple-light" %}
+  {% else %}
+    {% set colorCategories = "gray-light" %}
+  {% endif %}
+
+  <section class="class-profile-body">
+    <div class="container">
+      <div class="col-md-8">
+        <div class="content-class-profile">
+          <div class="content-body">
+            <div class="text-center">
+              <div class="image-avatar-teacher">
+                <img src="{{ base_url() }}images/avatar/{{ user.profile_pic }}" alt="">
+              </div>
+              <div class="title">
+                {{ user.first_name }} {{ user.last_name }}
+              </div>
+              <div class="sub-title-teacher">
+                {{ user.job }}
+              </div>
+            </div>
+            <div class="desc">
+              {{ user.bio | raw }}
+            </div>
+          </div>
+        </div>
+        <div class="view-social-share">
+          <div class="share">
+            <span>{{ line('share', 'teacher') }}</span>
+          </div>
+          <div class="icon">
+            <ul>
+              <li>
+                <a href="{{ share.facebook.shareUrl }}" target="_blank">
+                  <i class="fa fa-facebook color-facebook"></i>
+                </a>
+              </li>
+              <li>
+                <a href="{{ share.twitter.shareUrl }}" target="_blank">
+                  <i class="fa fa-twitter color-twitter"></i>
+                </a>
+              </li>
+              <li>
+                <a href="{{ share.plus.shareUrl }}" target="_blank">
+                  <i class="fa fa-google-plus color-google-plus"></i>
+                </a>
+              </li>
+              <li>
+                <a href="{{ share.linkedin.shareUrl }}" target="_blank">
+                  <i class="fa fa-linkedin color-linkedin"></i>
+                </a>
+              </li>
+              <li>
+                <a href="{{ share.pinterest.shareUrl }}" target="_blank">
+                  <i class="fa fa-pinterest color-pinterest"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="view-rating-review">
+          <div class="col-md-9 col-md-offset-3">
+            <div class="box-rating">
+              {% set rate = rate_avg|round %}
+              {% if rate > 0 %}
+                {% for i in range(1, rate) %}
+                  <img src="{{ base_url() }}assets/images/rating-active.png" alt="">
+                {% endfor %}
+                {% if rate < 5 %}
+                  {% for i in range(rate, 4) %}
+                    <img src="{{ base_url() }}assets/images/rating.png" alt="">
+                  {% endfor %}
+                {% endif %}
+              {% else %}
+                {% for i in range(1, 5) %}
+                  <img src="{{ base_url() }}assets/images/rating.png" alt="">
+                {% endfor %}
+              {% endif %}
+              {#{% for i in range(1, rate_avg|round) %}#}
+              {#<img src="{{ base_url() }}assets/images/rating-active.png" alt="">#}
+              {#{% endfor %}#}
+              {#{% if rate_avg|round < 5 %}#}
+              {#{% for i in range(rate_avg|round, 4) %}#}
+              {#<img src="{{ base_url() }}assets/images/rating.png" alt="">#}
+              {#{% endfor %}#}
+              {#{% endif %}#}
+              <span> {{ line('on_average_all_class', 'dashboard') }} </span>
+            </div>
+          </div>
+        </div>
+        <div class="comment-class-profile">
+          <div class="box-title-count">
+            <div class="title">
+              {{ line('reviews', 'teacher') }} {{ user.first_name }} {{ user.last_name }}
+            </div>
+            <div class="load-other-reviews">
+              {% if count_rating > 3 %}
+                <a href="{{ site_url('dashboard/rating/view_teacher/' ~ user.id) ~ '/index'}}">
+                  {{ line('view', 'field') }}  {{ count_rating }} {{ line('other-reviews', 'field') }}
+                </a>
+              {% endif %}
+            </div>
+          </div>
+          {% for rating in ratings %}
+            <div class="listing-comment">
+              <div class="box-image-avatar-comment">
+                <div class="avatar-comment-teacher">
+                  <img src="{{ base_url() }}images/avatar/{{ rating.profile_pic }}" alt="">
+                </div>
+                <div class="name">
+                  {{ rating.first_name }} {{ rating.last_name }}
+                </div>
+                <div class="date">
+                  {{ convert_to_timezone(session.ip_address, rating.created_at)|date("j F Y \\a\\t g:ia") }}
+                </div>
+                <div class="star">
+                  {% for i in range(1, rating.rate) %}
+                    <img src="{{ base_url() }}assets/images/rating-active.png" alt="">
+                  {% endfor %}
+                  {% if rating.rate < 5 %}
+                    {% for i in range(rating.rate+1, 5) %}
+                      <img src="{{ base_url() }}assets/images/rating.png" alt="">
+                    {% endfor %}
+                  {% endif %}
+                </div>
+              </div>
+              <div class="desc-comment-teacher">
+                <div class="name-time">
+                  <div class="name">
+                    {{line('class_attended','field')}} : {{ rating.title }}
+                  </div>
+                </div>
+                <div class="content-comment">
+                  {{ rating.review|raw }}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="sidebar-class-profile">
+          <div class="side-upcoming-session">
+            <div class="description">
+              <div class="title">
+                {{ line('question_about', 'teacher') }}
+              </div>
+              <div class="box-info-desc">
+                {#
+                <div class="list-id">
+                  <div class="i-left">
+                    <i class="fa fa-comments"></i>
+                  </div>
+                  <div class="i-right">
+                    skillagogo_chat
+                  </div>
+                </div>
+                #}
+                <a href="mailto:studentcare@skillagogo.com" class="list-id">
+                  <div class="i-left">
+                    <i class="fa fa-envelope"></i>
+                  </div>
+                  <div class="i-right">
+                    studentcare@skillagogo.com
+                  </div>
+                </a>
+                <a href="tel:+6591845698" class="list-id">
+                  <div class="i-left">
+                    <i class="fa fa-phone"></i>
+                  </div>
+                  <div class="i-right">
+                    +65 91845698
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="skillagogo-classes">
+    <div class="container">
+      <div class="col-md-12">
+        <div class="box-title-class-profile">
+          {{ line('other-classes', 'public') }}
+        </div>
+      </div>
+      {% if courses %}
+        <div class="col-md-12">
+          <div class="box-listing-classes">
+            <div class="row">
+              {% for course in courses %}
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                  {% include('public/course/course_card.twig') %}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <div class="col-md-12">
+          <div class="box-not-found">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="desc-big">
+                  {{ line('no_suggestion', 'field') }}
+                </div>
+                <div class="desc-small">
+                  {{ line('stay_with_us', 'field') }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+{% endblock %}
+
+{% block script %}
+  <script src="{{ base_url() }}assets/js/jquery.flexslider.js"></script>
+
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+  <script src="{{ base_url() }}assets/js/gmap3.js"></script>
+  <script>
+    $(window).load(function () {
+      $('.flexslider').flexslider({
+        animation: "slide"
+      });
+    });
+  </script>
+  {% include('shared/app/_include_wishlist_js_script.twig') %}
+{% endblock %}

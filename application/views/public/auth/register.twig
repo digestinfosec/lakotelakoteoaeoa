@@ -1,0 +1,276 @@
+{% extends 'layout/app/master.twig' %}
+{% set titleName = line('title_28', 'dashboard') %}
+{% set bodyClass = "register-page" %}
+{% block content %}
+  <div class="box-register">
+    <div class="box-join-now box-join-register">
+      <div class="box-header-join bg-sgogo-white">
+        <div class="logo-join">
+          <a href="{{ base_url() }}">
+            <img src="{{ base_url() }}assets/images/logo-teacher.png" alt="">
+          </a>
+        </div>
+        <div class="title-join title-register">
+          {{ line('join', 'modal') }}
+        </div>
+      </div>
+      <div class="box-body-join">
+        <div class="col-md-12">
+          <div class="text-center">
+
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="text-center">
+            <a href="{{ loginUrl }}">
+              <button class="btn btn-register-facebook">
+                <i class="fa fa-facebook"></i>
+                |
+                {{ line('reg-fb', 'modal') }}
+              </button>
+            </a>
+            <div class="break10"></div>
+            <div class="desc-btm-facebook">
+              {{ line('reg-email', 'modal') }}
+            </div>
+          </div>
+          <div class="break"></div>
+        </div>
+        <div class="clearfix"></div>
+        {{ form_open('register', {id: 'form-skillagogo-signup'}) }}
+        <div class="col-md-6">
+          <div class="form-group">
+            {{ sg_field('text', 'first_name', values, {
+              class: 'form-control',
+              placeholder: line('first_name','field')
+            }) }}
+            <label for="first_name" class="error"
+                   {% if not form_error('first_name') %}style="display: none;"{% endif %}>{{ form_error('first_name') }}</label>
+          </div>
+          <div class="form-group">
+            {{ sg_field('text', 'last_name', values, {
+              class: 'form-control',
+              placeholder: line('last_name','field')
+            }) }}
+            <label for="last_name" class="error"
+                   {% if not form_error('last_name') %}style="display: none;"{% endif %}>{{ form_error('last_name') }}</label>
+          </div>
+          <div class="form-group">
+            {{ sg_field('text', 'email', values, {
+              class: 'form-control',
+              placeholder: line('email','field')
+            }) }}
+            <label for="email" class="error"
+                   {% if not form_error('email') %}style="display: none;"{% endif %}>{{ form_error('email') }}</label>
+          </div>
+          <div class="form-group" id="passStrength">
+            <input type="password" id="password" class="form-control password" name="password"
+                   placeholder="{{line('password','field')}}">
+            <label for="password" class="error"
+                   {% if not form_error('password') %}style="display: none;"{% endif %}>{{ form_error('password') }}</label>
+            <div id="password-text" style="display: none;"></div>
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" name="password_confirmation"
+                   placeholder="{{line('password_confirmation','field')}}">
+            <label for="password_confirmation" class="error"
+                   {% if not form_error('password_confirmation') %}style="display: none;"{% endif %}>{{ form_error('password_confirmation') }}</label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="radio-registering">
+            <div class="desc">
+              {{ line('reg-as', 'modal') }}&nbsp;
+            </div>
+            <div class="radio-option" style="float:left;">
+              <input type="radio" value="student" name="role" id="role" class="checkradios custom-style"
+                {{ set_radio('role', 'student') }}> {{ line('student', 'modal') }}<br>
+              <input type="radio" value="teacher" name="role" id="role" class="checkradios custom-style"
+                {{ set_radio('role', 'teacher') }}> {{ line('teacher', 'modal') }}<br>
+            </div>
+          </div>
+          <label for="role" class="error"
+                 {% if not form_error('role') %}style="display: none;"{% endif %}>{{ form_error('role') }}</label>
+          <div class="date-registering">
+            <div class="birthday">{{line('birthday','field')}}</div>
+            <input type="text" id="birth_date" class="validate[required,custom[date]]"
+                   data-format="YYYY-MM-DD" data-template="D MMMM YYYY" name="birth_date"
+                   value="{{ set_value('birth_date') }}"/>
+          </div>
+          <label for="birth_date" class="error error-date"
+                 {% if not form_error('birth_date') %}style="display: none;"{% endif %}>{{ form_error('birth_date') }}</label>
+          <div class="desc-registering">
+            {#<span class="all-field"><em>* {{ line('mandatory', 'modal') }}</em></span><br>#}
+            <div class="txt-link mg-top-5">
+              {{ line('reg-agree', 'modal') }}
+            </div>
+            <div class="txt-link">
+              <a href="{{ base_url() }}page/terms_of_service" target="_blank">
+                {{ line('terms', 'footer') }}
+              </a>
+              {#<a href="#" data-toggle="modal" data-target="#modalTos">{{ line('terms', 'footer') }}</a>#}
+              &
+              <a href="{{ base_url() }}page/privacy_policy" target="_blank">
+                {{ line('privacy', 'footer') }}
+              </a>
+              {#<a href="#" data-toggle="modal" data-target="#modalPrivacy">{{ line('privacy', 'footer') }}</a>#}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <input type="checkbox" value="1" checked class="checkradios checkbox-apporve custom-style-2 break5"
+                 name="send_updates">
+                    <span
+                      class="all-check color-sgogo-yellow font-monserat">{{ line('update', 'modal') }}</span>
+          <div class="text-center box-btn-register">
+            <input class="btn btn-register" type="submit" value="{{ line('sign_up','button') }}">
+            <div class="break10"></div>
+            <span class="desc-link">{{ line('no-email', 'modal') }}</span>
+            <a href="{{ base_url('resend-confirmation') }}" class="desc-link">{{ line('resend', 'modal') }}</a>
+            <div class="break10"></div>
+            <span class="desc-link">{{ line('already', 'modal') }}</span>
+            <a href="{{ base_url('login') }}" class="desc-link">{{ line('sign_in', 'button') }}</a>
+          </div>
+        </div>
+        {{ form_close() }}
+      </div>
+    </div>
+  </div>
+{% if user_login is null %}
+  {% include 'layout/app/modal_tospp.twig' %}
+{% endif %}
+{% endblock %}
+
+{% block script %}
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $(".password").focus(function(){
+        $("#password-text").show();
+      }).blur(function(){
+        $("#password-text").hide();
+      });
+
+      $('.password').strengthMeter('text', {
+        container: $('#password-text'),
+        hierarchy: {
+        '0': ['tooltip-strength-meter danger', "{{ line('very_weak', 'form_validation') }}"],
+        '10': ['tooltip-strength-meter warning', "{{ line('weak', 'form_validation') }}"],
+        '20': ['tooltip-strength-meter warning', "{{ line('good', 'form_validation') }}"],
+        '30': ['tooltip-strength-meter success', "{{ line('strong', 'form_validation') }}"],
+        '40': ['tooltip-strength-meter success', "{{ line('very_strong', 'form_validation') }}"]
+        }
+      });
+
+      $.validator.setDefaults({
+        highlight: function (element, errorClass, validClass) {
+          if (element.type === "radio") {
+            this.findByName(element.name).addClass('error-radio');
+          } else {
+            $(element).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+            $(element).closest('.form-group').find('i.fa').remove();
+            $(element).closest('.form-group').append('<i class="fa fa-exclamation fa-lg form-control-feedback"></i>');
+          }
+        },
+        unhighlight: function (element, errorClass, validClass) {
+          if (element.type === "radio") {
+            this.findByName(element.name).removeClass(errorClass).addClass(validClass);
+          } else {
+            $(element).closest('.form-group').removeClass('has-error has-feedback').addClass('has-success has-feedback');
+            $(element).closest('.form-group').find('i.fa').remove();
+            $(element).closest('.form-group').append('<i class="fa fa-check fa-lg form-control-feedback"></i>');
+          }
+        }
+      });
+
+      $.validator.addMethod(
+        "regex",
+        function (value, element, regexp) {
+          var re = new RegExp(regexp);
+          return this.optional(element) || re.test(value);
+        },
+        "Please check your input."
+      );
+
+      $("#form-skillagogo-signup").validate({
+        ignore: [],
+        rules: {
+          'first_name': {
+            required: true,
+            regex: "^[a-zA-Z. ]+$"
+          },
+          'last_name': {
+            required: true,
+            regex: "^[a-zA-Z. ]+$"
+          },
+          'email': {
+            required: true,
+            email: true
+          },
+          'password': {
+            required: true,
+            minlength: 8,
+            regex: "^(?:(?=.*[a-zA-Z])(?:(?=.*[0-9]))).{8,}$"
+          },
+          'password_confirmation': {
+            required: true,
+            equalTo: "#password",
+            regex: "^(?:(?=.*[a-zA-Z])(?:(?=.*[0-9]))).{8,}$"
+          },
+          'role': {
+            required: true
+          },
+          'birth_date': {
+            required: true
+          }
+        },
+        messages: {
+          first_name: {
+            required: "{{line('validation_first_name','controller_js')}}",
+            regex: "{{line('validation_first_name','controller_js')}}"
+          },
+          last_name: {
+            required: "{{line('validation_last_name','controller_js')}}",
+            regex: "{{line('validation_last_name','controller_js')}}"
+          },
+          email: {
+            required: "{{line('validation_email','controller_js')}}"
+          },
+          password: {
+            required: "{{line('validation_password_minlength','controller_js')}}",
+            minlength: "{{line('validation_password_minlength','controller_js')}}",
+            regex: "{{line('validation_password_minlength','controller_js')}}"
+          },
+          password_confirmation: {
+            required: "{{line('validation_password_minlength','controller_js')}}",
+            equalTo: "{{line('validation_password_confirmation_equalto','controller_js')}}",
+            regex: "{{line('validation_password_minlength','controller_js')}}"
+          },
+          role: {
+            required: "{{line('validation_role','controller_js')}}",
+          },
+          birth_date: {
+            required: "{{line('validation_birthday','controller_js')}}",
+          }
+        }
+      });
+
+      $('#birth_date').combodate({
+        customClass: 'form-control',
+        firstItem: 'skillagogo',
+        minYear: 1950,
+        maxYear: 1998,
+        smartDays: true,
+        indonesian: {{ session.location == 'ID' ? 1 : 0 }}
+      });
+
+      $('.checkradios').checkradios({
+        checkbox: {
+          iconClass: 'fa fa-square'
+        },
+        radio: {
+          iconClass: 'fa fa-square'
+        }
+      });
+    });
+  </script>
+{% endblock %}

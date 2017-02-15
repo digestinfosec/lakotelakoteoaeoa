@@ -1,0 +1,24 @@
+<div class="sub-header-skillagogo-2 {{ ClassHeader2Color }}">
+  <div class="container">
+    <div class="col-md-12">
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+        <div class="row">
+          <a href="{{ base_url() }}course" class="txt-white link-menu-top">
+            {{ line('browse', 'button') }}
+            <img src="{{ base_url() }}assets/images/header_browse_classes.png" alt="">
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+        <div class="row">
+          {% if user_login['is_student'] == '1' %}
+            <a href="{{ base_url() }}dashboard/student/wishlist" class="txt-white link-menu-top">
+              {{ line('wishlist', 'homepage') }}
+              <img src="{{ base_url() }}assets/images/header_your_wishlist.png" alt="">
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

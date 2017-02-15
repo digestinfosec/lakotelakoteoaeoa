@@ -1,0 +1,134 @@
+{% extends 'layout/app/master.twig' %}
+{% set titleName = line('dashboard_shared_title', 'dashboard') %}
+
+{% block content %}
+  <section class="receipt-bg-wrapper">
+    <div class="container">
+      <div class="col-md-12">
+        <section class="receipt">
+          <div class="body-receipt">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="header-receipt">
+                  <div class="logo">
+                    <img src="{{ base_url() }}assets/images/logo-black.png" alt="">
+                  </div>
+                  <div class="no-receipt">
+                    {{ line('dashboard_62', 'dashboard') }}
+                    <span>{{ payout.0.invoice_code }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="info-receipt">
+                <div class="col-md-6">
+                  <div class="pull-left">
+                    <div class="sender-from">
+                      <strong>{{ line('dashboard_34', 'dashboard') }}</strong>
+                      {{ payout.0.created_at|date("j F Y") }}
+                    </div>
+                    <div class="sender-from">
+                      <strong>{{ line('dashboard_52', 'dashboard') }}</strong>
+                      {{ payout.0.created_at|date_modify("+1 month")|date("7 F Y")}}
+                    </div>
+                    <div class="sender-from">
+                      <strong>{{ line('class_id', 'field') }}</strong>
+                      {{ payout.0.unique_id }}
+                    </div>
+                    <div class="sender-from">
+                      <strong>{{ line('class_title', 'field') }}</strong>
+                      {{ payout.0.title }}
+                    </div>
+                    <div class="sender-from">
+                      <strong>{{ line('desc', 'field') }}</strong>
+                      {{ payout.0.description|raw }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="pull-right">
+                    <div class="sender-to">
+                      <strong>{{ line('dashboard_61', 'dashboard') }}</strong>
+                      <p>{{ payout.0.teacher_first_name ~ " " ~ payout.0.teacher_last_name }}</p>
+                      <p>{{ payout.0.address_line1 }}</p>
+                      <p>{{ payout.0.address_line2 }}</p>
+                      <p>{{ payout.0.city }}</p>
+                      <p>{{ payout.0.state }}</p>
+                      <p>{{ payout.0.country }}</p>
+                      <p>{{ payout.0.postal_code }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <tr>
+                  <td class="t-top-tr" width="25%">{{line('voucher_code', 'field')}}</td>
+                  <td class="t-top-tr" width="20%">{{line('price', 'field')}}</td>
+                  <td class="t-top-tr" width="25%">{{line('skillagogo_commission', 'field')}}</td>
+                  <td class="t-top-tr" width="25%">{{line('payment_amount', 'field')}}</td>
+                </tr>
+                {% for item in vouchers %}
+                  <tr>
+                    <td>{{ item.voucher_code }}</td>
+                    <td><strong>{{ delimiter_number(item.currency, item.price) }}</strong></td>
+                    <td><strong style="color:red">- {{ delimiter_number_dec(item.currency, item.skillagogo_commission, 2) }}</strong></td>
+                    <td><strong>{{ delimiter_number_dec(item.currency, item.amount, 2) }}</strong></td>
+                  </tr>
+                {% endfor %}
+                <tr>
+                  <td colspan="1">
+                    <div class="total-desc">
+                      Total :
+                    </div>
+                  </td>
+                  <td>
+                    <div class="total-price">
+                      {{ delimiter_number(vouchers.0.currency, total.0.total_price) }}
+                    </div>
+                  </td>
+                  <td>
+                    <div class="total-price" style="color:red">
+                      {{ delimiter_number_dec(vouchers.0.currency, total.0.total_commission, 2) }}
+                    </div>
+                  </td>
+                  <td>
+                    <div class="total-price">
+                      {{ delimiter_number_dec(vouchers.0.currency, total.0.total_amount, 2) }}
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="footer-receipt">
+              <div class="box-logo-desc">
+                <div class="desc">
+                  <p>
+                    {{ line('dashboard_63', 'dashboard') }}<br/>
+                    {{ line('dashboard_54', 'dashboard') }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            {% if with_buttons %}
+            <div class="pull-right">
+              <div class="btn-group" role="group" aria-label="...">
+                <a href="" class="btn btn-t-course" onclick="window.print();">
+                  <i class="fa fa-print"></i>
+                  &nbsp;{{ line('dashboard_41', 'dashboard') }}
+                </a>
+                <a href="" class="btn btn-t-course" download>
+                  <i class="fa fa-download"></i>
+                  &nbsp;{{ line('dashboard_42', 'dashboard') }}
+                </a>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+{% endblock %}

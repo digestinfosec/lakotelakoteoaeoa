@@ -1,0 +1,16 @@
+{% extends 'layout/app/master.twig' %}
+{% set titleName = line('title_18', 'dashboard') %}
+{% set ClassHeader1Color = "bg-sgogo-gray-dark" %}
+{% set ClassHeader2Color = "bg-sgogo-gray-dark" %}
+{% set ClassHiddenSubTitle = "box-hidden" %}
+{% set SubTitleHeader = line('about_us','static_page') %}
+{% set header0, header1, header2, header3 = true, true, true, true %}
+{% set footer = true %}
+
+{% block content %}
+  {% if session.lang == 'indonesian' %}
+    {% include('public/page/about_us/about_us_id.twig') %}
+  {% else %}
+    {% include('public/page/about_us/about_us_eng.twig') %}
+  {% endif %}
+{% endblock %}

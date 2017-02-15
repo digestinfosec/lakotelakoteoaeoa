@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="horizontal-menu">
+      {% if header_title != "Vouchers" %}
+        <a href="{{ base_url() }}dashboard/teacher/course"
+           class="list-h-top menu_profile_student {% if menu_top == 'published' %} active {% endif %}">
+          <div class="title">
+            {{ line('dashboard_122', 'dashboard') }}
+          </div>
+        </a>
+        <a href="{{ base_url() }}dashboard/teacher/course/draft"
+           class="list-h-top menu_profile_student {% if menu_top == 'draft' %} active {% endif %}">
+          <div class="title">
+            {{ line('dashboard_123', 'dashboard') }}
+          </div>
+          <div
+            tabindex="0"
+            data-toggle="popover"
+            data-trigger="focus"
+            data-content="{{line('course_tooltip','field')}}"
+            class="btnInfoPopover img-tooltip-top">
+            <img src="{{ base_url() }}assets/images/tooltips other.png" class="img-tooltip">
+          </div>
+        </a>
+        <a href="{{ base_url() }}dashboard/teacher/course/cancelled"
+           class="list-h-top menu_profile_student {% if menu_top == 'cancelled' %} active {% endif %}">
+          <div class="title">
+            {{ line('cancelled', 'dashboard') }}
+          </div>
+        </a>
+        <a href="{{ base_url() }}dashboard/teacher/course/finished"
+           class="list-h-top menu_profile_student {% if menu_top == 'finished' %} active {% endif %}">
+          <div class="title">
+            {{ line('finished', 'dashboard') }}
+          </div>
+        </a>
+      {% else %}
+      <a href="#"
+         class="list-h-top menu_profile_student {% if menu_top == 'draft' %} active {% endif %}" disabled>
+        <div class="title">
+          Voucher
+        </div>
+      </a>
+      {% endif %}
+    </div>
+  </div>
+</div>

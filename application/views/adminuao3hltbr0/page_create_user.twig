@@ -1,0 +1,145 @@
+{% extends 'adminuao3hltbr0/master.twig' %}
+{% set titleName = "new admin page" %}
+{% set bodyClass = "fixed-topbar fixed-sidebar theme-sdtl color-purple" %}
+
+{% block css %}
+<link href="{{ base_url() }}assets/adminuao3hltbr0/plugins/datatables/dataTables.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+  <section>
+    {% include 'adminuao3hltbr0/shareds/sidebar.twig' %}
+    <div class="main-content">
+      {% include 'adminuao3hltbr0/shareds/top_bar.twig' %}
+      <div class="page-content">
+        <div class="header">
+          <h2><strong>Create User Admin</strong></h2>
+          <div class="breadcrumb-wrapper">
+            <ol class="breadcrumb">
+              <li><a href="{{ base_url() }}/adminuao3hltbr0/home">Dashboard</a></li>
+              <li class="active">Create user admin</li>
+            </ol>
+          </div>
+          {% include 'adminuao3hltbr0/shareds/alert.twig' %}
+        </div>
+        <div class="row">
+          <div class="col-lg-12 portlets">
+            <div class="panel">
+              <div class="panel-content">
+                <div class="row">
+                  {{form_open('adminuao3hltbr0/page_administrators/new_admin')}}
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="form-label">Username</label>
+                          {{ sg_field('text', 'username', values, {class: 'form-control', placeholder: 'Username'}) }}
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="form-label">User Type</label>
+                          {% set options = {
+                          '0': { 'label': 'Admin', 'value': 2 },
+                          '1': { 'label': 'Review Officer', 'value': 3 },
+                          '2': { 'label': 'Marketing Officer', 'value': 4 },
+                          } %}
+                          {{ sg_field('select', 'type', get_values, {id: "type", class: 'form-control'}, 2, options) }}
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="form-label">First Name</label>
+                          {{ sg_field('text', 'first_name', values, {class: 'form-control', placeholder: 'first_name'}) }}
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="form-label">Last Name</label>
+                          {{ sg_field('text', 'last_name', values, {class: 'form-control', placeholder: 'last name'}) }}
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="form-label">Email</label>
+                          {{ sg_field('text', 'email', values, {class: 'form-control', placeholder: 'Email'}) }}
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" name="password" placeholder="Password" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" name="password_confirmation" placeholder="confirm password" required>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <input type="submit" class="btn btn-md btn-primary" value="Submit">
+                      </div>
+                    </div>
+                  {{ form_close() }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% include 'adminuao3hltbr0/shareds/footer.twig' %}
+      </div>
+    </div>
+  </section>
+  {# section for sidebar left and searching full #}
+  <div class="loader-overlay">
+    <div class="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <a href="#" class="scrollup"><i class="fa fa-angle-up"></i></a>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery/jquery-1.11.1.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery/jquery-migrate-1.2.1.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery-ui/jquery-ui-1.11.2.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/gsap/main-gsap.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap/js/bootstrap.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery-cookies/jquery.cookies.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery-block-ui/jquery.blockUI.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootbox/bootbox.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/mcustom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap-dropdown/bootstrap-hover-dropdown.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/charts-sparkline/sparkline.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/retina/retina.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/select2/select2.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/icheck/icheck.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/backstretch/backstretch.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/charts-chartjs/Chart.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/sidebar_hover.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/widgets/notes.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/quickview.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/pages/search.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/plugins.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/application.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/pages/table_dynamic.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/layout.js"></script>
+  <script>
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          $('#upload-image-user')
+          .attr('src', e.target.result)
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+  </script>
+{% endblock %}

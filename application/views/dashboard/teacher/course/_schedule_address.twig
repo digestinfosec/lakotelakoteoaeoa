@@ -1,0 +1,79 @@
+<div class="box-form-class-schedule-wrapper">
+  <div class="box-form-class-schedule location-field">
+    <div class="col-md-12">
+      <div class="col-md-6 break">
+        <div class="row form-create-class">
+          <div class="box-date-wrapper">
+            <label class="list-date">
+              <div class="date-name">
+                <span for="date">
+                  <span>{{ line('date','create_course') }}<sup class="required-sag">*</sup></span>
+                </span>
+              </div>
+              <div class="date-form">
+                {% set schedule_date = (schedule.date ? schedule.date : 'tomorrow'|date('Y-m-d')) %}
+                <input type="text" class="schedule_date" data-format="YYYY-MM-DD" required data-template="D MMMM YYYY"
+                       name="schedule_date[]" value="{{ schedule_date }}">
+              </div>
+            </label>
+            <label class="list-date">
+              <div class="date-name">
+                <span for="start">
+                  <span>{{ line('start','create_course') }}<sup class="required-sag">*</sup></span>
+                </span>
+              </div>
+              <div class="date-form">
+                {% set schedule_start = (schedule.start_time ?: "08:00") %}
+                {% set schedule_end = (schedule.end_time ?: "09:00") %}
+                <input type="text" class="schedule_start" data-format="hh:mm a" required data-template="hh mm a"
+                       name="schedule_start[]"
+                       value="{{ date('h:i a', strtotime(schedule_start)) }}">
+              </div>
+            </label>
+            <label class="list-date">
+              <div class="date-name">
+                <span for="end">
+                  <span>{{ line('end','create_course') }}<sup class="required-sag">*</sup></span>
+                </span>
+              </div>
+              <div class="date-form">
+                <input type="text" class="schedule_end" data-format="hh:mm a" required data-template="hh mm a"
+                       name="schedule_end[]"
+                       value="{{ date('h:i a', strtotime(schedule_end)) }}">
+              </div>
+            </label>
+          </div>
+        </div>
+        <div class="row form-create-class row-schedule-venue">
+          <label for="schedule_venue">
+            <span>{{ line('find_location','create_course') }}<sup class="required-sag">*</sup></span>
+          </label>
+          <input type="text" class="form-control autocomplete width-86" value="{{schedule.name}}" placeholder="{{ line('enter_location','create_course')}}">
+        </div>
+        <div class="row reset-location">
+          <button class="btn btn-xs-red" type="button">
+            <i class="fa fa-refresh"></i>
+            {{line('reset_location','field')}}
+          </button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="map"></div>
+      </div>
+    </div>
+    {% include 'dashboard/teacher/course/_location_detail.twig' %}
+  </div>
+  <div class="box-action-create-class">
+    <div class="action-2">
+      <a href="#" class="btn btn-add add-fields-schedule">
+        <i class="fa fa-plus"></i>
+        &nbsp;{{ line('dashboard_102', 'dashboard') }}
+      </a>
+      &nbsp;
+      <a href="#" class="btn btn-remove remove-fields-schedule">
+        <i class="fa fa-times"></i>
+        &nbsp;{{ line('dashboard_103', 'dashboard') }}
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+{% extends 'email/shared/body.twig' %}
+
+{% block content %}
+    <tr>
+      <td align="center" valign="top" class="fix-box">
+        <table align="center" border="0" cellspacing="0" cellpadding="0" class="container" bgcolor="#ffffff" style="background-color: #ffffff;">
+          <tbody>
+            <tr>
+              <td valign="top">
+                <table align="center" border="0" cellspacing="0" cellpadding="0" class="full-width" bgcolor="#ffffff" style="background-color:#ffffff;">
+                  <tbody>
+                    <tr>
+                      <td height="50">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td valign="top">
+                        <table border="0" cellspacing="0" cellpadding="0" align="left">
+                          <tbody>
+                            <tr>
+                              <td style="font-size:16px; color:#999999;line-height:180%;font-family:arial, sans-serif;">
+                                <span style="color: #555555; font-weight:300;">
+                                  <a href="#" style="text-decoration: none; color: #555555; font-weight: 300;">
+                                    {{ line('a1', 'email') }} {{ teacher.first_name }},
+                                  </a>
+                                </span>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="15">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="font-size:16px;color:#999999;line-height:180%;font-family:arial, sans-serif;">
+                                {{ line('a88', 'email') }}
+                                <br>
+                                <br>
+                                <b>{{ line('a145', 'email') }} </b> : {{ course.title }}
+                                <br>
+                                <b>{{ line('a146', 'email') }}</b> : {{ detail.pax }}
+                                <br>
+                                <b>{{ line('a147', 'email') }}</b> : {{ course.available_seat }}
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="25">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="font-size:16px;color:#999999;line-height:180%;font-family:arial, sans-serif;">
+                                {{ line('a8', 'email') }}
+                                <br>
+                                <br>
+                                The skillagogo team
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td height="20">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+{% endblock %}

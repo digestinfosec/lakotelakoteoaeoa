@@ -1,0 +1,231 @@
+<div class="sub-header-skillagogo-1 {{ ClassFixedHeaderSubPage }}" id="{{ IdFixedHeaderSubPage }}">
+  <nav class="navbar navbar-default {{ ClassHeader1Color }}" id="{{ IdHeader1Color }}">
+    <div class="container">
+      <div class="col-md-12">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                  data-target="#sub-header-skillagogo" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{ base_url() }}">
+            <img src="{{ base_url() }}assets/images/home-logo.png" alt="">
+          </a>
+        </div>
+        <div class="collapse navbar-collapse" id="sub-header-skillagogo">
+          <ul class="nav navbar-nav navbar-right">
+            {% if not session.class_admin_edit %}
+            <li>
+              {% if current_page == "new_course" %}
+                {# nop #}              
+              {% elseif session.login.is_teacher == true or session.login is not defined %}
+                <a href="{{ dashboard_url('teacher/course/new_course') }}" class="btn-header">{{ line('create', 'button') }}</a>
+              {% else %}
+                <a href="#" class="btn-header" data-toggle="modal" data-target="#QuestionCreateClass">{{ line('create', 'button') }}</a>
+              {% endif %}
+            </li>
+            {% if user_login %}
+            <li><a data-toggle="collapse" data-parent="#home-accordion" href="#collapseOne" aria-expanded="false"
+                   aria-controls="collapseOne" class="btn-hitwork">{{ line('how', 'button') }}</a></li>
+                   <li>
+                     <div id="basic" data-input-name="country" data-selected-country="{{ session.location }}"
+                         data-countries='{"SG": "Singapore","ID": "Indonesia"}'></div>
+                   </li>
+            {# <li>
+              <div class="box-bell dropdown">
+                <div class="box-icon-rounded dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                     aria-expanded="true">
+                  <div class="icon">
+                    <i class="fa fa-bell-o"></i>
+                  </div>
+                </div>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu0">
+                  <div class="bell-header">
+                    <div class="title">12 pending notifications</div>
+                  </div>
+                  <div class="bell-body">
+                    <div class="listing-notifications">
+                      <div class="info-left">
+                        <div class="avatar">
+                          <img src="{{ base_url() }}assets/images/fathan.jpg" alt="">
+                        </div>
+                      </div>
+                      <div class="info-right">
+                        <div class="info-one">
+                          <div class="name">Fathan R</div>
+                          <div class="time">
+                            <div class="desc">
+                              <i class="fa fa-clock-o"></i>
+                              <span>12 Mins ago</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="info-two">
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="listing-notifications">
+                      <div class="info-left">
+                        <div class="avatar">
+                          <img src="{{ base_url() }}assets/images/febri.jpg" alt="">
+                        </div>
+                      </div>
+                      <div class="info-right">
+                        <div class="info-one">
+                          <div class="name">Febryan</div>
+                          <div class="time">
+                            <div class="desc">
+                              <i class="fa fa-clock-o"></i>
+                              <span>12 Mins ago</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="info-two">
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="listing-notifications">
+                      <div class="info-left">
+                        <div class="avatar">
+                          <img src="{{ base_url() }}assets/images/maulana.jpg" alt="">
+                        </div>
+                      </div>
+                      <div class="info-right">
+                        <div class="info-one">
+                          <div class="name">Maulana M</div>
+                          <div class="time">
+                            <div class="desc">
+                              <i class="fa fa-clock-o"></i>
+                              <span>12 Mins ago</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="info-two">
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="listing-notifications">
+                      <div class="info-left">
+                        <div class="avatar">
+                          <img src="{{ base_url() }}assets/images/afif.jpg" alt="">
+                        </div>
+                      </div>
+                      <div class="info-right">
+                        <div class="info-one">
+                          <div class="name">Afif Akbar I</div>
+                          <div class="time">
+                            <div class="desc">
+                              <i class="fa fa-clock-o"></i>
+                              <span>12 Mins ago</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="info-two">
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bell-footer">
+                    <div class="title">see all messages</div>
+                  </div>
+                </ul>
+              </div>
+            </li> #}
+            <li>
+              <div class="box-user-profile">
+                <div class="box-avatar dropdown">
+                  <div class="avatar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="true">
+                    <img src="{{ base_url() }}images/avatar/{{ user_login.avatar }}" alt="">
+                  </div>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li>
+                      <a href="{{ base_url() }}dashboard">
+                        <i class="fa fa-dashboard"></i>
+                        {{ line('menu_dashboard', 'main') }}
+                      </a>
+                    </li>
+                    {% if user_login['is_student'] == '1' and session.carts|length > 0 %}
+                      <li>
+                        <a href="{{ base_url() }}dashboard/student/order/cart">
+                          <i class="fa fa-shopping-cart"></i>
+                          {{ line('menu_cart', 'main') }}
+                        </a>
+                      </li>
+                    {% endif %}
+                    <li>
+                      <a href="{{ base_url() }}dashboard/profile">
+                        <i class="fa fa-edit"></i>
+                        {{ line('menu_profile', 'main') }}
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{{ base_url() }}logout">
+                        <i class="fa fa-sign-out"></i>
+                        {{ line('menu_logout', 'main') }}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="name-country">
+                  <div class="name" title="{{ user_login.name }}">{{ user_login.first_name }}</div>
+                </div>
+              </div>
+            </li>
+            {% else %}
+            <li>
+              <a data-toggle="collapse" data-parent="#home-accordion" href="#collapseOne"
+                 aria-expanded="false" aria-controls="collapseOne" class="btn-hitwork">
+                {{ line('how', 'button') }}
+              </a>
+            </li>
+            <li><a href="#" data-toggle="modal" data-target="#skillagogo-signin">{{ line('sign_in', 'button') }}</a>
+            </li>
+            <li><a href="#" data-toggle="modal" data-target="#skillagogo-signup">{{ line('sign_up', 'button') }}</a>
+            </li>
+            <li>
+              <div id="basic" data-input-name="country" data-selected-country="{{ session.location }}"
+                   data-countries='{"SG": "Singapore","ID": "Indonesia"}'></div>
+            </li>
+            {% endif %}
+            {% else %}
+            <li>
+              <a data-toggle="collapse" data-parent="#home-accordion" href="#collapseOne"
+                 aria-expanded="false" aria-controls="collapseOne" class="btn-hitwork">
+                {{ line('how', 'button') }}
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+          </div>
+      </div>
+    </div>
+</nav>
+{% if user_login is null %}
+  {% include 'layout/app/modal_reglogin.twig' %}
+  {% include 'layout/app/modal_tospp.twig' %}
+{% endif %}
+</div>
+<header class="header-mobile-skillagogo {{ ClassHeader1Color }}" id="header-mobile-create-class">
+  <div class="box-element">
+    <div class="swipe-area"></div>
+    <a data-toggle=".skillagogo-wrapper" id="sidebar-toggle">
+      <button class="c-hamburger c-hamburger--htx">
+        <span>toggle menu</span>
+      </button>
+    </a>
+    <div class="logo">
+      <a href="{{ base_url() }}">
+        <span class="logo-skillagogo"></span>
+      </a>
+    </div>
+  </div>
+</header>
+
+{% include('layout/app/menu_mobile.twig') %}

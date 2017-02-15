@@ -1,0 +1,23 @@
+{% extends 'layout/app/master.twig' %}
+{% set titleName = "" %}
+{% set ClassHeader1Color = "bg-sgogo-gray-dark" %}
+{% set ClassHeader2Color = "bg-sgogo-gray-dark" %}
+{% set SubTitleHeader = line('dashboard_shared_subtitle', 'dashboard') %}
+{% set header0, header1, header2, header3 = true, true, true, true %}
+{% set footer = true %}
+
+{% block content %}
+  <section class="dashboard-user">
+    <div class="container">
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+        {% include 'layout/app/sidebar_dashboard.twig' %}
+      </div>
+      <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+        <div class="d-u-body">
+          {% include menu %}
+          {% block dashboard_content %} {% endblock %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'layout/app/master.twig' %}
+{% set titleName = line('title_22', 'dashboard') %}
+{% set ClassHeader1Color = "bg-sgogo-gray-dark" %}
+{% set ClassHeader2Color = "bg-sgogo-gray-dark" %}
+{% set SubTitleHeader = line('how_to_learn','static_page') %}
+{% set header0, header1, header2, header3 = true, true, true, true %}
+{% set footer = true %}
+
+{% block content %}
+  {% if session.lang == 'indonesian' %}
+      {{ content_id_new|raw }}
+  {% else %}
+    {{ content_en_new|raw }}
+  {% endif %}
+{#   <section class="static-how-to-teach-wrapper bg-sgogo-yellow2">
+    <div class="container">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="title">1. Search</div>
+            <div class="image">
+              <img src="../assets/images/how_it_works_search.png" alt="">
+            </div>
+            <div class="description">skillagogo offers a wide selection of classes you can choose from</div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="title">2. book</div>
+            <div class="image">
+              <img src="../assets/images/how_it_works_book.png" alt="">
+            </div>
+            <div class="description">Sign up with skillagogo and immediately book your class</div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="title">3. enjoy</div>
+            <div class="image">
+              <img src="../assets/images/how_it_works_enjoy.png" alt="">
+            </div>
+            <div class="description">Learn and acquire a new skill from our great teachers</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> #}
+{% endblock %}

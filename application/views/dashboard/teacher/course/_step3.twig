@@ -1,0 +1,67 @@
+<div class="setup-content" id="step-3">
+  <div class="col-md-12">
+    <div class="box-create-class-wrapper">
+      <div class="box-form-create">
+        <div class="box-title-top">
+          <div class="title">
+            {{ line('class_schedule','create_course') }}
+          </div>
+        </div>
+        <div class="box-input">
+          <div class="col-md-12">
+            <div class="row form-create-class">
+              <div class="col-md-6 break">
+                <label for="class_title">
+                  <span>{{ line('type_of_class','create_course') }}</span>
+                  <a tabindex="0" data-toggle="popover" data-trigger="focus" data-content="{{line('type_of_class_tooltip','field')}}">
+                    <img src="{{ base_url() }}assets/images/tooltips schedule.png" alt="">
+                  </a>
+                </label>
+                <label class="select-create-class">
+                  {% set options = {
+                  '0': { 'label': line('single','field'), 'value': 1 },
+                  '1': { 'label': line('repeated','field'), 'value': 2 },
+                  '2': { 'label': line('staged','field'), 'value': 3 }} %}
+                  {% set attr_select = {'class': 'form-control type-of-class'} %}
+                  {{ sg_field('select', 'type', course.type, attr_select, 0, options) }}
+                </label>
+              </div>
+            </div>
+          </div>
+
+          {% if schedules %}
+          {% for schedule in schedules %}
+          {% include 'dashboard/teacher/course/_schedule_address.twig' %}
+          {% endfor %}
+          {% else %}
+          {% include 'dashboard/teacher/course/_schedule_address.twig' %}
+          {% endif %}
+        </div>
+      </div>
+      <div class="box-button-create">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-center">
+              <button class="btn btn-prev-c-class btn-prev my-btn-step bg-sgogo-blue-light" data-color="blue-light" type="button">
+                {{ line('dashboard_110', 'dashboard') }}
+              </button>
+              <button class="btn btn-c-next-1 no-border btn-preview btn-lg bg-sgogo-red enabled-action-preview3" type="button">
+                {{ line('dashboard_106', 'dashboard') }}
+              </button>
+              &nbsp;
+              {% if not session.class_admin_edit %}
+              <button class="btn btn-c-next-1 no-border btn-save-draft btn-lg bg-sgogo-red enabled-action-draft3" type="submit" value="draft">
+                {{ line('dashboard_107', 'dashboard') }}
+              </button>
+              &nbsp;
+              {% endif %}
+              <button class="btn btn-next-c-class btn-next my-btn-step bg-sgogo-yellow" data-color="yellow" data-next-class="step-4">
+                {{ line('dashboard_109', 'dashboard') }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

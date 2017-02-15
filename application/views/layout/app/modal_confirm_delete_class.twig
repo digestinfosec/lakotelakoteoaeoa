@@ -1,0 +1,36 @@
+<div class="modal fade" id="{{ 'QuestionDeleteClass' ~ row.id  }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="vertical-alignment-helper">
+    <div class="modal-dialog vertical-align-center" role="document">
+      <div class="modal-content">
+        <div class="box-modal-skillagogo">
+          <div class="col-md-12">
+            <div class="box-close close" data-dismiss="modal" aria-label="Close">
+              <i class="fa fa-times"></i>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="description">
+              <p>
+                {{ line('delete-class', 'modal') }}
+              </p>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="action">
+              <div class="box-action">
+                <a href="{{ base_url() }}" class="btn btn-lg-red" data-dismiss="modal" aria-label="Close">
+                  <i class="fa fa-times"></i>
+                  {{ line('no', 'button') }}
+                </a>
+                <a href="{{ site_url('dashboard/teacher/course/delete/' ~ row.id) }}" class="btn btn-lg-blue">
+                  <i class="fa fa-check"></i>
+                  {{ line('yes', 'button') }}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

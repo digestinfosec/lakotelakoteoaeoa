@@ -1,0 +1,165 @@
+{% extends 'layout/app/student_dashboard.twig' %}
+{% set titleName = line('dashboard_shared_title', 'dashboard') %}
+{% set menu = "dashboard/student/menu_course.twig" %}
+{% set is_class_schedule = true %}
+
+{% block dashboard_content %}
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content-body">
+        {% if courses %}
+          <div class="class-schedule-2">
+            {% for course in courses %}
+
+            <div class="list-box border-green">
+              {% if header_title == "You" %}
+              {% set color_class = "bg-sgogo-purple" %}
+              {% else %}
+              {% set color_class = "bg-sgogo-gray" %}
+              {% endif %}
+              <div class="box-description-wrapper">
+                <div class="image-class">
+                  <div class="image">
+                    {% if course.images is not empty %}
+                    {% set filename = course.images.0.path ~ course.images.0.title[:-4] ~ '_thumb' ~ course.images.0.title[-4:] %}
+                    <img src="{{ site_url(filename) }}" alt="">
+                    {% else %}
+                      <div class="imageCenter">
+                        <img src="{{ base_url() }}assets/images/image_default_skillagogo.png"/>
+                      </div>
+                    {% endif %}
+                    {#
+                    <div class="box-count-img">
+                      <i class="fa fa-image"></i> <span class="number">{{ course.images|length }}</span>
+                    </div>
+                    #}
+                  </div>
+                </div>
+                <div class="description-class">
+                  <div class="desc-top-left">
+                    <a href="{{ site_url('course/detail/' ~ course.course_id) }}" class="title">{{ course.title }}</a><br>
+                    {% set voucher = course.voucher_code|trim(course.code) %}
+                    <div class="label label-info">{{ course.code }} {{ voucher[:3] }} {{ voucher[3:3] }} {{ voucher[6:] }}</div>
+                    <br/><br/>
+                    <div class="category">{{ line( 'category', 'field') }} : {{ line( 'categories_' ~ course.category_id, 'categories') }}</div>
+                    <div class="category">{{ line( 'type', 'field') }} : {{ line( 'type_' ~ course.type, 'field') }}</div>
+                  </div>
+                  <div class="desc-top-right mg-top-10">
+                    <div class="price">
+                      {{ delimiter_number(course.currency, course.price) }}
+                    </div>
+                  </div>
+                  <div class="desc-middle mg-top-10">
+                    {% if course.type == 3 %}
+                    {% for schedule in course.schedules %}
+                    {% set course_date_start = strtotime(schedule.date ~ ' ' ~ schedule.start_time) %}
+                    {% set course_date_end = strtotime(schedule.date ~ ' ' ~ schedule.end_time) %}
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="date-location">
+                          <div class="icon">
+                            <i class="fa fa-clock-o"></i>
+                            {{ date('j F Y', course_date_start) }}<br>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="date-location">
+                          <div class="icon">
+                            <i class="fa fa-map-marker"></i>
+                            {{ schedule.address_line1 }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    {% set course_date_start = strtotime(course.date ~ ' ' ~ course.start_time) %}
+                    {% set course_date_end = strtotime(course.date ~ ' ' ~ course.end_time) %}
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="date-location">
+                          <div class="icon">
+                            <i class="fa fa-clock-o"></i>
+                            {{ date('j F Y', course_date_start) }}<br>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="date-location">
+                          <div class="icon">
+                            <i class="fa fa-map-marker"></i>
+                            {{ course.address_line1 }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {% endif %}
+                    <br/>
+                    <p>{{ course.description|striptags }}</p>
+                  </div>
+                  <div class="btn-group-class-teacher">
+                    {% if is_past %}
+                    <div class="category-menu-block">
+                      <a href="{{ site_url('dashboard/rating/new_rating/' ~ course.course_id) }}" class="btn  {{ course.add_rating_status ?: 'disabled' }}">
+                        <div class="category-box">
+                          <i class="fa fa-star fa-2x"></i> <br>
+                          <div class="name-menu">{{ line('dashboard_206', 'dashboard') }}</div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="category-separator"></div>
+                    {% endif %}
+                    {% if is_current %}
+                    <div class="category-menu-block">
+                      <a href="#" class="btn btn-class-cancel {{ course.can_cancel_status == 0 ? 'disabled' }}" data-code="{{ course.voucher_code }}">
+                        <div class="category-box">
+                          <i class="fa fa-times-circle fa-2x"></i> <br>
+                          <div class="name-menu">{{ line('dashboard_118', 'dashboard') }}</div>
+                        </div>
+                      </a>
+                    </div>
+                    {% endif %}
+                    {% if not is_cancelled %}
+                    <div class="category-separator"></div>
+                    <div class="category-menu-block">
+                      <a href="{{ site_url('dashboard/student/course/show-voucher/' ~ course.voucher_code) }}" class="btn btn-voucher{{ course.can_print_voucher ? 'disabled' }}">
+                        <div class="category-box">
+                          <i class="fa fa-print fa-2x"></i> <br>
+                          <div class="name-menu">{{ line('dashboard_51', 'dashboard') }}</div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="category-separator"></div>
+                    {% endif %}
+                  </div>
+                  {% include 'layout/app/modal_confirm_delete_class.twig' %}
+                  {% include 'layout/app/modal_cancel_course_student.twig' %}
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+            {% include('dashboard/shareds/_pagination.twig') %}
+          </div>
+        {% else %}
+          <div class="alert alert-info">
+            {{ line('dashboard_14', 'dashboard') }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script>
+    $(document).ready(function () {
+      $('.btn-class-cancel').click(function(e){
+        $("input#change_reason").val('');
+        $("input#voucher_code").val($(this).data('code'));
+        $('#skillagogo-cancel-class-teacher').modal('show');
+      })
+    });
+  </script>
+
+{% endblock %}

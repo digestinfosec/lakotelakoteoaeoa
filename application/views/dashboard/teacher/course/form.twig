@@ -1,0 +1,439 @@
+{% extends 'layout/app/master.twig' %}
+{% set titleName = line('title_9', 'dashboard') %}
+{% set ClassHeader1Color = "navbar-create-class bg-sgogo-purple" %}
+{% set IdHeader1Color = "header-create-class" %}
+{% set ClassBoxRightTitleColor = "sub-head-purple" %}
+{% set IdBoxRightTitleColor = "box-head-create-class-profile" %}
+{% set SubTitleHeader = line('subtitle_8', 'dashboard') %}
+{% set header0, header1, header3 = true, true, true %}
+{% set footer = true %}
+
+{% block css %}
+  <link href="{{ base_url('assets/css/tinymce.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+  <div class="se-pre-con">
+    <div class="box-preloader">
+      <img src="{{ base_url('assets/images/logo-teacher.png') }}">
+      <p>{{ line('please_wait','dashboard') }}</p>
+    </div>
+  </div>
+  {{ form_open_multipart(submit_path, {id: 'create_class_form'}) }}
+  {% set attr = { 'class': 'form-control' } %}
+
+  <section class="step-create-class">
+    <div class="container">
+      <div class="stepwizard col-md-offset-1">
+        <div class="stepwizard-row setup-panel">
+          <div class="stepwizard-step">
+            <a href="#step-1" type="button" data-color="purple" class="btn btn-primary btn-circle my-btn-step">
+              <div class="number bg-sgogo-purple" id="number-step-1">1</div>
+            </a>
+            <p class="" id="p-step-1">{{ line('step_class_details','create_course') }}</p>
+          </div>
+          <div class="stepwizard-step">
+            <a href="#step-2" type="button" data-color="blue-light" class="btn btn-default btn-circle my-btn-step" disabled="disabled">
+              <div class="number" id="number-step-2">2</div>
+            </a>
+            <p class="" id="p-step-2">{{ line('step_class_price_and_attendees','create_course') }}</p>
+          </div>
+          <div class="stepwizard-step">
+            <a href="#step-3" type="button" data-color="red" class="btn btn-default btn-circle my-btn-step" disabled="disabled">
+              <div class="number" id="number-step-3">3</div>
+            </a>
+            <p class="" id="p-step-3">{{ line('step_class_schedule','create_course') }}</p>
+          </div>
+          <div class="stepwizard-step">
+            <a href="#step-4" type="button" data-color="yellow" class="btn btn-default btn-circle my-btn-step" disabled="disabled">
+              <div class="number" id="number-step-4">4</div>
+            </a>
+            <p class="" id="p-step-4">{{ line('step_other_class_info','create_course') }}</p>
+          </div>
+          <div class="stepwizard-step">
+            <a href="#step-5" type="button" data-color="purple-light" class="btn btn-default btn-circle my-btn-step" disabled="disabled">
+              <div class="number" id="number-step-5">5</div>
+            </a>
+            <p class="" id="p-step-5">{{ line('step_terms_of_service','create_course') }}</p>
+          </div>
+        </div>
+      </div>
+
+      {% include 'dashboard/teacher/course/_step1.twig' %}
+      {% include 'dashboard/teacher/course/_step2.twig' %}
+      {% include 'dashboard/teacher/course/_step3.twig' %}
+      {% include 'dashboard/teacher/course/_step4.twig' %}
+      {% include 'dashboard/teacher/course/_step5.twig' %}
+
+    </div>
+  </section>
+  {{ form_close() }}
+
+  {% include 'layout/app/modal_tospp.twig' %}
+
+  <div id="map-dialog" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Modal title</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-horizontal" style="width: 550px">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Location:</label>
+
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="input-address"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Radius:</label>
+
+              <div class="col-sm-5">
+                <input type="text" class="form-control" id="input-radius"/>
+              </div>
+            </div>
+            <div id="map-class" style="width: 100%; height: 400px;"></div>
+            <div class="clearfix">&nbsp;</div>
+            <div class="m-t-small">
+              <label class="p-r-small col-sm-1 control-label">Lat.:</label>
+
+              <div class="col-sm-3">
+                <input type="text" class="form-control" style="width: 110px" id="input-lat"/>
+              </div>
+              <label class="p-r-small col-sm-2 control-label">Long.:</label>
+
+              <div class="col-sm-3">
+                <input type="text" class="form-control" style="width: 110px" id="input-lon"/>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
+{% endblock %}
+
+{% block script %}
+  <script src="{{ base_url() }}assets/js/duplicate.fields.js"></script>
+  <script src="{{ base_url() }}assets/js/fileinput.js"></script>
+  <script src="{{ base_url() }}assets/js/locationpicker.jquery.js"></script>
+  <script src="{{ base_url() }}assets/js/tinymce.min.js"></script>
+  <script src="{{ base_url() }}assets/js/tinymce-placeholder-plugin.min.js"></script>
+  <script src="{{ base_url() }}assets/js/tinymce-autoresize-plugin.min.js"></script>
+  <script>
+    $("#file-upload-create-class").fileinput({
+      uploadUrl: '{{ base_url() }}dashboard/teacher/course/upload-image/', // you must set a valid URL here else you will get an error
+      allowedFileExtensions: ['jpg', 'png', 'gif'],
+      overwriteInitial: false,
+      maxFileSize: 2000,
+      maxFilesNum: 10,
+      language: "{{ session.location == 'ID' ? 'id':'en' }}",
+      uploadExtraData: $('form').data('id'),
+      uploadAsync: true,
+      showUpload: false,
+      showRemove: false,
+      overwriteInitial: true,
+      initialPreview: [
+        {% for image in images %}
+        {% set filename = image.path ~ image.title[:-4] ~ '_thumb' ~ image.title[-4:] %}
+        "<img style='height:160px;width:auto' src={{ site_url(filename) }}>",
+        {% endfor %}
+      ],
+      initialPreviewConfig: [
+        {% for image in images %}
+        {
+          height: "160px",
+          width: "auto",
+          url: "{{ site_url('dashboard/teacher/course/delete-image/' ~ image.id) }}",
+          key: 1
+        },
+        {% endfor %}
+      ],
+      allowedFileTypes: ['image'],
+      // slugCallback: function (filename) {
+      //   return filename.replace('(', '_').replace(']', '_');
+      // }
+    });
+    $("#file-upload-create-class").on("filebatchselected", function(event, files) {
+      // trigger upload method immediately after files are selected
+      $(this).fileinput("upload");
+    });
+  </script>
+  <script>
+    var submitUrl = "";
+    var updateUrl = "";
+    var enablePreview = {{ preview }};
+    $(window).load(function () {
+      $('#prerequisite_skill').change(function () {
+        if ($(this).val() == 1)
+          $('#prerequisite_detail').show();
+        else
+          $('#prerequisite_detail').hide();
+      })
+
+      $('#class_pack').change(function () {
+        if ($(this).val() == 1)
+          $('#package_detail').show();
+        else
+          $('#package_detail').hide();
+      })
+
+      {% if (course.draft_step) %}
+      var draft_step = {{ course.draft_step }}
+      for (var i = 1; i < draft_step; i++) {
+        var nextBtn = $('div.setup-panel div a[href="#step-' + i + '"]').parent().next().children("a")
+        changeColorHeader($('.btn-next:visible'));
+        nextBtn.removeAttr('disabled').trigger('click');
+      }
+      replaceValidationUI();
+      {% endif %}
+
+      $(".se-pre-con").fadeOut("slow")
+    });
+
+    $(window).keydown(function (event) {
+      if (event.keyCode == 13) {
+        event.preventDefault();
+        return false;
+      }
+    });
+
+    $(document).ready(function () {
+
+      jqueryStep();
+      dateCreateClass();
+      changeClassType();
+      duplicateForm();
+      popover();
+      tinymceInit();
+
+      var curStep = $(".setup-content")
+      var curInputs = curStep.find("input[type='text'],input[type='url'],input[type='number'],select,textarea")
+
+      curInputs.on('change', function () {
+        $(window).on("beforeunload", function () {
+          return "{{ line('are_you_sure','controller_js') }}"
+        });
+      });
+
+      curInputs.on('keypress', function () {
+        $(this)[0].setCustomValidity('');
+      })
+
+      updateUrl = '{{ update_path }}'
+      submitUrl = '{{ submit_path }}'
+
+      $(".enabled-action-preview1, .enabled-action-preview2, .enabled-action-preview3, .enabled-action-preview4, .enabled-action-draft1, .enabled-action-draft2, .enabled-action-draft3, .enabled-action-draft4, .enabled-publish").click(function () {
+        $(window).off("beforeunload");
+        return true;
+      })
+
+      if ($("#prerequisite_skill").val() == 0)
+        $("#prerequisite_detail").hide();
+      if ($("#class_pack").val() == 0)
+        $("#package_detail").hide();
+
+      if ($(".type_of_class option:selected").val() === "1") {
+        $(".add-fields-schedule").hide();
+      } else {
+        $(".add-fields-schedule").show();
+        $(".remove-fields-schedule:not(:first)").show();
+      }
+
+      $('.btn-preview').click(function () {
+        if (enablePreview == false)
+          toastr.error("{{ line('must_save','controller_js') }}");
+        else
+          window.open("{{ site_url('course/preview/' ~ course.course_id) }}", '_blank');
+      });
+
+      $("#create_class_form").submit(function (e) {
+        e.preventDefault();
+      });
+
+      $('.btn-c-publish').click(function (e) {
+        $("form#create_class_form").unbind().submit();
+      })
+
+      $('.schedule_start').change(function () {
+        var ampm_start = $('.schedule_start').next().find('.ampm').val();
+        var ampm_end = $('.schedule_end').next().find('.ampm').val();
+        var schedule_end = $('.schedule_end').val();
+        $('.schedule_end').next().find('.ampm').val(ampm_start);
+        $('.schedule_end').val(schedule_end.replace(ampm_end, ampm_start));
+      })
+    });
+
+
+
+    function popover() {
+      $('[data-toggle="popover"]').popover()
+    }
+
+    function submitForm(data) {
+      if (data.success) {
+        toastr.success(data.message)
+        enablePreview = true;
+        console.log(data)
+        if (data.course_id) {
+          var course_id = data.course_id;
+          $('.btn-preview').unbind('click');
+          $('.btn-preview').on('click', function () {
+            window.open(base_url + "course/preview/" + course_id, '_blank');
+          });
+          submitUrl = updateUrl + '/' + data.course_id;
+        }
+        if (data.schedule_ids && data.address_ids) {
+          for (var i = 0; i < data.schedule_ids.length; i++) {
+            $('.schedule_ids').eq(i).val(data.schedule_ids[i]);
+            $('.address_ids').eq(i).val(data.address_ids[i]);
+          }
+        }
+      } else {
+        toastr.error(data.message)
+      }
+    }
+
+    function changeClassType() {
+      $(".type_of_class").change(function () {
+        if ($(".type_of_class option:selected").val() === "1" ) {
+          $(".add-fields-schedule").hide();
+        } else {
+          $(".add-fields-schedule").show();
+          $(".remove-fields-schedule:not(:first)").show();
+        }
+      });
+    }
+
+    function duplicateForm() {
+      $('.box-form-class-schedule-wrapper').duplicateElement({
+        "class_remove": ".remove-fields-schedule",
+        "class_create": ".add-fields-schedule",
+        "onCreate": function (newElement, old, e) {
+          dateCreateClass();
+          $(newElement).find('.form-control').val('')
+          $(newElement).find('.location-detail').hide();
+          $(newElement).find('.reset-location').hide();
+          $(newElement).find('.map').hide();
+          $(newElement).find('.row-schedule-venue').val('').show();
+          initAutocompleteAfter();
+          $('.box-form-class-schedule-wrapper:last').find('input').val("");
+          $('.box-form-class-schedule-wrapper:last').find('.schedule_date').combodate('setValue', moment());
+          $('.box-form-class-schedule-wrapper:last').find('.schedule_start').combodate('setValue', "08:00 am");
+          $('.box-form-class-schedule-wrapper:last').find('.schedule_end').combodate('setValue', "09:00 am");
+        }
+      });
+    }
+
+    // Returns text statistics for the specified editor by id
+    function getStats(id) {
+      var body = tinyMCE.get(id).getBody(), text = tinyMCE.trim(body.innerText || body.textContent);
+
+      return {
+        chars: text.length,
+        words: text.split(/[\w\u2019\'-]+/).length
+      };
+    }
+
+    function dateCreateClass() {
+      $('.schedule_date').combodate({
+        customClass: 'form-control',
+        firstItem: 'skillagogo',
+        minYear: 2016,
+        maxYear: 2017,
+        smartDays: true,
+        indonesian: {{ session.location == 'ID' ? 1 : 0 }}
+      });
+
+      $('.schedule_start').combodate({
+        firstItem: 'name',
+        minuteStep: 15,
+        customClass: 'form-control'
+      });
+
+      $('.schedule_end').combodate({
+        firstItem: 'name',
+        minuteStep: 15,
+        customClass: 'form-control'
+      });
+    }
+
+    function tinymceInit() {
+      var options = {
+          selector: '.tinymce-class',
+          content_style: "",
+          menubar: false,
+          plugins: ["placeholder", "autoresize"],
+          plugins: "paste",
+          paste_as_text: true,
+          force_p_newlines: true,
+          force_br_newlines: false,
+          forced_root_block: '',
+          toolbar: 'styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+          width: '100%',
+          height: 100,
+          autoresize_min_height: 100,
+          autoresize_max_height: 800,
+          autoresize_bottom_margin: 0,
+          elementpath: false,
+          setup: function (ed) {
+            ed.on('init', function () {
+              this.getDoc().body.style.fontSize = '14px';
+            });
+            ed.on('keyup', function (ed, e) {
+              $("textarea[name=" + $(ed.target).data('id') + "]").closest('.form-create-class').find('.alert-bubble').remove()
+            })
+          },
+          external_plugins: {
+            "autoresize": "/assets/js/tinymce-autoresize-plugin.min.js"
+          }
+        },
+        $this = $(this);
+
+      // fix tinymce bug
+      if ($this.is('[required]')) {
+        options.oninit = function (editor) {
+          editor.save();
+        }
+      }
+
+      tinymce.init(options);
+    }
+
+    function changeColorHeader(btn) {
+      //console.log('my_id_step', my_id_step);
+      $("#header-create-class, #header-mobile-create-class")
+        .removeClass("bg-sgogo-blue-light bg-sgogo-red bg-sgogo-yellow")
+        .removeClass("bg-sgogo-purple-light bg-sgogo-yellow bg-sgogo-purple")
+
+      $("#box-head-create-class-profile")
+        .removeClass("sub-head-blue-light sub-head-red sub-head-yellow")
+        .removeClass("sub-head-purple-light sub-head-yellow sub-head-purple")
+
+      $("#header-create-class").addClass("bg-sgogo-" + btn.data('color'));
+      $("#header-mobile-create-class").addClass("bg-sgogo-" + btn.data('color'));
+      $("#box-head-create-class-profile").addClass("sub-head-" + btn.data('color'));
+
+      var next = btn.data('next-class')
+      if (next) {
+        $("#number-" + btn.data('next-class')).addClass("bg-sgogo-" + btn.data('color'));
+        //$("#p-" + btn.data('next-class')).addClass("bg-sgogo-" + btn.data('color'));
+      }
+    }
+
+    {% include 'dashboard/teacher/course/_form_validation.js.twig' %}
+  </script>
+
+  {% include 'dashboard/teacher/course/_google_map.twig' %}
+{% endblock %}

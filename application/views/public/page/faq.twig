@@ -1,0 +1,16 @@
+{% extends 'layout/app/master.twig' %}
+{% set titleName = line('title_21', 'dashboard') %}
+{% set ClassHeader1Color = "bg-sgogo-gray-dark" %}
+{% set ClassHeader2Color = "bg-sgogo-gray-dark" %}
+{% set SubTitleHeader = line('subtitle_11', 'dashboard') %}
+{% set ClassHiddenSubTitle = "box-hidden" %}
+{% set header0, header1, header2, header3 = true, true, true, true %}
+{% set footer = true %}
+
+{% block content %}
+  {% if session.lang == 'indonesian' %}
+    {% include('public/page/faq/faq_id.twig') %}
+  {% else %}
+    {% include('public/page/faq/faq_eng.twig') %}
+  {% endif %}
+{% endblock %}

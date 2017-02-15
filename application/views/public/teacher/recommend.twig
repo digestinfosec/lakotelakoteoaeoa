@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>skillagogo - Recommend Teacher</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- START SEO META SHARE FACEBOOK -->
+  <meta property="og:url" content="http://www.skillagogo.com"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:title" content="skillagogo Website"/>
+  <meta property="og:description" content="skillagogo Website"/>
+  <meta property="og:image" content="URL IMAGE WEBSITE"/>
+
+  <!-- START SEO META SHARE TWITTER -->
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:site" content="apecsa"/>
+  <meta name="twitter:title" content="Apecsa title">
+  <meta name="twitter:description" content="Apecsa Project"/>
+  <meta name="twitter:creator" content="ApecsaOS"/>
+  <meta name="twitter:image:src" content="https://website.com/image250X250.png"/>
+  <meta name="twitter:domain" content="website.com"/>
+  <!-- END SEO META SHARE TWITTER -->
+
+  <!-- START SEO META SHARE GOOGLE PLUS -->
+  <meta itemprop="name" content="ApecsaOS"/>
+  <meta itemprop="description" content="Website Description"/>
+  <meta itemprop="image" content="https://website.com/image250X250.png"/>
+
+  <link href="{{ base_url() }}assets/css/bootstrap.css" rel="stylesheet">
+  <link href="{{ base_url() }}assets/css/font-awesome.css" rel="stylesheet">
+
+  <link href="{{ base_url() }}assets/css/jquery.checkradios.css" rel="stylesheet">
+  <link href="{{ base_url() }}assets/css/main.css" rel="stylesheet">
+  <link href="{{ base_url() }}assets/css/main-responsive.css" rel="stylesheet">
+</head>
+<body class="recommend-teacher-page">
+<section class="box-recommend-teacher">
+  <div class="logo">
+    <a href="{{ base_url() }}">
+      <img src="{{ base_url() }}assets/images/logo-teacher.png" alt="">
+    </a>
+
+  </div>
+  <div class="title">{{ line('recommend_title', 'teacher') }}</div>
+  <div class="sub-title">
+    {{ line('recommend_sub', 'teacher') }}
+  </div>
+  {{ form_open('', {id: 'form-recommend-teacher'}) }}
+  <div class="box-form">
+    {% if error %}
+    <div class="col-lg-12 text-center">
+      <div class="alert alert-danger">{{ error|raw }}</div>
+    </div>
+    {% endif %}
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      <div class="title-form">
+        {{line('your_profile','field')}}
+      </div>
+      <div class="recommend-group">
+        <input type="text" class="form-control" name="submitter_name" placeholder="{{ line('name', 'field') }}">
+        <div class="six-start">*</div>
+        <label for="submitter_name" class="error" style="display: none;"></label>
+      </div>
+      <div class="recommend-group">
+        <input type="email" class="form-control" name="submitter_email" placeholder="{{line('email', 'field')}}">
+        <div class="six-start">*</div>
+        <label for="submitter_email" class="error" style="display: none;"></label>
+      </div>
+      <br>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      <div class="title-form">
+        {{line('your_recommendation','field')}}
+      </div>
+      <div class="recommend-group">
+        <input type="text" name="teacher_name" class="form-control" placeholder="{{line('teacher_name','field')}}">
+        <div class="six-start">*</div>
+        <label for="teacher_name" class="error" style="display: none;"></label>
+      </div>
+      <div class="recommend-group">
+        <select name="teacher_expertise" class="form-control">
+          <option value="">{{line('select_please','categories')}}</option>
+          {% for category in categories %}
+            <optgroup label="{{ line('categories_' ~ category.id,'categories') }}">
+              {% for child in category.child %}
+                <option value="{{ child.id }}">{{ line('categories_' ~ child.id,'categories') }}</option>
+              {% endfor %}
+            </optgroup>
+          {% endfor %}
+        </select>
+        <div class="six-start">*</div>
+        <label for="teacher_expertise" class="error" style="display: none;"></label>
+      </div>
+      <div class="recommend-group">
+        <input type="text" name="teacher_contact" class="form-control" placeholder="{{line('teacher_contact','field')}}">
+        <div class="six-start">*</div>
+        <label for="teacher_contact" class="error" style="display: none;"></label>
+      </div>
+      <div class="recommend-group">
+        <input type="email" name="teacher_email" class="form-control" placeholder="{{line('email', 'field')}}">
+        <div class="six-start">*</div>
+        <label for="teacher_email" class="error" style="display: none;"></label>
+      </div>
+      <div class="recommend-group">
+        <select name="teacher_country" class="form-control" id="teacher_country">
+          <option value="Singapore">Singapore</option>
+          <option value="Indonesia">Indonesia</option>
+        </select>        
+        <div class="six-start">*</div>
+        <label for="teacher_country" class="error" style="display: none;"></label>
+      </div>
+      {#
+      <div class="recommend-group">
+        <input type="url" name="teacher_website" class="form-control" placeholder="Website/blog">
+        <div class="six-start">*</div>
+        <label for="teacher_website" class="error" style="display: none;"></label>
+      </div>
+      #}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="text-center">
+        <input type="submit" class="btn btn-recommend-teacher" value="{{line('recommend_button','field')}}">
+      </div>
+    </div>
+  </div>
+  </form>
+</section>
+
+<!-- MODAL TOS -->
+<div class="modal fade" id="modalTos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content modal-coming-soon">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="fa fa-times i-size"></i>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Terms of service</h4>
+      </div>
+      <div class="modal-body">
+        <div>
+          <div class="title-modal">
+            <h2>DEFINITIONS</h2>
+            <div class="title-highlight"></div>
+          </div>
+          <p>
+            This website (the “Website”) is operated by skillagogo Pte. Ltd., a Singapore private company
+            (Reg. no.&nbsp;201507746N).
+          </p>
+          <ol>
+            <li>
+              <p>
+                The classes on the Website are offered for users who wish to attend classes, courses,
+                workshops from the class provider or their legal representative (“the Teacher”) to the
+                learner (“the Student”) under the following Terms of Service. Some classes also have Courses
+                Specific Terms of Service, available on the class provider’s page or the
+                school/institution’s page on the Website. When booking a seat on the Website and/or
+                making inquiry on the Website or via email or telephone, the Student accepts and agrees
+                to these Terms of Service and to the Courses Specific Terms of Service.
+              </p>
+            </li>
+            <li>
+              <p>
+                The Website provides an online platform through which the Teachers can<br>
+                advertise their classes, courses and workshops. By booking a seat through the Website,
+                the Students enters into a direct, legally binding, contractual relationship with the
+                relevant Teachers. The Website acts solely as an intermediary between the Student and
+                the Teacher, sending the booking and payment details to the Teacher and sending
+                the Student a confirmation email for and on behalf of the Teacher.
+              </p>
+            </li>
+          </ol>
+          <br/>
+          <div class="title-modal">
+            <h2>BOOKING</h2>
+            <div class="title-highlight"></div>
+          </div>
+          <ol start="3">
+            <li>
+              <p>
+                To book a seat on the class offered by the Teacher, the Student must pay to the Website
+                a class full price as advertised on the Website (unless otherwise specified in the
+                Courses Specific Terms of Service). Upon reception of the confirmation email and
+                payment, the Website, on behalf of the Teacher, will send a class confirmation email and
+                an attendance voucher. The booking will be effective immediately after the confirmation
+                email has been sent to the Student.
+              </p>
+            </li>
+            <li>
+              <p>
+                Class booking can only be accepted from the user aged 18 or over at the time of the
+                booking time.
+              </p>
+            </li>
+          </ol>
+          <br/>
+          <div class="title-modal">
+            <h2>PRICE AND PAYMENTS</h2>
+            <div class="title-highlight"></div>
+          </div>
+          <ol start="5">
+            <li>
+              <p>The Student is responsible for the payments of the class cost and for compliance with
+                these Terms of Service.</p>
+            </li>
+            <li>
+              <p>The class prices include the following: </p>
+              <ul>
+                <li>Class/course/workshop content offered by the Teacher</li>
+                <li>Use of class facilities (if any)</li>
+                <li>Certificate of Completion (if any)</li>
+              </ul>
+            </li>
+            <li>
+              <p>Prices DO NOT include the following: </p>
+              <ul>
+                <li>Other additional specific tools and/or equipment needed for the class as specified
+                  in the Class Profile Page
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p>
+                For classes in Singapore, the class prices are all in Singapore Dollars (S$). For
+                classes in Indonesia, the class prices are all in Indonesia Rupiah (Rp). Payment can be
+                made only in respective currencies.
+              </p>
+            </li>
+            <li>
+              <p>Payments can be made by Paypal (S$ only), bank/ATM transfer (Rp only).</p>
+            </li>
+          </ol>
+          <br/>
+          <div class="title-modal">
+            <h2>CANCELLATION</h2>
+            <div class="title-highlight"></div>
+          </div>
+          <ol start="10">
+            <li>
+              <p>
+                If the cancellation is made by the Student, the payment will be revised into skillagogo
+                credits which can be used to attend other class. skillagogo credits has a validity of 12
+                months after opening.
+              </p>
+            </li>
+            <li>
+              <p>
+                If the cancellation is made by the Teacher, the Student will be offered an opportunity
+                to change her/his schedule. In the event that there is no available new class schedule,
+                the Student will be given skillagogo credits. Class cancellation made by the Teacher is
+                subject to admin fees as stated in the Teacher Cancellation scheme.
+              </p>
+            </li>
+          </ol>
+          <br/>
+          <div class="title-modal">
+            <h2>REVIEWS</h2>
+            <div class="title-highlight"></div>
+          </div>
+          <ol start="12">
+            <li>
+              <p>
+                The Student reviews may be uploaded onto the Teacher’s website and/or his/her social
+                media accounts, as well as on our website for the sole purpose of informing future
+                Students of other opinions of the service level and quality of the class and/or the
+                Teacher.
+              </p>
+            </li>
+            <li>
+              <p>The Website reserves the right to accept, refuse or remove reviews at our sole
+                discretion.</p>
+            </li>
+          </ol>
+          <br/>
+          <div class="title-modal">
+            <h2>LIABILITY</h2>
+            <div class="title-highlight"></div>
+          </div>
+          <ol start="14">
+            <li>
+              <p>
+                Neither Teacher nor the Website shall be liable for events beyond their control which
+                may interfere with the Student’s scheduled occupancy, including but not limited to Acts
+                of God, acts of governmental agencies, fire, strikes, terrorism, war, inclement weather,
+                flooding, disturbance or noise coming from outside the class premises such as private or
+                public construction, traffic, animals or neighbours. No rebate of refund will be offered
+                in these circumstances.
+              </p>
+            </li>
+            <li>
+              <p>
+                The Website assumes no liability for property loss or damages, nor liability for injury,
+                accidents, delay, or irregularity which may be occasioned during the class session.
+              </p>
+            </li>
+            <li>
+              <p>
+                Any exception to these Terms of Service granted by the Website for the Student’s benefit in
+                no way modifies the present Terms of Service. Complete or partial nullity of any clause in
+                the Terms of Service does not entail the nullity of the other Terms of Service
+              </p>
+            </li>
+          </ol>
+          <br/>
+          <div class="title-modal">
+            <h2>LANGUAGE AND APPLICABLE LAW</h2>
+            <div class="title-highlight"></div>
+          </div>
+          <ol start="17">
+            <li>
+              <p>
+                These Terms of Service are written in English. The English writing will prevail over any
+                translation available.
+              </p>
+            </li>
+            <li>
+              <p>
+                These Terms of Service are submitted to the exclusive jurisdiction of the Singapore courts
+                under Singapore laws.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-register" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PRIVACY -->
+<div class="modal fade" id="modalPrivacy" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content modal-coming-soon">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="fa fa-times i-size"></i>
+        </button>
+        <h4 class="modal-title" id="modalPrivacyLabel">Privacy Policy</h4>
+      </div>
+      <div class="modal-body">
+        <div>
+          <p>
+            Your privacy is our priority. This privacy policy sets out how skillagogo.com uses and protects
+            any information that you give skillagogo.com when you use this website. skillagogo.com is
+            committed to ensuring that your privacy is protected. Should we ask you to provide certain
+            information by which you can be identified when using this website, then you can be assured that
+            it will only be used in accordance with this privacy statement.
+          </p>
+          <p>
+            skillagogo.com may change this policy by updating this page. You should check this page from
+            time to time to ensure that you are happy with any changes. This policy is effective from 20
+            April 2016.
+          </p>
+          <br/>
+          <div class="title-modal">
+            <h2>WHAT WE COLLECT</h2>
+            <div class="title-highlight"></div>
+          </div>
+          <p>We may collect the following information:</p>
+          <ul class="list-modal-body">
+            <li class="check">Personal information including name, age, gender, and job title</li>
+            <li class="check">Contact information including telephone numbers and email address</li>
+            <li class="check">Demographic information including postcode, home address, office address</li>
+            <li class="check">Other information relevant to customer surveys and/or offers including
+              preferences and interests
+            </li>
+          </ul>
+          <br/>
+          <div class="title-modal">
+            <h2>WHAT WE DO WITH THE INFORMATION WE GATHER</h2>
+            <div class="title-highlight"></div>
+          </div>
+          <p>
+            We require this information to understand your needs and provide you with a better service, and
+            in particular for the following reasons:
+          </p>
+          <ul class="list-modal-body">
+            <li class="check">Internal record keeping.</li>
+            <li class="check">We may use the information to improve our products and services.</li>
+            <li class="check">We may periodically send promotional emails about new products, special offers
+              or other information which we think you may find interesting using the email address which
+              you have provided.
+            </li>
+            <li class="check">From time to time, we may also use your information to contact you for market
+              research purposes. We may contact you by email, phone, fax or mail. We may use the
+              information to customise the website according to your interests.
+            </li>
+          </ul>
+          <br/>
+          <div class="title-modal">
+            <h2>SECURITY</h2>
+            <div class="title-highlight"></div>
+          </div>
+          <p>
+            We are committed to ensuring that your information is secure. In order to prevent unauthorised
+            access or disclosure, we have put in place suitable physical, electronic and managerial
+            procedures to safeguard and secure the information we collect online.
+          </p>
+          <br/>
+          <div class="title-modal">
+            <h2>HOW WE USE COOKIES</h2>
+            <div class="title-highlight"></div>
+          </div>
+          <p>
+            A cookie is a small file that asks permission to be placed on your computer’s hard drive. Once
+            you agree, the file is added and the cookie helps analyse web traffic or lets you know when you
+            visit a particular site. Cookies allow web applications to respond to you as an individual. The
+            web application can tailor its operations to your needs, likes and dislikes by gathering and
+            remembering information about your preferences.
+          </p>
+          <p>
+            We may use traffic log cookies to identify which pages are being used. This helps us analyse
+            data about web page traffic and improve our website in order to tailor it to customer needs. We
+            only use this information for statistical analysis purposes and then the data is removed from
+            the system.
+          </p>
+          <p>
+            Overall, cookies help us provide you with a better website, by enabling us to monitor which
+            pages you find useful and which you do not. A cookie in no way gives us access to your computer
+            or any information about you, other than the data you choose to share with us.
+          </p>
+          <p>
+            You can choose to accept or decline cookies. Most web browsers automatically accept cookies, but
+            you can usually modify your browser setting to decline cookies if you prefer. This may prevent
+            you from taking full advantage of the website.
+          </p>
+          <br/>
+          <div class="title-modal">
+            <h2>LINKS TO OTHER WEBSITES</h2>
+            <div class="title-highlight"></div>
+          </div>
+          <p>
+            Our website may contain links to other websites of interest. However, once you have used these
+            links to leave our site, you should note that we do not have any control over that other
+            website. Therefore, we cannot be responsible for the protection and privacy of any information
+            which you provide whilst visiting such sites and such sites are not governed by this privacy
+            statement. You should exercise caution and look at the privacy statement applicable to the
+            website in question.
+          </p>
+          <p>
+            We will not sell, distribute or lease your personal information to third parties unless we have
+            your permission or are required by law to do so. We may use your personal information to send
+            you promotional information about third parties which we think you may find interesting if you
+            tell us that you wish this to happen.
+          </p>
+          <p>
+            If you believe that any information we are holding on you is incorrect or incomplete, please
+            write to or email us as soon as possible at contact@skillagogo.com. We will promptly correct any
+            information found to be incorrect.
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-register" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{{ base_url() }}assets/js/jquery.min.js"></script>
+<script src="{{ base_url() }}assets/js/bootstrap.js"></script>
+<script src="{{ base_url() }}assets/js/jquery.validate.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $.validator.setDefaults({
+      highlight: function (element, errorClass, validClass) {
+        if (element.type === "radio") {
+          this.findByName(element.name).addClass('error-radio');
+        } else {
+          $(element).closest('.recommend-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+          $(element).closest('.recommend-group').find('i.fa').remove();
+          $(element).closest('.recommend-group').append('<i class="fa fa-exclamation fa-lg form-control-feedback right-i"></i>');
+        }
+      },
+      unhighlight: function (element, errorClass, validClass) {
+        if (element.type === "radio") {
+          this.findByName(element.name).removeClass(errorClass).addClass(validClass);
+        } else {
+          $(element).closest('.recommend-group').removeClass('has-error has-feedback').addClass('has-success has-feedback');
+          $(element).closest('.recommend-group').find('i.fa').remove();
+          $(element).closest('.recommend-group').append('<i class="fa fa-check fa-lg form-control-feedback right-i"></i>');
+        }
+      }
+    });
+
+    $.validator.addMethod(
+      "regex",
+      function(value, element, regexp) {
+        var re = new RegExp(regexp);
+        return this.optional(element) || re.test(value);
+      },
+      "Please check your input."
+      );
+
+    $("#form-recommend-teacher").validate({
+      ignore: [],
+      rules: {
+        'submitter_name': {
+          required: true
+        },
+        'submitter_email': {
+          required: true,
+          email: true
+        },
+        'teacher_name': {
+          required: true
+        },
+        'teacher_expertise': {
+          required: true
+        },
+        'teacher_contact': {
+          required: true
+        },
+        'teacher_email': {
+          required: true,
+          email: true
+        }
+        'teacher_country': {
+          required: true
+        }
+      },
+      messages: {
+        submitter_name: {
+          required: "Please enter your name."
+        },
+        submitter_email: {
+          required: "Email address is invalid."
+        },
+        teacher_name: {
+          required: "Please enter the teacher's name."
+        },
+        teacher_expertise: {
+          required: "Please enter the teacher's expertise."
+        },
+        teacher_contact: {
+          required: "Please enter the teacher's phone number."
+        },
+        teacher_email: {
+          required: "Email address is invalid."
+        }
+        teacher_email: {
+          required: "Pease enter the teacher's country."
+        }      
+      }
+    });
+  });
+</script>
+</body>
+</html>

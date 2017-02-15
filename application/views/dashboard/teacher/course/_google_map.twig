@@ -1,0 +1,273 @@
+<script>
+  // This example displays an address form, using the autocomplete feature
+  // of the Google Places API to help users fill in the information.
+
+  // This example requires the Places library. Include the libraries=places
+  // parameter when you first load the API. For example:
+  // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+  var zoom = 16,
+    longAddress
+  var componentForm = {
+    route: 'long_name',
+    street_number: 'short_name',
+    administrative_area_level_2: 'long_name',
+    administrative_area_level_1: 'short_name',
+    country: 'long_name',
+    postal_code: 'short_name'
+  };
+
+  $(window).on('load', function(){
+    initAutocomplete();
+  })
+
+  function initAutocompleteAfter() {
+    var autocomplete
+    $('.autocomplete').each(function () {
+      autocomplete = new google.maps.places.Autocomplete($(this)[0], {componentRestrictions: {country: '{{ session.location }}'}});
+      autocomplete.elem = $(this);
+
+      google.maps.event.addListener(autocomplete, 'place_changed', fillInAddress);
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          var geolocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          var circle = new google.maps.Circle({
+            center: geolocation,
+            radius: position.coords.accuracy
+          });
+          autocomplete.setBounds(circle.getBounds());
+        });
+      }
+
+      var parentField = $(autocomplete.elem).closest('.location-field')
+      parentField.find('.map-field').on('change', function () {
+        updateLongAddress(this)
+        updateMapByAddress(this)
+      })
+    })
+    $('.reset-location').on('click', function () {
+      resetLocation(this)
+    })
+  }
+
+  function initAutocomplete() {
+    // Create the autocomplete object, restricting the search to geographical
+    // location types.
+    var autocomplete
+    $('.autocomplete').each(function () {
+      autocomplete = new google.maps.places.Autocomplete($(this)[0], {componentRestrictions: {country: '{{ session.location }}'}});
+      autocomplete.elem = $(this);
+
+      google.maps.event.addListener(autocomplete, 'place_changed', fillInAddress);
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          var geolocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          var circle = new google.maps.Circle({
+            center: geolocation,
+            radius: position.coords.accuracy
+          });
+          autocomplete.setBounds(circle.getBounds());
+        });
+      }
+
+      var parentField = $(autocomplete.elem).closest('.location-field')
+      parentField.find('.map-field').on('change', function () {
+        updateLongAddress(this)
+        updateMapByAddress(this)
+      })
+      if (parentField.find('.latitude').val() && parentField.find('.longitude').val()) {
+        location.latitude = parentField.find('.latitude').val()
+        location.longitude = parentField.find('.longitude').val()
+        setMap(autocomplete.elem, location);
+        $(this).closest('.row-schedule-venue').hide();
+      } else {
+        parentField.find('.location-detail').hide();
+        parentField.find('.map').hide();
+        parentField.find('.reset-location').hide();
+      }
+    })
+
+    $('.reset-location').on('click', function () {
+      resetLocation(this)
+    })
+
+  }
+
+  function fillInAddress() {
+    // var country = "{{ session.location }}" == "ID" ? "Indonesia" : "Singapore";
+
+    // Get the place details from the autocomplete object.
+    var place = this.getPlace();
+    var countryByPlace = getCountryFromPlace(place.address_components);
+    // if (country.toLowerCase() !== countryByPlace.toLowerCase()) {
+    //   $('.autocomplete').val('')
+    //   toastr.error("{{ line('error_select_location', 'create_course') }}")
+    //   return;
+    // }
+    var elem = this.elem.closest('.location-field')
+    $(this.elem)[0].setCustomValidity("");
+    elem.find('.location-detail').show()
+    elem.find('.map').show()
+    elem.find('.venue-name').val(place.name)
+    this.elem.closest('.row-schedule-venue').hide()
+    elem.find('.reset-location').show()
+
+    for (var component in componentForm) {
+      var field = this.elem.closest('.location-field').find('.' + component)
+      field.val('').prop('disabled', false);
+    }
+
+    // Get each component of the address from the place details
+    // and fill the corresponding field on the form.
+    console.log(place.address_components)
+    for (var i = 0; i < place.address_components.length; i++) {
+      if (place.address_components[i].types[0] == "locality"
+        && countryByPlace.toLowerCase() !== "indonesia") {
+        var addressType = "locality";
+        componentForm['locality'] = 'long_name';
+      } else {
+        var addressType = place.address_components[i].types[0];
+      }
+      if (componentForm[addressType]) {
+        var val = place.address_components[i][componentForm[addressType]];
+        this.elem.closest('.location-field').find('.' + addressType).val(val)
+      }
+    }
+
+    var location = {}
+    location.latitude = place.geometry.location.lat()
+    location.longitude = place.geometry.location.lng()
+    location.zoom = zoom
+
+    setMap(this.elem, location);
+  }
+
+  function getCountryFromPlace(address_components) {
+    for (var i = 0; i < address_components.length; i++) {
+      var addressType = address_components[i].types[0];
+      if (addressType == 'country') {
+        return address_components[i][componentForm[addressType]];
+      }
+    }
+    return "";
+  }
+
+  function setMap(autocomplete, location, callback) {
+    var latlng = new google.maps.LatLng(location.latitude, location.longitude);
+    var zoom = location.zoom;
+    // set the map
+    var map = initMap(autocomplete);
+    map.setCenter(latlng);
+
+    // set the zoom
+    if (zoom != undefined)
+      map.setZoom(zoom);
+
+    // set the marker
+    var marker = new google.maps.Marker({
+      map: map,
+      draggable: true
+    });
+    marker.setPosition(map.getCenter());
+    setLocationField(autocomplete, marker.getPosition());
+    marker.addListener('position_changed', function () {
+      setLocationField(autocomplete, marker.getPosition());
+    })
+
+    map.addListener('center_changed', function () {
+      marker.setPosition(map.getCenter());
+    })
+
+    if (typeof callback === 'function') {
+      callback(location, map);
+    }
+  }
+
+  function setLocationField(autocomplete, position) {
+    autocomplete.closest('.location-field').find('.latitude').val(position.lat());
+    autocomplete.closest('.location-field').find('.longitude').val(position.lng());
+  }
+
+  function initMap(autocomplete) {
+    var mapElement = autocomplete.closest('.location-field').find('.map')[0];
+    map = new google.maps.Map(mapElement, {
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      zoom: zoom,
+      mapTypeControl: false,
+      scrollwheel: false,
+      streetViewControl: false
+    });
+    mapElement.map = map;
+    return map;
+  }
+
+  // Bias the autocomplete object to the user's geographical location,
+  // as supplied by the browser's 'navigator.geolocation' object.
+
+  function updateLongAddress(elem) {
+    var longAddressArray = [];
+    var address = "";
+    var parentElement = elem.closest('.location-field')
+    longAddressArray.push($(parentElement).find('.venue-name').val())
+    for (var component in componentForm) {
+      if ($(parentElement).find('.' + component).val() || component == 'street_number') {
+        if (component == 'route')
+          address += $(parentElement).find('.' + component).val()
+        else if (component == 'street_number') {
+          if ($(parentElement).find('.' + component).val())
+            address += " " + $(parentElement).find('.' + component).val()
+          if (address)
+            longAddressArray.push(address)
+        } else
+          longAddressArray.push($(parentElement).find('.' + component).val())
+      }
+    }
+    longAddress = longAddressArray.join(', ')
+    return longAddress
+  }
+
+  function updateMapByAddress(elem) {
+    var geocoder = new google.maps.Geocoder()
+    geocoder.geocode({
+      address: longAddress
+    }, function (results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        $(elem).closest('.location-field').find('.map')[0].map.setCenter(results[0].geometry.location);
+      }
+    })
+  }
+
+  function resetLocation(elem) {
+    var parentField = $(elem).closest('.location-field')
+    parentField.find('.map').hide()
+    parentField.find('.location-detail').hide()
+    parentField.find('.row-schedule-venue').show()
+    parentField.find('.autocomplete').val('')
+    parentField.find('.reset-location').hide()
+    parentField.find('.location-detail').find('.form-control').val('')
+  }
+
+  function getLocationByAddress(address, callback) {
+    var location;
+    geocoder = new google.maps.Geocoder()
+    geocoder.geocode({
+      'address': address
+    }, function (results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        location = results[0].geometry.location
+        if (typeof callback === 'function') {
+          callback(location);
+        }
+      }
+    })
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9EqURdti6hiyW4KBDfVmQkcMznfqwDbs&libraries=places&language={{ session.location|lower }}" async defer></script>

@@ -1,0 +1,134 @@
+{% extends 'email/shared/body.twig' %}
+
+{% block content %}
+    <tr>
+      <td align="center" valign="top" class="fix-box">
+        <table align="center" border="0" cellspacing="0" cellpadding="0" class="container" style="padding-left: 20px; padding-right: 20px; background-color: #ffffff;mso-table-lspace:0pt; mso-table-rspace:0pt;">
+          <tbody>
+            <tr>
+              <td valign="top">
+                <table align="center" border="0" cellspacing="0" cellpadding="0" class="full-width" style="mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                  <tbody>
+                    <tr>
+                      <td valign="top">
+                        <table border="0" cellspacing="0" cellpadding="0" align="center" style="mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                          <tbody>
+                            <tr>
+                              <td valign="top" width="auto" align="center">
+                                <table border="0" align="center" cellpadding="0" cellspacing="0" width="auto" style="mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                                  <tbody>
+                                    <tr>
+                                      <td height="50"></td>
+                                    </tr>
+                                    <tr>
+                                      <td width="auto" align="center" valign="middle" height="28" style=" font-size: 18px; color:#999999;line-height:180%;font-family:Arial; text-align: center; color: rgb(163, 162, 162); font-weight: 300; padding-left: 18px; padding-right: 18px; word-break: break-word; line-height: 26px; background-clip: padding-box;">
+                                        <span style="font-size: 18px; font-family: Montserrat, arial, sans-serif !important; word-break: break-word; line-height: 26px;">&nbsp;
+                                          <strong>
+                                            {{ line('a12', 'email') }}
+                                          </strong>
+                                          &nbsp; &nbsp;&nbsp;
+                                        </span>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table align="center" border="0" cellspacing="0" cellpadding="0" class="container" bgcolor="#ffffff" style="background-color: #ffffff;">
+          <tbody>
+            <tr>
+              <td valign="top">
+                <table align="center" border="0" cellspacing="0" cellpadding="0" class="full-width" bgcolor="#ffffff" style="background-color:#ffffff;">
+                  <tbody>
+                    <tr>
+                      <td height="20">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td valign="top">
+                        <table border="0" cellspacing="0" cellpadding="0" align="left">
+                          <tbody>
+                            <tr>
+                              <td style="color:#999999;line-height:180%;font-family:Arial;">
+                                <span style="color: #555555; font-weight:300;">
+                                  <center>
+                                    <a href="#" style="font-size:16px;text-decoration: none; color: #555555; font-weight: 300;">
+                                      Hi, {{ first_name }} {{ last_name }}
+                                    </a>
+                                  </center>
+                                </span>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="15">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="font-size:16px;color:#999999;line-height:180%;font-family:Arial;">
+                                <center>
+                                  {{ line('a13', 'email') }}
+                                </center>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="20">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <table align="center" border="0" cellspacing="0" cellpadding="0">
+                                  <tbody>
+                                    <tr>
+                                      <td width="auto" align="left" valign="middle" height="32" style="border-radius: 5px; font-size: 13px; font-family: Roboto, Arial, Helvetica, sans-serif; text-align: center; color: rgb(255, 255, 255); font-weight: 300; padding: 10px 25px; word-break: break-word; line-height: 21px; background-color: #8388be; background-clip: padding-box;">
+                                        <span style="font-family: Montserrat, arial, sans-serif !important; font-size: 21px; word-break: break-word; line-height: 29px;">
+                                          <a href="{{ base_url() }}auth/confirm/{{ reg_key }}" style="text-decoration: none; color: #ffffff; font-weight: 300;">
+                                            {{ line('a14', 'email') }}
+                                          </a>
+                                        </span>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="20">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="font-size:16px;color:#999999;line-height:180%;font-family:Arial;">
+                                <center>
+                                  {{ line('a2', 'email') }}
+                                  <br />
+                                  The skillagogo team
+                                </center>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td height="50">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+
+{% endblock %}

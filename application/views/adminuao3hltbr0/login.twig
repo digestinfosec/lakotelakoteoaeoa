@@ -1,0 +1,41 @@
+{% extends 'adminuao3hltbr0/master.twig' %}
+{% set titleName = "login" %}
+{% set bodyClass = "account2" %}
+{% set dataPage = "login" %}
+{% block content %}
+  <div class="container" id="login-block">
+    <i class="user-img icons-faces-users-03"></i>
+    <div class="account-info">
+      <a href="{{ base_url() }}adminuao3hltbr0/home" class="logo"></a>
+    </div>
+    <div class="account-form">
+      {{ form_open('adminuao3hltbr0/login') }}
+        <h3><strong>Sign in</strong> to your system</h3>
+        <div class="append-icon mg-10">
+          <input type="text" name="email" id="email" class="form-control form-white username" placeholder="Username/Email" required>
+          <i class="icon-user"></i>
+        </div>
+        <div class="append-icon mg-10 m-b-20">
+          <input type="password" name="password" class="form-control form-white password" placeholder="Password" required>
+          <i class="icon-lock"></i>
+        </div>
+        <button type="submit" id="submit-form" class="btn btn-lg btn-dark btn-rounded ladda-button" data-style="expand-left">Login</button>
+      {{ form_close() }}
+    </div>
+    <p class="account-copyright">
+      <span>Copyright &copy; 2016 </span>
+      <span>skillagogo</span>.
+      <span>All rights reserved.</span>
+    </p>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery/jquery-1.11.1.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery/jquery-migrate-1.2.1.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/gsap/main-gsap.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap/js/bootstrap.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/backstretch/backstretch.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap-loading/lada.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/pages/login-v2.js"></script>
+{% endblock %}

@@ -1,0 +1,53 @@
+<div class="d-u-sidebar">
+  {% if session.login.is_teacher %}
+    <div class="title-list-menu">
+      <i class="fa fa-user-secret"></i>
+      {{ line('teacher-menu', 'dashboard') }}
+    </div>
+    <a href="{{ base_url() }}dashboard/teacher/course" class="list-menu {% if menu_left == 'teacher_course' %} active {% endif %}">
+      <div class="title">{{ line('class-sched', 'dashboard') }}</div>
+    </a>
+    <a href="{{ base_url() }}dashboard/teacher/rating" class="list-menu {% if menu_left == 'teacher_review' %} active {% endif %}">
+      <div class="title">{{ line('reviews', 'dashboard') }}</div>
+    </a>
+    <a href="{{ base_url() }}dashboard/teacher/comment" class="list-menu {% if menu_left == 'teacher_comment' %} active {% endif %}">
+      <div class="title">{{ line('comments', 'dashboard') }}</div>
+    </a>
+    <a href="{{ base_url() }}dashboard/teacher/payout" class="list-menu last-list-menu {% if menu_left == 'teacher_payout' %} active {% endif %}">
+      <div class="title">{{ line('payout', 'dashboard') }}</div>
+    </a>
+  {% endif %}
+
+  {% if session.login.is_student %}
+    <div class="title-list-menu">
+      <i class="fa fa-users"></i>
+      {{ line('student-menu', 'dashboard') }}
+    </div>
+    <a href="{{ base_url() }}dashboard/student/course" class="list-menu {% if menu_left == 'student_course' %} active {% endif %}">
+      <div class="title">{{ line('class-sched', 'dashboard') }}</div>
+    </a>
+    <a href="{{ base_url() }}dashboard/student/rating" class="list-menu {% if menu_left == 'student_review' %} active {% endif %}">
+      <div class="title">{{ line('reviews', 'dashboard') }}</div>
+    </a>
+    <a href="{{ base_url() }}dashboard/student/comment" class="list-menu {% if menu_left == 'student_comment' %} active {% endif %}">
+      <div class="title">{{ line('comments', 'dashboard') }}</div>
+    </a>
+    <a href="{{ base_url() }}dashboard/student/wishlist" class="list-menu {% if menu_left == 'student_wishlist' %} active {% endif %}">
+      <div class="title">{{ line('wishlist', 'homepage') }}</div>
+    </a>
+    <a href="{{ base_url() }}dashboard/student/payment/history" class="list-menu {% if menu_left == 'student_payment' %} active {% endif %}">
+      <div class="title">{{ line('payments', 'dashboard') }}</div>
+    </a>
+    <a href="{{ base_url() }}dashboard/student/credit" class="list-menu last-list-menu {% if menu_left == 'student_credit' %} active {% endif %}">
+      <div class="title">{{ line('credits', 'dashboard') }}</div>
+    </a>
+  {% endif %}
+
+  <div class="title-list-menu">
+    <i class="fa fa-gear"></i>
+    {{ line('user-menu', 'dashboard') }}
+  </div>
+  <a href="{{ base_url() }}dashboard/profile" class="list-menu last-list-menu {% if menu_left == 'user_profile' %} active {% endif %}">
+    <div class="title">{{ line('profile', 'dashboard') }}</div>
+  </a>
+</div>

@@ -1,0 +1,75 @@
+<div class="setup-content" id="step-2">
+  <div class="col-md-12">
+    <div class="box-create-class-wrapper mg-btm-250">
+      <div class="box-form-create">
+        <div class="box-title-top">
+          <div class="title">
+            {{ line('class_price_and_attendees','create_course') }}
+          </div>
+        </div>
+        <div class="box-input">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="col-md-12 break">
+                <div class="row form-create-class">
+                  <label for="class_title">
+                    <span>{{ line('price','create_course') }}<sup class="required-sag">*</sup></span>
+                  </label>
+                  <div class="box-price">
+                    <div class="left">
+                      <span>{{ line('currency','create_course') }}</span>
+                    </div>
+                    <div class="right">
+                      <input type="number" name="price" class="form-control class-price" placeholder="{{line('price_tooltip','field')}}" value="{{ course.price }}" required="required">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="col-md-12 break">
+                <div class="row form-create-class">
+                  <label for="available_seat">
+                    <span>{{ line('available_seats','create_course') }}<sup class="required-sag">*</sup></span>
+                  </label>
+                  <div class="box-seats">
+                    <div class="left">
+                      <input max="50000" type="number" name="available_seat" class="form-control" placeholder="{{line('available_seats_tooltip','field')}}" required value="{{ course.available_seat }}">
+                    </div>
+                    <div class="right">
+                      <span>{{ line('seats','create_course') }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="box-button-create">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-center">
+              <button class="btn btn-prev-c-class btn-prev my-btn-step bg-sgogo-purple" data-color="purple" type="button">
+                {{ line('dashboard_110', 'dashboard') }}
+              </button>
+              <button class="btn btn-c-next-1 btn-preview no-border btn-lg bg-sgogo-blue-light enabled-action-preview2" type="button">
+                {{ line('dashboard_106', 'dashboard') }}
+              </button>
+              &nbsp;
+              {% if not session.class_admin_edit %}
+              <button class="btn btn-c-next-1 btn-save-draft no-border btn-lg bg-sgogo-blue-light enabled-action-draft2" type="submit" value="draft">
+                {{ line('dashboard_107', 'dashboard') }}
+              </button>
+              &nbsp;
+              {% endif %}
+              <button class="btn btn-next-c-class btn-next my-btn-step bg-sgogo-red" data-color="red" data-next-class="step-3">
+                {{ line('dashboard_109', 'dashboard') }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

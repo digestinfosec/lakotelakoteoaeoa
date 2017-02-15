@@ -1,0 +1,72 @@
+{% extends 'email/shared/body.twig' %}
+
+{% block content %}
+    <tr>
+      <td align="center" valign="top" class="fix-box">
+        <table align="center" border="0" cellspacing="0" cellpadding="0" class="container" bgcolor="#ffffff" style="background-color: #ffffff;">
+          <tbody>
+            <tr>
+              <td valign="top">
+                <table align="center" border="0" cellspacing="0" cellpadding="0" class="full-width" bgcolor="#ffffff" style="background-color:#ffffff;">
+                  <tbody>
+                    <tr>
+                      <td height="50"></td>
+                    </tr>
+                    <tr>
+                      <td valign="top">
+                        <table border="0" cellspacing="0" cellpadding="0" align="left">
+                          <tbody>
+                            <tr>
+                              <td style="font-size:16px;color:#999999;line-height:180%;font-family:Arial;">
+                                <span>
+                                  <a href="#" style="text-decoration: none; color: #555555; font-weight: 300;">
+                                    {{ line('a1', 'email') }} {{ first_name }},
+                                  </a>
+                                </span>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="15">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="font-size:16px;color:#999999;line-height:180%;font-family:Arial;">
+                                {{ line('a74', 'email') }}
+                                <br>
+                                <br>
+                                <b>{{ line('af1', 'email') }}</b> : {{ title }}
+                                <br>
+                                <b>{{ line('af9', 'email') }}</b> : 
+                                <blockquote>
+                                  {{ review|raw }}                                  
+                                </blockquote>                                
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="25">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="font-size:16px;color:#999999;line-height:180%;font-family:Arial;">
+                                {{ line('a75', 'email') }}
+                                <br>
+                                <br>
+                                The skillagogo team
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td height="50"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+{% endblock %}

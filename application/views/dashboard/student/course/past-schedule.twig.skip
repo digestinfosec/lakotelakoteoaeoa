@@ -1,0 +1,29 @@
+{% extends 'layout/app/student_dashboard.twig' %}
+{% set titleName = line('dashboard_shared_title', 'dashboard') %}
+{% set menu = "dashboard/student/menu_course.twig" %}
+{% set is_class_schedule = true %}
+
+{% block dashboard_content %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="content-body">
+      <div class="class-schedule-wrapper">
+        <div class="row">
+          {% if courses %}
+          <div class="col-md-10 col-md-offset-1">
+            {% for course in courses %}
+              {% include('dashboard/shareds/_class_schedule.twig') %}
+            {% endfor %}
+          </div>
+          {% else %}
+          <div class="col-md-12">
+            <div class="alert alert-info">
+              {{ line('dashboard_14', 'dashboard') }}
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endblock %}

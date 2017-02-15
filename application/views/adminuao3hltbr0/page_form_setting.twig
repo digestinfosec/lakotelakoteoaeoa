@@ -1,0 +1,234 @@
+{% extends 'adminuao3hltbr0/master.twig' %}
+{% set titleName = "Setting form" %}
+{% set bodyClass = "fixed-topbar fixed-sidebar theme-sdtl color-purple" %}
+
+{% block css %}
+<link href="{{ base_url() }}assets/adminuao3hltbr0/plugins/datatables/dataTables.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+  <section>
+    {% include 'adminuao3hltbr0/shareds/sidebar.twig' %}
+    <div class="main-content">
+      {% include 'adminuao3hltbr0/shareds/top_bar.twig' %}
+      <div class="page-content">
+        <div class="header">
+          <h2><strong>Form Setting Website</strong></h2>
+          <div class="breadcrumb-wrapper">
+            <ol class="breadcrumb">
+              <li><a href="{{ base_url() }}/adminuao3hltbr0/home">Dashboard</a></li>
+              <li class="active">Setting Website</li>
+            </ol>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 portlets">
+            <div class="panel">
+              <div class="panel-content">
+                <div class="row">
+                  {{ form_open('#') }}
+                    <div class="col-md-12">
+                      <h3><strong>Global setting</strong></h3>
+                      <hr>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="form-label">Logo Header Home</label>
+                        <input type="file" name="#" required>
+                        <img src="{{ base_url() }}assets/images/image-setting.png" alt="" style="width: 90px;">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="form-label">Logo header Page</label>
+                        <input type="file" name="#" required>
+                        <img src="{{ base_url() }}assets/images/image-setting.png" alt="" style="width: 90px;">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="form-label">Logo Footer Bottom</label>
+                        <input type="file" name="#" required>
+                        <img src="{{ base_url() }}assets/images/image-setting.png" alt="" style="width: 90px;">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="text" class="form-control" name="#" placeholder="E.g : skillagogo@skillagogo.com" required>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="form-label">Phone</label>
+                        <input type="text" class="form-control" name="#" placeholder="E.g : 021-123-456" required>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="form-label">FAX</label>
+                        <input type="text" class="form-control" name="#" placeholder="E.g : 021-123-456" required>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label class="form-label">Footer Tag Corpyright</label>
+                        <input type="text" class="form-control" name="#" placeholder="Example: &copy; 2016 skillagogo. All rights reserved." required>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <h3><strong>Search Engine Optimation (SEO)</strong></h3>
+                      <hr>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="form-label">Title</label>
+                        <input type="text" class="form-control" name="#" placeholder="E.g : Your meta title website" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="form-label">Keyword</label>
+                        <input type="text" class="form-control" name="#" placeholder="E.g : Your meta keyword website" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <input type="text" class="form-control" name="#" placeholder="E.g : Your meta Description website" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="form-label">Author</label>
+                        <input type="text" class="form-control" name="#" placeholder="E.g : Your meta author website" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="form-label">Google Site verification</label>
+                        <input type="text" class="form-control" name="#" placeholder="E.g : Xfrt43443 visit Google Webmaster" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="form-label">Alexa ID</label>
+                        <input type="text" class="form-control" name="#" placeholder="E.g : Xfrt43443 visit www.alexa.com" required>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <h3><strong>Address</strong></h3>
+                      <hr>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="form-label">City 1</label>
+                        <input type="text" class="form-control" name="#" required>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="form-label">City 2</label>
+                        <input type="text" class="form-control" name="#" required>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="form-label">Post Code</label>
+                        <input type="text" class="form-control" name="#" placeholder="E.g : 43121" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="form-label">Address 1</label>
+                        <textarea class="form-control" name="#" rows="10" cols="10" required></textarea>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="form-label">Address 2</label>
+                        <textarea class="form-control" name="#" rows="10" cols="10" required></textarea>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <h3><strong>Media Sosial</strong></h3>
+                      <hr>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="form-label">Facebook URL</label>
+                        <input type="url" class="form-control" name="#" placeholder="E.g : http://facebook.com" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="form-label">Twitter URL</label>
+                        <input type="url" class="form-control" name="#" placeholder="E.g : http://twitter.com" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="form-label">Instagram URL</label>
+                        <input type="url" class="form-control" name="#" placeholder="E.g : http://instagram.com" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="form-label">Linkedin URL</label>
+                        <input type="url" class="form-control" name="#" placeholder="E.g : http://linkedin.com" required>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <input type="submit" class="btn btn-md btn-primary" value="Submit">
+                      </div>
+                    </div>
+                  {{ form_close() }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% include 'adminuao3hltbr0/shareds/footer.twig' %}
+      </div>
+    </div>
+  </section>
+  {# section for sidebar left and searching full #}
+  <div class="loader-overlay">
+    <div class="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <a href="#" class="scrollup"><i class="fa fa-angle-up"></i></a>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery/jquery-1.11.1.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery/jquery-migrate-1.2.1.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery-ui/jquery-ui-1.11.2.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/gsap/main-gsap.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap/js/bootstrap.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery-cookies/jquery.cookies.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery-block-ui/jquery.blockUI.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootbox/bootbox.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/mcustom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap-dropdown/bootstrap-hover-dropdown.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/charts-sparkline/sparkline.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/retina/retina.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/select2/select2.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/icheck/icheck.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/backstretch/backstretch.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/charts-chartjs/Chart.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/sidebar_hover.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/widgets/notes.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/quickview.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/pages/search.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/plugins.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/application.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/pages/table_dynamic.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/layout.js"></script>
+{% endblock %}

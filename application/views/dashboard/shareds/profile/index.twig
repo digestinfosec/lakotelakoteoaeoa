@@ -1,0 +1,278 @@
+{% extends 'layout/app/teacher_dashboard.twig' %}
+{% set titleName = line('dashboard_shared_title', 'dashboard') %}
+{% set menu = "dashboard/shareds/menu_profile.twig" %}
+
+{% block css %}
+  <link rel="stylesheet" href="{{ base_url() }}assets/css/dropify.css">
+{% endblock %}
+
+{% block dashboard_content %}
+  <div class="se-pre-con">
+    <div class="box-preloader">
+      <img src="{{ base_url('assets/images/logo-teacher.png') }}">
+      <p>{{ line('please_wait','dashboard') }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content-body">
+        <div class="profile-wrapper">
+          <div class="row">
+            {{ form_open_multipart(current_url()) }}
+            <div class="col-md-12">
+              <div class="box-avatar-profile">
+                <input type="file" id="input-file-now" name="avatar" accept="image/*" class="dropify"
+                       data-default-file="{{ base_url('images/avatar') }}/{{ profile.profile_pic }}">
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="row boxed-profile">
+                <div class="col-md-12">
+                  <h3>{{ line('dashboard_207', 'dashboard') }}</h3>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label for="email">{{ line('email', 'field') }}<sup class="required-sag">*</sup></label>
+                      {{ sg_field('text', 'email', profile, {placeholder: line('email', 'field'), class: 'form-control'}) }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label for="first_name">{{line('first_name', 'field')}}<sup class="required-sag">*</sup></label>
+                      {{ sg_field('text', 'first_name', profile, {placeholder: line('first_name', 'field'), class: 'form-control'}) }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label for="last_name">{{line('last_name', 'field')}}<sup class="required-sag">*</sup></label>
+                      {{ sg_field('text', 'last_name', profile, {placeholder: line('last_name', 'field'), class: 'form-control'}) }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label for="gender">{{line('gender', 'field')}}</label>
+                      <div class="select-sgogo">
+                        {% set options = {
+                        '0': { 'label': line('choose_one', 'field'), 'value': 0 },
+                        '1': { 'label': line('male', 'field'), 'value': 1 },
+                        '2': { 'label': line('female', 'field'), 'value': 2 }
+                        } %}
+                        {{ sg_field('select', 'gender', profile, {id: 'gender', class: 'form-control'}, 0, options) }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label for="birthday">{{line('birthday', 'field')}}<sup class="required-sag">*</sup></label>
+                      {{ sg_field('text', 'birth_date', profile, {
+                        class: 'form-control',
+                        'data-format':'YYYY-MM-DD',
+                        'data-template': 'D MMMM YYYY',
+                        id: 'profile_birth_date'
+                      }) }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  {#<div class="row">
+                    <div class="col-md-12">
+                      <label for="id_number">{{line('id_number', 'field')}}</label>
+                      {{ sg_field('text', 'id_number', profile, {placeholder: line('id_number', 'field'), class: 'form-control'}) }}
+                    </div>
+                  </div>#}
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label for="home_phone">{{line('home_phone', 'field')}}</label>
+                      {{ sg_field('text', 'home_phone', profile, {placeholder: line('home_phone', 'field'), class: 'form-control'}) }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label for="mobile_phone">{{line('mobile_phone', 'field')}}<sup class="required-sag">*</sup></label>
+                      {{ sg_field('text', 'mobile_phone', profile, {placeholder: line('mobile_phone', 'field'), class: 'form-control'}) }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label for="academic_level">{{line('academic_level', 'field')}}</label>
+                      <div class="select-sgogo">
+                        {% set options = {
+                        '0': { 'label': line('choose_one', 'field'), 'value': '' },
+                        '1': { 'label': line('secondary', 'field'), 'value': 'secondary' },
+                        '2': { 'label': line('post_secondary', 'field'), 'value': 'post_secondary' },
+                        '3': { 'label': line('university', 'field'), 'value': 'university' },
+                        '4': { 'label': line('post_graduate', 'field'), 'value': 'post_graduate' }
+                        } %}
+                        {{ sg_field('select', 'academic_level', profile, {id: 'academic_level', class: 'form-control'}, 0, options) }}
+                      </div>
+                    </div>
+                  </div>
+                  {#
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label for="home_address">{{line('home_address', 'field')}}</label>
+                      {{ sg_field('text', 'home_address', profile, {placeholder: 'line('home_address', 'field')', class: 'form-control'}) }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label for="business_address">{{line('business_address', 'field')}}</label>
+                      {{ sg_field('text', 'business_address', profile, {placeholder: 'line('business_address', 'field')', class: 'form-control'}) }}
+                    </div>
+                  </div>
+                  #}
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label for="marital_status">{{line('marital_status', 'field')}}</label>
+                      <div class="select-sgogo">
+                        {% set options = {
+                        '0': { 'label': line('choose_one', 'controller_js'), 'value': 0 },
+                        '1': { 'label': line('marital_status1', 'controller_js'), 'value': 1 },
+                        '3': { 'label': line('marital_status2', 'controller_js'), 'value': 3 }
+                        } %}
+                        {{ sg_field('select', 'marital_status', profile, {id: 'marital_status', class: 'form-control'},
+                          0, options) }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="break"></div>
+                <div class="col-md-12">
+                  <h3>{{ line('dashboard_208', 'dashboard') }}</h4>
+                </div>
+                <div class="payment-info-wrapper">
+                  <div class="col-md-6">
+                    <label for="address_line1">{{line('address_1', 'field')}}<sup class="required-sag">*</sup></label>
+                    <input type="text" name="address_line1" class="form-control" placeholder="{{line('enter_address_`1', 'field')}}" value="{{profile.address_line1}}">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="address_line2">{{line('address_2', 'field')}}</label>
+                    <input type="text" name="address_line2" class="form-control" placeholder="{{line('enter_address_2', 'field')}}" value="{{profile.address_line2}}">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="city">{{line('city', 'field')}}<sup class="required-sag">*</sup></label>
+                    <input type="text" name="city" class="form-control" placeholder="{{line('enter_city', 'field')}}" value="{{profile.city}}">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="state">{{line('state', 'field')}}<sup class="required-sag">*</sup></label>
+                    {% if session.location == "ID" %}
+                      {% set options = {
+                      'Aceh': { 'label': 'Aceh', 'value': 'Aceh'},
+                      'Bali': { 'label': 'Bali', 'value': 'Bali'},
+                      'Banten': { 'label': 'Banten', 'value': 'Banten'},
+                      'Bengkulu': { 'label': 'Bengkulu', 'value': 'Bengkulu'},
+                      'Gorontalo': { 'label': 'Gorontalo', 'value': 'Gorontalo'},
+                      'Jakarta': { 'label': 'Jakarta', 'value': 'Jakarta'},
+                      'Jambi': { 'label': 'Jambi', 'value': 'Jambi'},
+                      'Jawa Barat': { 'label': 'Jawa Barat', 'value': 'Jawa Barat'},
+                      'Jawa Tengah': { 'label': 'Jawa Tengah', 'value': 'Jawa Tengah'},
+                      'Jawa Timur': { 'label': 'Jawa Timur', 'value': 'Jawa Timur'},
+                      'Kalimantan Barat': { 'label': 'Kalimantan Barat', 'value': 'Kalimantan Barat'},
+                      'Kalimantan Selatan': { 'label': 'Kalimantan Selatan', 'value': 'Kalimantan Selatan'},
+                      'Kalimantan Tengah': { 'label': 'Kalimantan Tengah', 'value': 'Kalimantan Tengah'},
+                      'Kalimantan Timur': { 'label': 'Kalimantan Timur', 'value': 'Kalimantan Timur'},
+                      'Kalimantan Utara': { 'label': 'Kalimantan Utara', 'value': 'Kalimantan Utara'},
+                      'Kepulauan Bangka Belitung': { 'label': 'Kepulauan Bangka Belitung', 'value': 'Kepulauan Bangka Belitung'},
+                      'Kepulauan Riau': { 'label': 'Kepulauan Riau', 'value': 'Kepulauan Riau'},
+                      'Lampung': { 'label': 'Lampung', 'value': 'Lampung'},
+                      'Maluku': { 'label': 'Maluku', 'value': 'Maluku'},
+                      'Maluku Utara': { 'label': 'Maluku Utara', 'value': 'Maluku Utara'},
+                      'Nusa Tenggara Barat': { 'label': 'Nusa Tenggara Barat', 'value': 'Nusa Tenggara Barat'},
+                      'Nusa Tenggara Timur': { 'label': 'Nusa Tenggara Timur', 'value': 'Nusa Tenggara Timur'},
+                      'Papua': { 'label': 'Papua', 'value': 'Papua'},
+                      'Papua Barat': { 'label': 'Papua Barat', 'value': 'Papua Barat'},
+                      'Riau': { 'label': 'Riau', 'value': 'Riau'},
+                      'Sulawesi Barat': { 'label': 'Sulawesi Barat', 'value': 'Sulawesi Barat'},
+                      'Sulawesi Selatan': { 'label': 'Sulawesi Selatan', 'value': 'Sulawesi Selatan'},
+                      'Sulawesi Tengah': { 'label': 'Sulawesi Tengah', 'value': 'Sulawesi Tengah'},
+                      'Sulawesi Tenggara': { 'label': 'Sulawesi Tenggara', 'value': 'Sulawesi Tenggara'},
+                      'Sulawesi Utara Sulawesi': { 'label': 'Sulawesi Utara Sulawesi', 'value': 'Sulawesi Utara Sulawesi'},
+                      'Sumatera Barat': { 'label': 'Sumatera Barat', 'value': 'Sumatera Barat'},
+                      'Sumatera Selatan': { 'label': 'Sumatera Selatan', 'value': 'Sumatera Selatan'},
+                      'Sumatera Utara': { 'label': 'Sumatera Utara', 'value': 'Sumatera Utara'},
+                      'Yogyakarta': { 'label': 'Yogyakarta', 'value': 'Yogyakarta'}
+                      } %}
+                      {% set default = "Aceh" %}
+                    {% else %}
+                      {% set options = {
+                      'Singapore': { 'label': 'Singapore', 'value': "Singapore" }
+                      } %}
+                      {% set default = "Singapore" %}
+                    {% endif %}
+                    <div class="select-sgogo">
+                      {{ sg_field('select', 'state', profile, {id: 'state', class: 'form-control'}, default, options) }}
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="postal_code">{{line('postal_code', 'field')}}<sup class="required-sag">*</sup></label>
+                    <input type="text" name="postal_code" class="form-control" placeholder="{{line('enter_postal_code', 'field')}}" value="{{profile.postal_code}}">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="country">{{line('country', 'field')}}<sup class="required-sag">*</sup></label>
+                    <div class="select-sgogo">
+                        {% set options = {
+                        'Singapore': { 'label': 'Singapore', 'value': "Singapore" },
+                        'Indonesia': { 'label': 'Indonesia', 'value': "Indonesia" }
+                        } %}
+                        {% if session.location == "SG" %}
+                          {% set default = "Singapore" %}
+                        {% else %}
+                          {% set default = "Indonesia" %}
+                        {% endif %}
+                        {{ sg_field('select', 'country', profile, {id: 'country', class: 'form-control'},
+                          default, options) }}
+                    </div>
+                  </div>
+                  <div class="col-md-8"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="break"></div>
+              <input type="submit" class="btn btn-lg-gray" value="{{ line('dashboard_104', 'dashboard') }}">
+            </div>
+            {{ form_close() }}
+          </div>
+        </div>
+      </div>
+      <div class="break"></div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script src="{{ base_url() }}assets/js/dropify.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('#profile_birth_date').combodate({
+        customClass: 'form-control',
+        firstItem: 'skillagogo',
+        minYear: 1950,
+        maxYear: 1998,
+        smartDays: true,
+        indonesian: {{ session.location == 'ID' ? 1 : 0 }}
+      });
+
+      $('.dropify').dropify({
+          messages: {
+              'default': "{{line('dropify_default','controller_js')}}",
+              'replace': "{{line('dropify_replace','controller_js')}}",
+              'remove':  "{{line('dropify_remove','controller_js')}}",
+              'error':   "{{line('dropify_error','controller_js')}}"
+          }
+      });
+      var drEvent = $('.dropify-event').dropify();
+      drEvent.on('dropify.beforeClear', function (event, element) {
+        return confirm("{{line('dropify_confirm','controller_js')}} \"" + element.filename + "\" ?");
+      });
+      drEvent.on('dropify.afterClear', function (event, element) {
+        alert("{{line('dropify_deleted','controller_js')}}");
+      });
+    });
+
+    $(window).load(function () {
+      $(".se-pre-con").fadeOut("slow")
+    });
+  </script>
+{% endblock %}

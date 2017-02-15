@@ -1,0 +1,159 @@
+{% extends 'layout/app/teacher_dashboard.twig' %}
+{% set titleName = line('dashboard_shared_title', 'dashboard') %}
+{% set menu = "dashboard/shareds/menu_profile.twig" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ base_url() }}assets/css/dropify.css">
+{% endblock %}
+
+{% block dashboard_content %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="content-body">
+      <div class="profile-wrapper">
+        <div class="row">
+          {{ form_open("") }}
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="teacher_type">{{line('business_type', 'field')}}</label>
+                  <div class="select-sgogo">
+                    {% set options = {
+                    '0': { 'label': line('choose_one', 'field'), 'value': 0 },
+                    '1': { 'label': line('teacher_detail.personal', 'main'), 'value': 1 },
+                    '2': { 'label': line('teacher_detail.institution', 'main'), 'value': 2 },} %}
+                    {{ sg_field('select', 'teacher_type', values, {id: 'teacher_type', class: 'form-control'}, '', options) }}
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="bank">{{line('bank', 'field')}}
+                    <span>
+                  {% if session.location == 'ID' %}
+                      <sup class="required-sag">*</sup>
+                  {% endif %}
+                    </span>
+                    <a tabindex="0" data-toggle="popover" data-trigger="focus" class="profile-popover"
+                       data-content="{{ line('popover_bank', 'field') }}">
+                      <img src="{{ base_url() }}assets/images/tooltips schedule.png" alt="">
+                    </a>
+                  </label>
+                  <div class="select-sgogo">
+                    {{ sg_field('select', 'bank_id', values, {id: 'bank_id', class: 'form-control'}, '', banks) }}
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="job">{{line('job', 'field')}}<sup class="required-sag">*</sup></label>
+                  {{ sg_field('text', 'job', values, {placeholder: line('job', 'field'), class: 'form-control'}) }}
+                </div>
+                <div class="col-md-6">
+                  {% if session.location == 'ID' %}
+                  <label for="bank_branch_name">{{line('bank_branch_name', 'field')}}</label>
+                  {% else %}
+                  <label for="bank_branch_name">{{line('bank_branch_name', 'field')}}</label>
+                  {% endif %}
+                  {{ sg_field('text', 'bank_branch_name', values, {placeholder: line('bank_branch_name', 'field'), class: 'form-control'}) }}
+                </div>
+                <div class="col-md-6">
+                  <label for="monthly_class_envisaged">{{line('monthly_class_envisaged', 'field')}}</label>
+                  <div class="select-sgogo">
+                    {% set options = {
+                    '0': { 'label': line('choose_one', 'field'), 'value': 0 },
+                    '1': { 'label': line('teacher_detail.class_option1', 'main'), 'value': 1 },
+                    '2': { 'label': line('teacher_detail.class_option2', 'main'), 'value': 2 },
+                    '3': { 'label': line('teacher_detail.class_option3', 'main'), 'value': 3 },
+                    '4': { 'label': line('teacher_detail.class_option4', 'main'), 'value': 4 },} %}
+                    {{ sg_field('select', 'monthly_class_envisaged', values, {id: 'monthly_class_envisaged', class: 'form-control'}, '', options) }}
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  {% if session.location == 'ID' %}
+                  <label for="bank_account_number">{{line('bank_account_number', 'field')}}<sup class="required-sag">*</sup></label>
+                  {% else %}
+                  <label for="bank_account_number">{{line('bank_account_number', 'field')}}</label>
+                  {% endif %}
+                  {{ sg_field('text', 'bank_account_number', values, {placeholder: line('bank_account_number', 'field'), class: 'form-control'}) }}
+                </div>
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label for="objective">{{line('objective', 'field')}}</label>
+                      <div class="select-sgogo">
+                        {% set options = {
+                        '0': { 'label': line('choose_one', 'field'), 'value': 0 },
+                        '1': { 'label': line('teacher_detail.objective_share', 'main'), 'value': 1 },
+                        '2': { 'label': line('teacher_detail.objective_extra_income', 'main'), 'value': 2 },
+                        '3': { 'label': line('teacher_detail.objective_grow_business', 'main'), 'value': 3 },
+                        '4': { 'label': line('teacher_detail.objective_more_student', 'main'), 'value': 4 },
+                        } %}
+                        {{ sg_field('select', 'objective', values, {id: 'objective', class: 'form-control'}, '', options) }}
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="paypal_email">{{line('paypal_email', 'field')}}<span>
+                      {% if session.location == 'SG' %}
+                      <sup class="required-sag">*</sup>
+                      {% endif %}
+                      </span>
+                      <a tabindex="0" data-toggle="popover" data-trigger="focus" class="profile-popover"
+                         data-content="{{ line('popover_paypal', 'field') }}">
+                        <img src="{{ base_url() }}assets/images/tooltips schedule.png" alt="">
+                      </a>
+                      </label>
+                      {{ sg_field('text', 'paypal_email', values, {placeholder: line('paypal_email', 'field'), class: 'form-control'}) }}
+                    </div>
+                    <div class="col-md-6">
+                      <label for="website_blog">Website/blog</label>
+                      {{ sg_field('text', 'website_blog', values, {placeholder: 'Website/Blog', class: 'form-control'}) }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <label for="goal">Bio<sup class="required-sag">*</sup></label>
+                  {{ sg_field('textarea', 'bio', values, {
+                  placeholder: line('enter_bio', 'field'),
+                  class: 'form-control',
+                  rows: '10',
+                  cols: '10',
+                  class: 'tinymce-class'}) }}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="break"></div>
+              <input type="submit" class="btn btn-lg-gray" value="{{ line('dashboard_104', 'dashboard') }}">
+            </div>
+          {{ form_close() }}
+      </div>
+    </div>
+  </div>
+  <div class="break"></div>
+</div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{{ base_url() }}assets/js/tinymce.min.js"></script>
+<script src="{{ base_url() }}assets/js/tinymce-placeholder-plugin.min.js"></script>
+<script>
+$(document).ready(function(){
+  var options = {
+    selector: '.tinymce-class',
+    content_style: "",
+    menubar: "tools",
+    plugins: ["placeholder", "code"],
+    elementpath: false,
+    toolbar: 'styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code',
+  },
+  $this = $(this);
+
+      // fix tinymce bug
+      if ($this.is('[required]')) {
+        options.oninit = function (editor) {
+          editor.save();
+        }
+      }
+
+      tinymce.init(options);
+    })
+</script>
+{% endblock %}

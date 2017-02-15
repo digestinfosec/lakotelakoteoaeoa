@@ -1,0 +1,165 @@
+<script>
+$(document).ready(function () {
+  validateModalRegisterLogin();
+  $('[data-toggle="popover"]').popover();
+});
+function validateModalRegisterLogin() {
+  $.validator.setDefaults({
+    highlight: function (element, errorClass, validClass) {
+      if (element.type === "radio") {
+        this.findByName(element.name).addClass('error-radio');
+      } else {
+        $(element).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+        $(element).closest('.form-group').find('i.fa').remove();
+        $(element).closest('.form-group').append('<i class="fa fa-exclamation fa-lg form-control-feedback"></i>');
+      }
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      if (element.type === "radio") {
+        this.findByName(element.name).removeClass(errorClass).addClass(validClass);
+      } else {
+        $(element).closest('.form-group').removeClass('has-error has-feedback').addClass('has-success has-feedback');
+        $(element).closest('.form-group').find('i.fa').remove();
+        $(element).closest('.form-group').append('<i class="fa fa-check fa-lg form-control-feedback"></i>');
+      }
+    }
+  });
+
+  $(document).ready(function () {
+    $(".password").focus(function(){
+      $("#password-text").show();
+    }).blur(function(){
+      $("#password-text").hide();
+    });
+
+    $('.password').strengthMeter('text', {
+      container: $('#password-text'),
+      hierarchy: {
+        '0': ['tooltip-strength-meter danger', "{{ line('very_weak', 'form_validation') }}"],
+        '10': ['tooltip-strength-meter warning', "{{ line('weak', 'form_validation') }}"],
+        '20': ['tooltip-strength-meter warning', "{{ line('good', 'form_validation') }}"],
+        '30': ['tooltip-strength-meter success', "{{ line('strong', 'form_validation') }}"],
+        '40': ['tooltip-strength-meter success', "{{ line('very_strong', 'form_validation') }}"]
+      }
+    });
+
+    $('[data-toggle="tooltip"]').tooltip();
+
+    $.validator.addMethod(
+      "regex",
+      function (value, element, regexp) {
+        var re = new RegExp(regexp);
+        return this.optional(element) || re.test(value);
+      },
+      "{{line('validation_check','controller_js')}}"
+    );
+
+    jQuery.extend(jQuery.validator.messages, {
+      email:"{{line('validation_email2','controller_js')}}",
+    });
+
+    $("#form-newsletter-popup").validate({
+      ignore: [],
+      rules: {
+        'email': {
+          required: true,
+          email: true
+        }
+      },
+      messages: {
+        email: {
+          required: "{{line('validation_email','controller_js')}}"
+        }
+      }
+    });
+
+    $("#form-skillagogo-modal-signup").validate({
+      ignore: [],
+      rules: {
+        'first_name': {
+          required: true,
+          regex: "^[a-zA-Z. ]+$"
+        },
+        'last_name': {
+          required: true,
+          regex: "^[a-zA-Z. ]+$"
+        },
+        'email': {
+          required: true,
+          email: true
+        },
+        'password': {
+          required: true,
+          minlength: 8,
+          regex: "^(?:(?=.*[a-zA-Z])(?:(?=.*[0-9]))).{8,}$"
+        },
+        'password_confirmation': {
+          required: true,
+          equalTo: "#password",
+          regex: "^(?:(?=.*[a-zA-Z])(?:(?=.*[0-9]))).{8,}$"
+        },
+        'role': {
+          required: true
+        },
+        'birth_date': {
+          required: true
+        }
+      },
+      messages: {
+        first_name: {
+          required: "{{line('validation_first_name','controller_js')}}",
+          regex: "{{line('validation_first_name','controller_js')}}"
+        },
+        last_name: {
+          required: "{{line('validation_last_name','controller_js')}}",
+          regex: "{{line('validation_last_name','controller_js')}}"
+        },
+        email: {
+          required: "{{line('validation_email','controller_js')}}"
+        },
+        password: {
+          required: "{{line('validation_password_minlength','controller_js')}}",
+          minlength: "{{line('validation_password_minlength','controller_js')}}",
+          regex: "{{line('validation_password_minlength','controller_js')}}"
+        },
+        password_confirmation: {
+          required: "{{line('validation_password_minlength','controller_js')}}",
+          equalTo: "{{line('validation_password_confirmation_equalto','controller_js')}}",
+          regex: "{{line('validation_password_minlength','controller_js')}}"
+        },
+        role: {
+          required: "{{line('validation_role','controller_js')}}",
+        },
+        birth_date: {
+          required: "{{line('validation_birthday','controller_js')}}",
+        }
+      }
+    });
+
+    $("#form-skillagogo-modal-signin").validate({
+      ignore: [],
+      rules: {
+        'email': {
+          required: true,
+          email: true
+        },
+        'password': {
+          required: true,
+          minlength: 8,
+          regex: "^(?:(?=.*[a-zA-Z])(?:(?=.*[0-9]))).{8,}$"
+        }
+      },
+      messages: {
+        email: {
+          required: "{{line('validation_email','controller_js')}}"
+        },
+        password: {
+          required: "{{line('validation_password','controller_js')}}",
+          minlength: "{{line('validation_password_minlength','controller_js')}}",
+          regex: "{{line('validation_password','controller_js')}}"
+          }
+      }
+    });
+  });
+}
+</script>

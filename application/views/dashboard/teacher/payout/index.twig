@@ -1,0 +1,61 @@
+{% extends 'layout/app/teacher_dashboard.twig' %}
+{% set titleName = line('dashboard_shared_title', 'dashboard') %}
+{% set menu = "dashboard/teacher/menu_payout.twig" %}
+
+{% block dashboard_content %}
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content-body">
+        <div class="title-top">
+          <div class="title"> {{ line('dashboard_301', 'dashboard') }} </div>
+        </div>
+        <div class="payment-history-wrapper">
+          <div class="table-responsive">
+            <table class="table table-hover table-striped">
+              <tr>
+                <td>{{line('dashboard_315', 'dashboard') }}</td>
+                <td>{{line('dashboard_316', 'dashboard') }}</td>
+                <td>{{line('dashboard_314', 'dashboard') }}</td>
+              </tr>
+              <tr>
+                <td>{{line('dashboard_317', 'dashboard') }}</td>
+                <td>
+                  {% if payout.total_num_payout_last_month == 0%}
+                    {{ '-' }}
+                  {% else %}
+                    {% if payout.total_num_payout_last_month == payout.total_status_payout_last_month %}
+                    <h4>
+                      <span class="label label-success">
+                        {{line('paid','field')}}
+                      </span>
+                    </h4>
+                    {% else %}
+                    <h4>
+                      <span href="" class="label label-warning">
+                        {{line('pending','field')}}
+                      </span>
+                    </h4>
+                    {% endif %}
+                  {% endif %}
+                </td>
+                <td>{{delimiter_number_dec(currency, payout.total_last_month, 2)}}</td>
+              </tr>
+              <tr>
+                <td>{{line('dashboard_318', 'dashboard') }}</td>
+                <td>
+                  <h4>
+                    <span href="" class="label label-info">
+                      {{line('accumulating','field')}}
+                    </span>
+                  </h4>
+                </td>
+                <td>{{delimiter_number_dec(currency, payout.total_cur_month, 2)}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="break"></div>
+    </div>
+  </div>
+{% endblock %}

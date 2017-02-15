@@ -1,0 +1,38 @@
+{% extends 'layout/app/student_dashboard.twig' %}
+{% set titleName = line('dashboard_shared_title', 'dashboard') %}
+{% set menu = "dashboard/student/menu_wishlist.twig" %}
+{# used for reload when wishlist removed #}
+{% set dashboard_wishlist = true %}
+
+{% block dashboard_content %}
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content-body">
+        <div class="wishlist-wrapper">
+          <div class="box-listing-classes">
+            <div class="row">
+              {% if courses %}
+                {% for course in courses %}
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    {% include('public/course/course_card.twig') %}
+                  </div>
+                {% endfor %}
+                {% include('dashboard/shareds/_pagination.twig') %}
+              {% else %}
+                <div class="col-md-12">
+                  <div class="alert alert-info">
+                    {{ line('dashboard_44', 'dashboard') }}
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+  {% include('shared/app/_include_wishlist_js_script.twig') %}
+{% endblock %}

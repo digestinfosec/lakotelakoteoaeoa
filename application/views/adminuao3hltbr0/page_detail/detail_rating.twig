@@ -1,0 +1,136 @@
+{% extends 'adminuao3hltbr0/master.twig' %}
+{% set titleName = "rating detail" %}
+  {% set bodyClass = "fixed-topbar fixed-sidebar theme-sdtl color-purple" %}
+
+    {% block content %}
+      <section>
+        {% include 'adminuao3hltbr0/shareds/sidebar.twig' %}
+        <div class="main-content">
+          {% include 'adminuao3hltbr0/shareds/top_bar.twig' %}
+          <div class="page-content">
+            <div class="header">
+              <h2><strong>Rating detail</strong></h2>
+              <div class="breadcrumb-wrapper">
+                <ol class="breadcrumb">
+                  <li><a href="{{ base_url() }}adminuao3hltbr0/home">Dashboard</a></li>
+                  <li class="active">Rating</li>
+                </ol>
+              </div>
+              {% include 'adminuao3hltbr0/shareds/alert.twig' %}
+            </div>
+            <div class="row">
+              <div class="col-lg-12 portlets">
+                <div class="sgogo-rating-detail-admin">
+                  <div class="header">
+                    <div class="row">
+                      <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="box-left">
+                          <span class="title">{{ rating.title }}</span>
+                          <div class="teacher-name">Teacher
+                            : {{ rating.teacher_first_name }}  {{ rating.teacher_last_name }}</div>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="box-right">
+                          <div class="box-rating">
+                            <ul>
+                              {% for i in 1..5 %}
+                                <li class="{% if i <= rate %} active {% endif %}">
+                                  <i class="fa fa-star"></i>
+                                </li>
+                              {% endfor %}
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="content">
+                    <div class="block-status">
+                      <div class="pull-right">
+                        {% if rating.status == status_accepted %}
+                          <div class="btn btn-success">
+                            <i class="fa fa-check"></i>
+                            Published
+                          </div>
+                        {% elseif rating.status == status_pending %}
+                          <div class="btn btn-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Unpublished
+                          </div>
+                        {% endif %}
+                      </div>
+                    </div>
+                    <blockquote>                      
+                      {{ rating.review|raw }}
+                    </blockquote>
+                  </div>
+                  <div class="footer-rating">
+                    <div class="pull-left">
+                      <a href="{{ base_url() }}adminuao3hltbr0/page_rating" class="btn btn-primary btn-lg">
+                        <i class="fa fa-refresh"></i>
+                        Back to List Rating
+                      </a>
+                    </div>
+                    {{ form_open('') }}
+                    <div class="pull-right">
+                    {% if rating.status == status_pending %}
+                      <button name="publish" type="submit" value="publish" class="btn btn-success btn-lg">
+                        <i class="fa fa-check"></i> Publish
+                      </button>
+                    {% elseif rating.status == status_accepted %}
+                      <button name="unpublish" type="submit" value="unpublish" class="btn btn-warning btn-lg">
+                        <i class="fa fa-info-circle"></i> Unpublish
+                      </button>
+                    {% endif %}
+                      <button name="delete" type="submit" value="delete" class="btn btn-danger btn-lg">
+                        <i class="fa fa-trash-o"></i> Delete
+                      </button>
+                    </div>
+                    {{ form_close() }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% include 'adminuao3hltbr0/shareds/footer.twig' %}
+        </div>
+        </div>
+      </section>
+      {# section for sidebar left and searching full #}
+      <div class="loader-overlay">
+        <div class="spinner">
+          <div class="bounce1"></div>
+          <div class="bounce2"></div>
+          <div class="bounce3"></div>
+        </div>
+      </div>
+    {% endblock %}
+
+  {% block script %}
+    <a href="#" class="scrollup"><i class="fa fa-angle-up"></i></a>
+    <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery/jquery-1.11.1.min.js"></script>
+    <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery/jquery-migrate-1.2.1.min.js"></script>
+    <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery-ui/jquery-ui-1.11.2.min.js"></script>
+    <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/gsap/main-gsap.min.js"></script>
+    <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery-cookies/jquery.cookies.min.js"></script>
+    <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery-block-ui/jquery.blockUI.min.js"></script>
+    <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootbox/bootbox.min.js"></script>
+    <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/mcustom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap-dropdown/bootstrap-hover-dropdown.min.js"></script>
+    <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/charts-sparkline/sparkline.min.js"></script>
+    <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/retina/retina.min.js"></script>
+    <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/select2/select2.min.js"></script>
+    <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/icheck/icheck.min.js"></script>
+    <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/backstretch/backstretch.min.js"></script>
+    <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/charts-chartjs/Chart.min.js"></script>
+    <script src="{{ base_url() }}assets/adminuao3hltbr0/js/sidebar_hover.js"></script>
+    <script src="{{ base_url() }}assets/adminuao3hltbr0/js/widgets/notes.js"></script>
+    <script src="{{ base_url() }}assets/adminuao3hltbr0/js/quickview.js"></script>
+    <script src="{{ base_url() }}assets/adminuao3hltbr0/js/pages/search.js"></script>
+    <script src="{{ base_url() }}assets/adminuao3hltbr0/js/plugins.js"></script>
+    <script src="{{ base_url() }}assets/adminuao3hltbr0/js/application.js"></script>
+    <script src="{{ base_url() }}assets/adminuao3hltbr0/js/layout.js"></script>
+  {% endblock %}

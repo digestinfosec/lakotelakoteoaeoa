@@ -1,0 +1,108 @@
+{% extends 'email/shared/body.twig' %}
+
+{% block content %}
+<tr>
+  <td align="center" valign="top" class="fix-box">
+    <table align="center" border="0" cellspacing="0" cellpadding="0" class="container" bgcolor="#ffffff" style="background-color: #ffffff;">
+      <tbody>
+        <tr>
+          <td valign="top" width="100%" align="center">
+            <table border="0" align="center" cellpadding="0" cellspacing="0" width="auto" style="mso-table-lspace:0pt; mso-table-rspace:0pt; border-bottom: 2px solid #ffbb75; padding-bottom: 20px;">
+              <tbody>
+                <tr>
+                  <td height="50"></td>
+                </tr>
+                <tr>
+                  <td width="auto" align="center" valign="middle" height="28" style="font-size: 18px; font-family: Roboto, Arial, Helvetica, sans-serif; text-align: center; color: rgb(163, 162, 162); font-weight: 300; padding-left: 18px; padding-right: 18px; word-break: break-word; line-height: 26px; background-clip: padding-box;">
+                    <span style="font-size: 18px; line-height: 26px;">
+                      <span style="font-weight: bold; font-size: inherit; line-height: 26px;">
+                        {{ line('a36', 'email') }}
+                      </span>
+                      <br>
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">
+            <table align="center" border="0" cellspacing="0" cellpadding="0" class="full-width" bgcolor="#ffffff" style="background-color:#ffffff;">
+              <tbody>
+                <tr>
+                  <td height="20"></td>
+                </tr>
+                <tr>
+                  <td valign="top">
+                    <table border="0" cellspacing="0" cellpadding="0" align="left">
+                      <tbody>
+                        <tr>
+                          <td style="font-size:16px;color:#999999;line-height:180%;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                            <span>
+                              <a href="#" style="text-decoration: none; color: #555555; font-weight: 300;">
+                                {{ line('a1', 'email') }} {{first_name}},
+                              </a>
+                            </span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td height="15">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="font-size:16px;color:#999999;line-height:180%;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                            {{ line('a47', 'email') }}
+                            <br>
+                            <br>
+                            <b>{{ line('af1', 'email') }}</b> : {{ course.title }}
+                            <br>
+                            <b>{{ line('af2', 'email') }}</b> : {{ first_name }} {{ last_name }}
+                            <br>
+                            <b>{{ line('af3', 'email') }}</b> :
+                            <br>
+                            {% for schedule in schedules %}
+                            {% set start_time = strtotime(schedule.date ~ ' ' ~ schedule.start_time) %}
+                            - {{ date('j F Y g.ia', start_time) }} @ {{ schedule.address_line1 }}, {{ schedule.city }}, {{ schedule.state }} {{ schedule.postal_code }}
+                            <br>
+                            {% endfor %}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td height="30">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="font-size:16px;color:#999999;line-height:180%;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                            <b>{{ line('a48', 'email') }}</b>
+                            <br>
+                            <ul>
+                              <li>{{ line('a49', 'email') }}</li>
+                              <li>{{ line('a50', 'email') }}</li>
+                              <li>{{ line('a51', 'email') }}</li>
+                            </ul>
+                            {{ line('a6', 'email') }}
+                            <br>
+                            <br>
+                            {{ line('a4', 'email') }}
+                            <br>
+                            The skillagogo team
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td height="20">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </td>
+</tr>
+{% endblock %}

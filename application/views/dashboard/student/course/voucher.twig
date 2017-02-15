@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="{{ base_url() }}assets/css/bootstrap.css" rel="stylesheet">
+  <title>Voucher skillagogo</title>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="row" style="border: 1px solid #404041; padding: 20px;">
+          <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+            <img src="{{ base_url() }}assets/images/logo-black.png" style="width: 200px;margin-bottom: 20px;margin-top: 20px;">
+            <br/>
+            <p><strong>{{ line('class_title', 'field') }}</strong>: <br>{{ course.title }}</p>
+            <p><strong>{{ line('class_voucher_description', 'field') }}</strong>: <br>{{ course.description | raw }}</p>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="text-center">
+              <img src="{{ base_url() }}images/class/{{voucher_code}}.png" style="width: 100%;">
+              <strong>{{ line('class_voucher_code', 'field') }}</strong> <br>
+              <span style="color: red; font-weight: bold;">{{ voucher_code }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

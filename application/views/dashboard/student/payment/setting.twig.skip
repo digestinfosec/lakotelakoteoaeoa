@@ -1,0 +1,73 @@
+{% extends 'layout/app/student_dashboard.twig' %}
+{% set titleName = line('dashboard_shared_title', 'dashboard') %}
+{% set menu = "dashboard/student/menu_payment.twig" %}
+
+{% block dashboard_content %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="content-body">
+      <div class="payment-info-wrapper">
+        <div class="col-md-6">
+          <label for="billing_name">Billing name</label>
+          <input type="text" name="billing_name" class="form-control" placeholder="Billing name">
+        </div>
+        <div class="col-md-6">
+          <label for="country">Payment method</label>
+          <div class="select-sgogo">
+            <select name="payment" class="form-control" id="payment">
+              <option value="Bank Transfer">Bank Transfer</option>
+              <option value="Paypal">Paypal</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="address_1">Address 1</label>
+          <input type="text" name="address_1" class="form-control" placeholder="Address 1">
+        </div>
+        <div class="col-md-6">
+          <label for="address_2">Address 2</label>
+          <input type="text" name="address_2" class="form-control" placeholder="Address 2">
+        </div>
+        <div class="col-md-6">
+          <label for="city">City</label>
+          <input type="text" name="city" class="form-control" placeholder="City Name">
+        </div>
+        <div class="col-md-6">
+          <label for="state_or_province">State or Province</label>
+          <input type="text" name="state_or_province" class="form-control" placeholder="State or Province Name">
+        </div>
+        <div class="col-md-6">
+          <label for="postal_code">Postal Code</label>
+          <input type="text" name="postal_code" class="form-control" placeholder="Postal Code">
+        </div>
+        <div class="col-md-6">
+          <label for="country">Country</label>
+          <div class="select-sgogo">
+            <select name="country" class="form-control" id="country_id">
+              <option value="Singapore">Singapore</option>
+              <option value="Indonesia">Indonesia</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="phone">Phone</label>
+          <input type="text" name="phone" class="form-control" placeholder="Phone number">
+        </div>
+        <div class="col-md-6">
+          <label for="fax">Fax</label>
+          <input type="text" name="fax" class="form-control" placeholder="Fax Number">
+        </div>
+        <div class="col-md-8"></div>
+        <div class="col-md-4">
+          <div class="break"></div>
+          <div class="break"></div>
+          <div class="break"></div>
+          <div class="pull-right">
+            <input type="submit" class="btn btn-lg-gray" value="Save">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

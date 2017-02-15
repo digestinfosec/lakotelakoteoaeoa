@@ -1,0 +1,362 @@
+{% extends 'layout/app/master.twig' %}
+{% set titleName = line('title_17', 'dashboard') %}
+{% set ClassHeader1Color = "bg-sgogo-red" %}
+{% set ClassHeader2Color = "bg-sgogo-red" %}
+{% set ClassBoxRightTitleColor = "red" %}
+{% set SubTitleHeader = line('sub_header', 'course_profile') %}
+{% set header0, header1, header2, header3 = true, true, true, true %}
+{% set footer = true %}
+
+{% block content %}
+  <section class="class-profile-body">
+    <div class="container">
+      <div class="col-md-8">
+        <div class="content-class-profile">
+          {% set last_schedule = course_schedules|last %}
+          <div class="flexslider {{ 'now'|date('Y-m-d') > last_schedule.date ? 'img-blur' : '' }}">
+            {% if course.publish_status == 1 %}
+              <div class="label-finished bg-sgogo-gray">
+                Draft
+              </div>
+            {% elseif 'now'|date('Y-m-d') > last_schedule.date %}
+              <div class="label-finished bg-sgogo-purple">
+                Finished
+              </div>
+            {% endif %}
+            <ul class="slides">
+              {% if course.images is not empty %}
+                {% for image in course.images %}
+                  <li>
+                    <img src="{{ base_url() }}images/class/{{ image.title }}"/>
+                  </li>
+                {% endfor %}
+              {% else %}
+                <li>
+                  <img src="{{ base_url() }}assets/images/image_default_skillagogo.png"/>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+          <div class="content-body">
+            <div class="title">
+              {{ course.title }}
+            </div>
+            <div class="sub-title">
+              {{ course.first_name ~ ' ' ~ course.last_name }}
+            </div>
+            <div class="desc">
+              {{ course.description|raw }}
+              <div class="sub-desc">
+                <div class="title">Class Content:</div>
+                <span>{{ url_to_html(course.content)|raw }}</span>
+                <div class="title">Class Leader:</div>
+                <span>{{ course.class_leader }}</span>
+                <div class="title">About Leader:</div>
+                <span>{{ url_to_html(course.about_leader)|raw }}</span>
+                <div class="title">Prerequisite Skill:</div>
+                <span>{{ course.prerequisite_skill ? 'Yes, ' ~ course.prerequisite_detail : 'No' }}</span>
+                <div class="title">Class Objectives:</div>
+                <span>{{ url_to_html(course.end_goal)|raw }}</span>
+                <div class="title">Level:</div>
+                {{ course.level == 1 ? '<span>Beginner</span>' }}
+                {{ course.level == 2 ? '<span>Intermediate</span>' }}
+                {{ course.level == 3 ? '<span>Advanced</span>' }}
+                <div class="title">Pack:</div>
+                <span>{{ course.pack ? 'Yes' : 'No' }}</span>
+                <div class="title">Special Equipment(s):</div>
+                <span>{{ url_to_html(course.special_equipment)|raw }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="view-social-share">
+          <div class="share">
+            <span>{{ line('share', 'course_profile') }}</span>
+          </div>
+          <div class="icon">
+            <ul>
+              <li>
+                <a>
+                  <i class="fa fa-facebook color-facebook"></i>
+                </a>
+              </li>
+              <li>
+                <a>
+                  <i class="fa fa-twitter color-twitter"></i>
+                </a>
+              </li>
+              <li>
+                <a>
+                  <i class="fa fa-google-plus color-google-plus"></i>
+                </a>
+              </li>
+              <li>
+                <a>
+                  <i class="fa fa-linkedin color-linkedin"></i>
+                </a>
+              </li>
+              <li>
+                <a>
+                  <i class="fa fa-pinterest color-pinterest"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="view-rating-review">
+          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">
+            <a class="heart">
+              <i class="fa fa-heart"></i>
+            </a>
+          </div>
+          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">
+            <i class="fa fa-comments"></i>
+            <span class="counting-comment">&nbsp;0</span>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+            <div class="box-rating">
+              {{ show_rate(course_rate.rate_avg) }}
+            </div>
+          </div>
+          <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12"></div>
+        </div>
+        <div class="comment-class-profile">
+          <div class="box-title-count">
+            <div class="title">
+              {{ line('comment', 'course_profile') }}
+            </div>
+            <div class="count">
+            </div>
+          </div>
+          <div class="listing-comment">
+            <div class="alert alert-warning">{{ line('no-comment-first', 'public') }}</div>
+          </div>
+            <!-- listing-comment -->
+
+            <div class="listing-comment">
+              <div class="alert alert-info"><a>{{ line('sign-comment', 'public') }}</a>
+              </div>
+            </div>
+            <!-- listing-comment -->
+        </div>
+      </div>
+      <div class="col-md-4">
+        {{ form_open('dashboard/student/order/add', {'id':"form_book"}) }}
+        <div class="sidebar-class-profile">
+          <div class="side-upcoming-session">
+            <div class="side-price">
+              <div class="box-price">
+                <div class="box">
+                  <div class="title">{{ line('price', 'course_profile') }}</div>
+                  <div class="price">
+                    {{ delimiter_number(course.currency, course.price) }}
+                  </div>
+                </div>
+              </div>
+              {% if course.type != 2 %}
+                <input type="hidden" name="schedule_id" value="{{ course_schedules.0.id }}">
+              {% endif %}
+              <input type="hidden" name="id" value="{{ course.id }}"/>
+              <a>
+                <div class="box-book">
+                  <span>{{ line('book_now', 'course_profile') }}</span>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="side-upcoming-session">
+            <div class="title">
+              Type: {{ type_hash[course.type] }}
+            </div>
+            <div class="title">
+              Seats:
+              {% if course.type != 2 %}
+                {% if course_schedules.0.available_seat_left > 1 %}
+                  {{ course_schedules.0.available_seat_left }} Seats Left
+                {% else %}
+                  {{ course_schedules.0.available_seat_left }} Seat Left
+                {% endif %}
+              {% else %}
+                {{ course.available_seat }} Seat(s) for Each Class
+              {% endif %}
+            </div>
+            <div class="class-session-check">
+              {% if course.type == 2 %}
+                <div class="title">{{ line('other_class', 'course_profile') }}</div>
+              {% else %}
+                <div class="title">{{ line('class_schedules', 'course_profile') }}</div>
+              {% endif %}
+              <div class="box-radiocheck-desc">
+                {% set i = 0 %}
+                {% for schedule in course_schedules %}
+                  <div class="list-id">
+                    {# <div class="i-left">
+
+                    </div> #}
+                    <span class="i-right">
+                      {% if course.type == 2 %}
+                        {% if schedule.available_seat_left > 0 %}
+                          <input name="schedule_id" value="{{ schedule.id }}" type="radio" class="checkradios custom-style" {{ i == 0 ? 'checked' : ''}}>
+                          {% set i = i + 1 %}
+                        {% endif %}
+                      {% else %}
+                        <i class="fa fa-circle"></i>
+                      {% endif %}
+
+                      {{ schedule.date|date("j F Y") }}
+                      {% if course.type == 2 %}
+                        {% if schedule.available_seat_left > 0 %}
+                          {% if schedule.available_seat_left > 1 %}
+                            <span style="color:#FF4754">({{ schedule.available_seat_left }} Seats Left)</span>
+                          {% else %}
+                            <span style="color:#FF4754">({{ schedule.available_seat_left }} Seat Left)</span>
+                          {% endif %}
+                        {% endif %}
+                      {% endif %}
+                    </span>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="break"></div>
+            <div class="title">
+              {{ line('upcoming_session', 'course_profile') }}
+            </div>
+            {% if course_schedules %}
+              {% set start_time = strtotime(course_schedules.0.date ~ ' ' ~ course_schedules.0.start_time) %}
+              {% set end_time = strtotime(course_schedules.0.date ~ ' ' ~ course_schedules.0.end_time) %}
+              <div class="date-location">
+                <div class="box-date-location">
+                  <div class="box-sm">
+                    <div class="left"></div>
+                    <div class="right"></div>
+                  </div>
+                  <div class="box-date">
+                    <div class="year">
+                      {{ date('Y', start_time) }}
+                    </div>
+                    <div class="date-month">
+                      <div class="date">{{ date('d', start_time) }}</div>
+                      <div class="month">{{ date('F', start_time) }}</div>
+                    </div>
+                  </div>
+                  <div class="box-time">
+                    {{ date('D, g.ia', start_time) }} - {{ date('g.ia', end_time) }}
+                  </div>
+                  <div class="box-location">
+                    at {{ course_schedules.0.address_line1 }}
+                  </div>
+                </div>
+              </div>
+              <div id="maps" class="maps"><div id="map_canvas" class="map_canvas" style="height:100%"></div></div>
+            {% endif %}
+
+            <div class="description">
+              <div class="title">
+                {{ line('q-class', 'public') }}
+              </div>
+              <div class="box-info-desc">
+                {#
+                <a class="list-id">
+                  <div class="i-left">
+                    <i class="fa fa-comments"></i>
+                  </div>
+                  <div class="i-right">
+                    skillagogo_chat
+                  </div>
+                </a>
+                #}
+                <a href="mailto:studentcare@skillagogo.com" class="list-id">
+                  <div class="i-left">
+                    <i class="fa fa-envelope"></i>
+                  </div>
+                  <div class="i-right">
+                    studentcare@skillagogo.com
+                  </div>
+                </a>
+                <a href="tel:+6591845698" class="list-id">
+                  <div class="i-left">
+                    <i class="fa fa-phone"></i>
+                  </div>
+                  <div class="i-right">
+                    +65 91845698
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="side-teacher-profile">
+            <div class="title">
+              {{ line('teacher_profile', 'course_profile') }}
+            </div>
+            <div class="avatar-teacher">
+              <img src="{{ base_url() }}images/avatar/{{ course.teacher_avatar }}" alt="">
+            </div>
+            <div class="name">{{ course.first_name ~ ' ' ~ course.last_name }}</div>
+            <div class="position">{{ course.teacher_job }}</div>
+            <div class="desc-teacher">
+              {{ shorten_string(course.teacher_bio, 30) }}
+            </div>
+            <a href="{{ site_url('teacher/profile/' ~ course.teacher_id) }}"
+               class="link-full-profile">
+              {{ line('view-prof', 'public') }}
+            </a>
+          </div>
+        </div>
+        {{ form_close() }}
+      </div>
+    </div>
+  </section>
+  <section class="skillagogo-classes">
+    <div class="container">
+      <div class="col-md-12">
+        <div class="box-title-class-profile">
+          {{ line('more_classes', 'course_profile') }}
+        </div>
+      </div>
+      {% if courses %}
+        <div class="col-md-12">
+          <div class="box-listing-classes">
+            <div class="row">
+              {% for course in courses %}
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                  {% include('public/course/course_card.twig') %}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <div class="col-md-12">
+          <div class="box-not-found">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="desc-big">
+                  No suggestions yet.
+                </div>
+                <div class="desc-small">
+                  Stay with us for more updates.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+{% endblock %}
+
+{% block script %}
+  {{ map.js|raw }}
+  <script>
+    $(window).load(function () {
+      $('.flexslider').flexslider({
+        start: function (slider) {
+          $('body').removeClass('loading');
+          $('.flexslider').resize();
+        },
+        animation: "slide"
+      });
+    });
+  </script>
+{% endblock %}

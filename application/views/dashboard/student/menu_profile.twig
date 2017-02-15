@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="horizontal-menu">
+      <a href="{{ base_url() }}dashboard/student/profile"
+         class="list-h-top menu_profile_student {% if menu_top == 'profile' %} active {% endif %}">
+        <div class="title">
+          {{ line('dashboard_4', 'dashboard') }}
+        </div>
+      </a>
+      <a href="{{ base_url() }}dashboard/student/profile/password_setting"
+         class="list-h-top menu_profile_student {% if menu_top == 'password' %} active {% endif %}">
+        <div class="title">
+          {{ line('dashboard_6', 'dashboard') }}
+        </div>
+      </a>
+      <a href="{{ base_url() }}dashboard/student/profile/notification"
+         class="list-h-top menu_profile_student {% if menu_top == 'notification' %} active {% endif %}">
+        <div class="title">
+          {{ line('dashboard_11', 'dashboard') }}
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

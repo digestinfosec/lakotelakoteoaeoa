@@ -1,0 +1,62 @@
+{% extends 'layout/app/student_dashboard.twig' %}
+{% set titleName = line('dashboard_shared_title', 'dashboard') %}
+{% set menu = "dashboard/student/menu_credit.twig" %}
+
+{% block dashboard_content %}
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content-body">
+        <div class="balance">
+          {{line('balance', 'field')}}: <strong>{{ delimiter_number(session.currency, total) }}</strong>
+        </div>
+        <br/>
+        {% if credits %}
+        <div class="payment-history-wrapper">
+          <div class="table-responsive">
+            <table class="table table-hover table-striped">
+              <tr>
+                <td><i class="fa fa-calendar"></i>&nbsp;&nbsp;{{line('date', 'field')}}</td>
+                <td>{{line('details', 'field')}}</td>
+                <td>{{line('credit_added', 'field')}}</td>
+                <td>{{line('credit_used', 'field')}}</td>
+                <td><i class="fa fa-calendar"></i>&nbsp;{{line('valid_until', 'field')}}</td>
+              </tr>
+              {% for credit in credits %}
+                {% set balance = credit.debit - credit.credit %}
+                <tr>
+                  <td>{{ credit.created_at|date('Y-m-d') }}<br></td>
+                  <td>{{ line(credit.description, 'dashboard' ) }}</td>
+                  <td>
+                    {% if (credit.debit <= 0) %}
+                    {% else %}
+                      {{delimiter_number(currency, credit.debit)}}
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if (credit.amount_used <= 0) %}
+                    {% else %}
+                      {{delimiter_number(currency, credit.amount_used)}}
+                    {% endif %}
+                  </td>
+                  <td>{% if(credit.debit - credit.credit > 0) %}
+                    {{ credit.expired_date|date('Y-m-d') }}
+                    {% endif %}
+                  </td>
+                </tr>
+              {% endfor %}
+            </table>
+          </div>
+        </div>
+        {% else %}
+          <div class="row">
+            <div class="col-md-12">
+              <div class="alert alert-info">
+                  {{ line('dashboard_58', 'dashboard') }}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

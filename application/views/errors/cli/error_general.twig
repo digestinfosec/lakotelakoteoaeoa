@@ -1,0 +1,22 @@
+{% extends 'layout/app/master.twig' %}
+{% set titleName = "404" %}
+{% set bodyClass = "page-handler-wrapper" %}
+{% block content %}
+<div class="page-handler">
+    <div class="box-handler-error">
+        <div class="logo">
+            <a href="{{ base_url() }}">
+                <img src="{{ base_url() }}assets/images/logo-teacher.png" alt="">
+            </a>
+        </div>
+        <div class="description">
+            <div class="number">404
+            </div>
+            <div class="desc">Sorry, but we couldn't find the page you are looking for</div>
+            <a href="{{ base_url() }}" class="go-back">
+                Go back to skillagogo
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

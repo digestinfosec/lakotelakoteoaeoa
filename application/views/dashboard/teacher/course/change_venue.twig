@@ -1,0 +1,194 @@
+{% extends 'layout/app/master.twig' %}
+{% set titleName = line('title_8', 'dashboard') %}
+{% set ClassHeader1Color = "navbar-create-class bg-sgogo-gray" %}
+{% set IdHeader1Color = "header-create-class" %}
+{% set ClassBoxRightTitleColor = "gray" %}
+{% set IdBoxRightTitleColor = "box-head-create-class-profile" %}
+{% set SubTitleHeader = line('subtitle_7', 'dashboard') %}
+{% set header0, header1, header3 = true, true, true %}
+{% set footer = true %}
+
+{% block content %}
+  {{ form_open_multipart('', {id: 'create_class_form'}) }}
+  {% set attr = { 'class': 'form-control' } %}
+
+  <div class="step-create-class">
+    <div class="container">
+      <div class="setup-content">
+        <div class="col-md-12">
+          <div class="box-create-class-wrapper">
+            <div class="box-form-create">
+              <div class="box-title-top">
+                <div class="title">
+                  {{ line('dashboard_129', 'dashboard') }}
+                </div>
+              </div>
+              <div class="box-input">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6 break">
+                      <label for="class_title">
+                        <span>{{ line('type_of_class','create_course') }}</span>
+                        <a tabindex="0" data-trigger="focus"
+                           data-content="Please enter choose the class type">
+                        </a>
+                      </label>
+                      <label class="">
+                        {% set options = {
+                        '1': 'Single',
+                        '2': 'Repeated',
+                        '3': 'Staged'
+                        } %}
+                        {{ options[course.type] }}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                {% for schedule in schedules %}
+                  <div class="box-form-class-schedule-wrapper">
+                    <div class="box-form-class-schedule location-field">
+                      <div class="col-md-12">
+                        <div class="col-md-6 break">
+                          <div class="row">
+                            <label>
+                              <span>{{ line('date','create_course') }}</span>
+                            </label>
+                            {% set start_time = strtotime(schedule.date ~ ' ' ~ schedule.start_time) %}
+                            {% set end_time = strtotime(schedule.date ~ ' ' ~ schedule.end_time) %}
+                            <div>{{ date('j F Y g:ia', start_time) }} - {{ date('g:ia', end_time) }}</div>
+
+                          </div>
+                          <div class="row form-create-class row-schedule-venue">
+                            <label for="schedule_venue">
+                              <span>{{ line('find_location','create_course') }}<sup class="required-sag">*</sup></span>
+                            </label>
+                            <input type="text" class="form-control autocomplete width-86" value="{{schedule.name}}">
+                          </div>
+                          <div class="row reset-location mg-top-10">
+                            <button class="btn btn-xs-red" type="button">
+                              <i class="fa fa-refresh"></i>
+                              {{ line('reset_location', 'field') }}
+                            </button>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="map"></div>
+                        </div>
+                      </div>
+                      {% include 'dashboard/teacher/course/_location_detail.twig' %}
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="box-button-create">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="text-center">
+                    <button class="btn btn-next-c-class btn-next my-btn-step bg-sgogo-red" id="btn-btm-next-2" type="submit" style="margin-left: 5px;">
+                      <i class="fa fa-save"></i>
+                      &nbsp;{{ line('dashboard_104', 'dashboard') }}
+                    </button>
+                    <a class="btn btn-next-c-class btn-next my-btn-step bg-sgogo-yellow" href="{{ base_url('') }}dashboard">
+                      <i class="fa fa-times"></i>
+                      &nbsp;{{ line('dashboard_1044', 'dashboard') }}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% include 'layout/app/modal_confirm_change_venue.twig' %}
+  </div>
+
+  {{ form_close() }}
+{% endblock %}
+
+
+{% block script %}
+  <script src="{{ base_url() }}assets/js/fileinput.js"></script>
+  <script src="{{ base_url() }}assets/js/locationpicker.jquery.js"></script>
+  <script>
+    $(document).ready(function () {
+      $(window).keydown(function(event){
+        if(event.keyCode == 13) {
+          event.preventDefault();
+          return false;
+        }
+      });
+      popover();
+
+      var curStep = $(".setup-content")
+      var curInputs = curStep.find("input[type='text'],input[type='url'],input[type='number'],select,textarea")
+      curInputs.on('change', function()
+      {
+        $(window).on("beforeunload", function() {
+          return "{{line('are_you_sure','controller_js')}}";
+        });
+      });
+
+      curInputs.on('keypress', function(){
+        curInputs[0].setCustomValidity('');
+      })
+
+
+      $('.btn-next').on('click', function (e) {
+        //e.preventDefault()
+        var curStep = $(this).closest(".setup-content"),
+          curInputs = curStep.find("input[type='text'],input[type='url'],input[type='number'],select,textarea"),
+          firstError = null,
+          isValid = true;
+
+        $(".form-create-class").removeClass("has-error");
+        var __ret = validateStep(curInputs, firstError, isValid);
+        firstError = __ret.firstError;
+        isValid = __ret.isValid;
+
+        if (isValid) {
+          //$(window).off("beforeunload");
+          // $('form#create_class_form').unbind().submit();
+          e.preventDefault();
+          $('#skillagogo-confirm-change-venue').modal('show');
+        } else {
+          $('html, body').animate({
+            scrollTop: firstError.offset().top
+          }, 500);
+        }
+
+      });
+
+      $('#btn-submit').click(function(e) {
+        $('#create_class_form').submit();
+      });
+    });
+
+    function popover() {
+      $('[data-toggle="popover"]').popover()
+    }
+
+    function validateStep(curInputs, firstError, isValid) {
+      for (var i = 0; i < curInputs.length; i++) {
+        if (!curInputs[i].validity.valid) {
+          if (firstError == null) firstError = $(curInputs[i]).closest('.form-create-class').find('label');
+          isValid = false;
+          $(curInputs[i]).closest(".form-create-class").addClass("has-error");
+        }
+      }
+
+      var hiddenLocation = $('.location-detail:hidden')[0];
+      if ($('.location-detail').is(':hidden')) {
+          var autocompletField = $(hiddenLocation).closest(".location-field").find('.autocomplete')[0];
+          $(autocompletField).closest(".form-create-class").addClass("has-error");
+          autocompletField.setCustomValidity("{{line('validation_location_detail','controller_js')}}");
+          if (firstError == null) firstError = $(autocompletField).closest('.form-create-class').find('label');
+          isValid = false;
+      }
+      return {firstError: firstError, isValid: isValid};
+    }
+
+  </script>
+  {% include 'dashboard/teacher/course/_google_map.twig' %}
+{% endblock %}

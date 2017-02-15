@@ -1,0 +1,158 @@
+<footer class="footer-skillagogo">
+  <div class="container">
+    <div class="col-md-15 col-sm-3 col-xs-12">
+      <div class="title-footer">
+        {{ line('company', 'footer') }}
+      </div>
+      <div class="list-footer">
+        <ul>
+          <li>
+            <a href="{{ base_url() }}page/about_us">
+              {{ line('about', 'footer') }}
+            </a>
+          </li>
+          {# <li>
+            <a href="#">
+              {{ line('blog', 'footer') }}
+            </a>
+          </li> #}
+          <li>
+            <a href="{{ base_url() }}page/career">
+              {{ line('career', 'footer') }}
+            </a>
+          </li>
+          <li>
+            <a href="{{ base_url() }}page/terms_of_service">
+              {{ line('terms', 'footer') }}
+            </a>
+          </li>
+          <li>
+            <a href="{{ base_url() }}page/privacy_policy">
+              {{ line('privacy', 'footer') }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-15 col-sm-3 col-xs-12">
+      <div class="title-footer">
+        {{ line('support', 'footer') }}
+      </div>
+      <div class="list-footer">
+        <ul>
+          <li>
+            <a href="{{ base_url() }}page/faq">
+              {{ line('faq', 'footer') }}
+            </a>
+          </li>
+          <li>
+            <a href="{{ base_url() }}page/how_to_teach">
+              {{ line('how_to_teach', 'footer') }}
+            </a>
+          </li>
+          <li>
+            <a href="{{ base_url() }}page/how_to_learn">
+              {{ line('how_to_learn', 'footer') }}
+            </a>
+          </li>
+          <li>
+            <a href="{{ base_url() }}page/contact_us">
+              {{ line('contact', 'footer') }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-15 col-sm-3 col-xs-12">
+      <div class="title-footer">
+        {{ line('explore', 'footer') }}
+      </div>
+      <div class="list-footer">
+        <ul>
+          <li>
+            <a href="{{base_url()}}change-location?lang=SG">
+              {{ line('singapore_footer', 'footer') }}
+            </a>
+          </li>
+          <li>
+            <a href="{{base_url()}}change-location?lang=ID">
+              {{ line('indonesia_footer', 'footer') }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-15 col-sm-3 col-xs-12">
+      <div class="title-footer">
+        {{ line('stay', 'footer') }}
+      </div>
+      <div class="list-footer">
+        <ul>
+          <li>
+            <a href="#" data-toggle="modal" data-target="#skillagogo-newsletter">
+              {{ line('subscribe', 'footer') }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-15 col-sm-3 col-xs-12">
+      <div class="title-footer">
+        {{ line('keep_in_touch', 'homepage') }}
+      </div>
+      <div class="list-social">
+        <ul>
+          <li>
+            <a href="https://www.facebook.com/skillagogo/" class="btn btn-facebook-2">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com/skillagogo" class="btn btn-twitter-2">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/company/skillagogo-pte-ltd" class="btn btn-linkedin-2">
+              <i class="fa fa-linkedin"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/skillagogo/" class="btn btn-instagram-2">
+              <i class="fa fa-instagram"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+      <div class="box-logo-footer">
+        <img src="{{ base_url() }}assets/images/logo-white.png" alt="">
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+      <div class="box-center-bottom">
+        <div class="title">
+          {{ line('help', 'footer') }}<br>
+        </div>
+        <div class="sub-title">
+          <a href="{{ base_url() }}teacher/recommend" class="recomended-teacher">
+            {{ line('recommend', 'footer') }}
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+      <div class="box-corpyright">
+        &copy; 2016 skillagogo. All rights reserved.
+      </div>
+    </div>
+  </div>
+</footer>
+{% include 'layout/app/modal_newsletter.twig' %}
+{#% include 'layout/app/modal_location.twig' %#}
+{% include 'layout/app/modal_cancel_course_teacher.twig' %}
+{% include 'layout/app/modal_confirm_change_schedule.twig' %}
+{% include 'layout/app/modal_question_create_class.twig' %}

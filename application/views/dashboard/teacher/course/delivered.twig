@@ -1,0 +1,55 @@
+{% extends 'layout/app/teacher_dashboard.twig' %}
+{% set titleName = line('dashboard_shared_title', 'dashboard') %}
+{% set menu = "dashboard/teacher/menu_course.twig" %}
+
+{% block dashboard_content %}
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content-body">
+        <div class="title-top">
+          <div class="title">{{ line('dashboard_128', 'dashboard') }}</div>
+        </div>
+
+        <div class="class-schedule-wrapper">
+          {{ form_open('dashboard/teacher/course/add_voucher', {class: 'form-class-delivery'}) }}
+            <div class="pull-right">
+              <input type="hidden" name="id" value="{{ id }}">
+              <div class="input-group">
+                <input type="text" name="voucher_code" class="form-control form-control-normal" id="voucher_code" placeholder="{{line('class_voucher_code','field')}}">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="submit">
+                    <i class="fa fa-plus"></i>
+                    {{line('add','field')}}
+                  </button>
+                </span>
+              </div>
+            </div>
+          {{ form_close() }}
+        </div>
+        <div class="payment-history-wrapper">
+          <div class="table-responsive">
+            <table class="table table-hover table-striped">
+              <tr>
+                <td>No</td>
+                <td>{{line('class_voucher_code','field')}}</td>
+                <td>{{line('student_name','field')}}</td>
+                <td>{{line('amount','field')}}</td>
+              </tr>
+              {% set i = 1 %}
+              {% for voucher in vouchers %}
+                <tr>
+                  <td>{{i}}</td>
+                  <td>{{ voucher.voucher_code }}<br></td>
+                  <td>{{ voucher.attendee_first_name }} {{ voucher.attendee_last_name }}</td>
+                  <td>{{ delimiter_number(voucher.currency, voucher.amount) }}</td>
+                </tr>
+                {% set i=i+1%}
+              {% endfor %}
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+{% endblock %}

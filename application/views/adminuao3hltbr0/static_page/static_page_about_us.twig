@@ -1,0 +1,139 @@
+{% extends 'adminuao3hltbr0/master.twig' %}
+{% set titleName = "about us" %}
+{% set bodyClass = "fixed-topbar fixed-sidebar theme-sdtl color-purple" %}
+{% block content %}
+  <section>
+    {% include 'adminuao3hltbr0/shareds/sidebar.twig' %}
+    <div class="main-content">
+      {% include 'adminuao3hltbr0/shareds/top_bar.twig' %}
+      <div class="page-content">
+        <div class="header">
+          <h2><strong>About</strong> Us</h2>
+          <div class="breadcrumb-wrapper">
+            <ol class="breadcrumb">
+              <li><a href="{{ base_url() }}adminuao3hltbr0/home">Dashboard</a></li>
+              <li class="active">about us</li>
+            </ol>
+          </div>
+          {% include 'adminuao3hltbr0/shareds/alert.twig' %}
+        </div>
+        <div class="row">
+          <div class="col-lg-12 portlets">
+            <div class="panel">
+              <div class="panel-content">
+                <div class="row">
+                  {{ form_open('') }}
+                  <input type="hidden" name="last_editor_id" value="{{ user_login_admin.admin_id }}"/>
+                  <input type="hidden" name="id" value="{{ static_page[0].id }}">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="form-label">Select Language</label>
+                      {% set options = {
+                      '0': { 'label': 'Indonesia', 'value': 1 },
+                      '1': { 'label': 'English', 'value': 2 },
+                      } %}
+                      {{ sg_field('select', 'lang', get_values, {id: "type_language", class: 'form-control'}, 2, options) }}
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group" id="Description_AboutUs_English" style="display: block;">
+                      <label class="form-label">Description</label>
+                      {{ sg_field('textarea', 'content', static_page[0], {placeholder: 'Content', class: 'form-control'}) }}
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <input type="submit" class="btn btn-md btn-primary" value="Submit">
+                    </div>
+                  </div>
+                  {{ form_close('') }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% include 'adminuao3hltbr0/shareds/footer.twig' %}
+      </div>
+    </div>
+  </section>
+  {# section for sidebar left and searching full #}
+  <div class="loader-overlay">
+    <div class="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <a href="#" class="scrollup"><i class="fa fa-angle-up"></i></a>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery/jquery-1.11.1.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery/jquery-migrate-1.2.1.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery-ui/jquery-ui-1.11.2.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/gsap/main-gsap.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap/js/bootstrap.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery-cookies/jquery.cookies.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery-block-ui/jquery.blockUI.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootbox/bootbox.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/mcustom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap-dropdown/bootstrap-hover-dropdown.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/charts-sparkline/sparkline.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/retina/retina.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/select2/select2.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/icheck/icheck.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/backstretch/backstretch.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/charts-chartjs/Chart.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/tinymce/tinymce.min.js"></script>
+  <script>
+    tinymce.init({
+      selector: 'textarea',
+      height: 500,
+      plugins: [
+        'advlist autolink lists link image charmap print preview anchor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table contextmenu paste code'
+      ],
+      toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+      content_css: [
+        '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
+        '//www.tinymce.com/css/codepen.min.css'
+      ],
+
+      // The valid_elements option defines which elements will remain in the edited text when the editor saves.
+      valid_elements : "@[id|class|data*|aria*|data-parent|data-toggle|aria-expanded|aria-controls|role|style|title|dir<ltr?rtl|lang|xml::lang|onclick|ondblclick|"
+      + "onmousedown|onmouseup|onmouseover|onmousemove|onmouseout|onkeypress|"
+      + "onkeydown|onkeyup],a[rel|rev|charset|hreflang|tabindex|accesskey|type|"
+      + "name|href|target|title|class|onfocus|onblur|role],strong,b,em,i,strike,u,"
+      + "#p,-ol[type|compact],-ul[type|compact],-li,br,img[longdesc|usemap|"
+      + "src|border|alt=|title|hspace|vspace|width|height|align],-sub,-sup,"
+      + "-blockquote,-table[border=0|cellspacing|cellpadding|width|frame|rules|"
+      + "height|align|summary|bgcolor|background|bordercolor],-tr[rowspan|width|"
+      + "height|align|valign|bgcolor|background|bordercolor],tbody,thead,tfoot,"
+      + "#td[colspan|rowspan|width|height|align|valign|bgcolor|background|bordercolor"
+      + "|scope],#th[colspan|rowspan|width|height|align|valign|scope],caption,-div,"
+      + "-span,-code,-pre,address,-h1,-h2,-h3,-h4,-h5,-h6,hr[size|noshade],-font[face"
+      + "|size|color],dd,dl,dt,cite,abbr,acronym,del[datetime|cite],ins[datetime|cite],"
+      + "object[classid|width|height|codebase|*],param[name|value|_value],embed[type|width"
+      + "|height|src|*],script[src|type],map[name],area[shape|coords|href|alt|target],bdo,"
+      + "button,col[align|char|charoff|span|valign|width],colgroup[align|char|charoff|span|"
+      + "valign|width],dfn,fieldset,form[action|accept|accept-charset|enctype|method],"
+      + "input[accept|alt|checked|disabled|maxlength|name|readonly|size|src|type|value],"
+      + "kbd,label[for],legend,noscript,optgroup[label|disabled],option[disabled|label|selected|value],"
+      + "q[cite],samp,select[disabled|multiple|name|size],small,"
+      + "textarea[cols|rows|disabled|name|readonly],tt,var,big,section,div"
+    });
+
+    $("#type_language").change(function () {
+      window.location = location.protocol + '//' + location.host + location.pathname + '?lang=' + $(this).val();
+    });
+  </script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/sidebar_hover.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/widgets/notes.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/quickview.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/pages/search.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/plugins.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/application.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/layout.js"></script>
+{% endblock %}

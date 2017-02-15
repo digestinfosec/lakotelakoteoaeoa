@@ -1,0 +1,294 @@
+function replaceValidationUI() {
+    var contentVisible = $('.setup-content:visible')[0];
+    var form = $('.setup-content:visible').closest('form')[0];
+    // Suppress the default bubbles
+    form.addEventListener("invalid", function (event) {
+        event.preventDefault();
+    }, true);
+
+    // Support Safari, iOS Safari, and the Android browser—each of which do not prevent
+    // form submissions by default
+    form.addEventListener("submit", function (event) {
+        if (!this.checkValidity()) {
+            event.preventDefault();
+        }
+    });
+
+    var invalidFields = contentVisible.querySelectorAll(":invalid"),
+        errorMessages = contentVisible.querySelectorAll(".alert-bubble"),
+        parent;
+
+    // Remove any existing messages
+    for (var i = 0; i < errorMessages.length; i++) {
+        $(errorMessages[i]).remove();
+    }
+
+    for (var i = 0; i < invalidFields.length; i++) {
+        parent = invalidFields[i].closest('.form-create-class');
+        if (!$(invalidFields[i]).hasClass('map-field'))
+            $(parent).find('label:nth-child(1)').append("<div class='alert-bubble'>" +
+                "<div class='tooltip bottom in'>" +
+                "<div class='tooltip-inner'>" + invalidFields[i].validationMessage + "</div>" +
+                "</div>" +
+                "</div>");
+    }
+
+    // If there are errors, give focus to the first invalid field
+//        if (invalidFields.length > 0) {
+//          invalidFields[0].focus();
+//        }
+
+    $(invalidFields).on('keypress', function () {
+        $(this).closest('.form-create-class').find('.alert-bubble').remove();
+    })
+
+    $(invalidFields).on('change', function () {
+        $(this).closest('.form-create-class').find('.alert-bubble').remove();
+    })
+}
+
+function validateStep(curInputs, firstError, isValid) {
+    for (var i = 0; i < curInputs.length; i++) {
+        if ($(curInputs[i]).hasClass('schedule_date')) {
+            if ($(curInputs[i]).val()) {
+                var schedule_date = new Date($(curInputs[i]).val());
+                var date_now = new Date();
+
+                if (schedule_date < date_now) {
+                    if (firstError == null) firstError = $($(curInputs[i]).closest('.form-create-class').find('label')[0]);
+                    $(curInputs[i]).closest(".form-create-class").addClass("has-error");
+                    $(curInputs[i]).closest(".form-create-class").find('.day')[0].setCustomValidity("{{ line('validation_set_date_after_today','controller_js') }}");
+                    isValid = false;
+                } else {
+                    $(curInputs[i]).closest(".form-create-class").find('.day')[0].setCustomValidity('');
+                }
+            }
+        }
+
+        if ($(curInputs[i]).hasClass('schedule_start')) {
+            var $schedule_start = $(curInputs[i]).val()
+            var $schedule_end = $(curInputs[i]).closest('.box-date-wrapper').find('.schedule_end').val();
+            var schedule_start = new Date("January 1, 2017 " + $schedule_start);
+            var schedule_end = new Date("January 1, 2017 " + $schedule_end);
+            if (schedule_start > schedule_end) {
+                if (firstError == null) firstError = $($(curInputs[i]).closest('.form-create-class').find('label')[0]);
+                $(curInputs[i]).closest(".form-create-class").addClass("has-error");
+                $(curInputs[i]).closest(".form-create-class").find('.hour')[0].setCustomValidity("{{ line('validation_start_before_end','controller_js') }}");
+                isValid = false;
+            }
+            else {  
+                $(curInputs[i]).closest(".form-create-class").find('.hour')[0].setCustomValidity('');
+            }
+        }
+
+        if ($(curInputs[i]).hasClass('class-description')) {
+            if ($('#step-1').is(':visible')) {
+                var classContent = $(curInputs[i])[0];
+                if (getStats('description').chars > 500) {
+                    $(classContent).closest(".form-create-class").addClass("has-error");
+                    classContent.setCustomValidity("{{ line('validation_class_description','controller_js') }}");
+                    if (firstError == null) firstError = $(classContent).closest('.form-create-class').find('label');
+                    isValid = false;
+                }
+                else {
+                    classContent.setCustomValidity('');
+                }
+            }
+        }
+
+        if ($(curInputs[i]).hasClass('class-content')) {
+            if ($('#step-1').is(':visible')) {
+                var classField = $(curInputs[i])[0];
+                if (getStats('content').chars > 9999) {
+                    $(classField).closest(".form-create-class").addClass("has-error");
+                    classField.setCustomValidity("{{ line('validation_class_content','controller_js') }}");
+                    if (firstError == null) firstError = $(classField).closest('.form-create-class').find('label');
+                    isValid = false;
+                }
+                else {
+                    classField.setCustomValidity('');
+                }
+            }
+        }
+
+        if ($(curInputs[i]).hasClass('class-equipment')) {
+            if ($('#step-4').is(':visible')) {
+                var classContent = $(curInputs[i])[0];
+                if (getStats('special_equipment').chars > 999) {
+                    $(classContent).closest(".form-create-class").addClass("has-error");
+                    classContent.setCustomValidity("{{ line('validation_class_equipment','controller_js') }}");
+                    if (firstError == null) firstError = $(classContent).closest('.form-create-class').find('label');
+                    isValid = false;
+                }
+                else {
+                    classContent.setCustomValidity('');
+                }
+            }
+        }
+
+        if ($(curInputs[i]).hasClass('schedule_date')) {
+            var numScheds = $('.schedule_date').length;
+            var classType = $('.type-of-class').val();
+            if ((classType == '2' || classType == '3') && numScheds <= 1) // Repeated or Staged
+            {
+                $('.type-of-class').closest(".form-create-class").addClass("has-error");
+                isValid = false;
+                $('.type-of-class')[0].setCustomValidity("{{ line('validation_type_of_class','controller_js') }}");
+                if (firstError == null) firstError = $('.select-create-class');
+            }
+            else if ((classType == '1') && numScheds > 1) {
+                $('.type-of-class').closest(".form-create-class").addClass("has-error");
+                isValid = false;
+                $('.type-of-class')[0].setCustomValidity("{{ line('validation_type_of_class_2','controller_js') }}");
+                if (firstError == null) firstError = $('.select-create-class');
+            }
+            else {
+                $('.type-of-class')[0].setCustomValidity('');
+            }
+        }
+
+        if (!curInputs[i].validity.valid) {
+            if (firstError == null) firstError = $(curInputs[i]).closest('.form-create-class').find('label');
+            $(curInputs[i]).closest(".form-create-class").addClass("has-error");
+            isValid = false;
+            if ($(curInputs[i]).hasClass('schedule_date')) {
+                $(curInputs[i]).closest(".form-create-class").find('.day')[0].setCustomValidity("{{ line('validation_set_correct_date','controller_js') }}");
+            }
+            if ($(curInputs[i]).hasClass('class-price')) {
+                $('.class-price')[0].setCustomValidity("{{ line('validation_set_price','controller_js') }}");
+            }
+        }
+        else if (isValid !== false){
+            if ($(curInputs[i]).hasClass('schedule_date')) {
+                $(curInputs[i]).closest(".form-create-class").find('.day')[0].setCustomValidity('');
+            }
+            if ($(curInputs[i]).hasClass('class-price')) {
+                $('.class-price')[0].setCustomValidity('');
+            }
+        }
+    }
+
+    if ($('#step-3').is(':visible')) {
+        var hiddenLocation = $('.location-detail:hidden')[0];
+        if ($('.location-detail').is(':hidden')) {
+            var autocompletField = $(hiddenLocation).closest(".location-field").find('.autocomplete')[0];
+            $(autocompletField).closest(".form-create-class").addClass("has-error");
+            autocompletField.setCustomValidity("{{ line('validation_location_detail','controller_js') }}");
+            if (firstError == null) firstError = $(autocompletField).closest('.form-create-class').find('label');
+            isValid = false;
+        }
+    }
+    return {firstError: firstError, isValid: isValid};
+}
+
+$('.btn-save-draft').click(function () {
+    $(this).prop('disabled', true)
+    var curStep = $(this).closest(".setup-content"),
+        curInputs = curStep.find("input[type='text']:visible,input[type='url']:visible,input[type='number']:visible,select,textarea"),
+        firstError = null,
+        isValid = true;
+
+    // with errors
+    $(".form-create-class").removeClass("has-error");
+    tinyMCE.triggerSave();
+    var __ret = validateStep(curInputs, firstError, isValid);
+    firstError = __ret.firstError;
+    isValid = __ret.isValid;
+
+    if (isValid) {
+        var createform = $('form').serializeArray();
+        createform.push({name: 'draft', value: true});
+        createform.push({name: 'draft_step', value: $('.setup-content:visible').attr('id').slice(-1)})
+        var btnDraft = $(this)
+        $.post(submitUrl, createform, function (data) {
+            submitForm(data)
+            btnDraft.prop('disabled', false)
+        }, 'json');
+
+        firstError = null;
+    } else {
+        replaceValidationUI();
+        $(window).on("beforeunload", function () {
+            return "{{ line('are_you_sure','controller_js') }}"
+        });
+        $(this).prop('disabled', false)
+        $('html, body').animate({
+            scrollTop: firstError.offset().top
+        }, 500);
+    }
+
+})
+
+function jqueryStep() {
+
+    var navListItems = $('div.setup-panel div a'),
+        allWells = $('.setup-content'),
+        allNextBtn = $('.btn-next');
+    allPrevBtn = $('.btn-prev');
+
+    allWells.hide();
+
+    navListItems.on('click', function (e) {
+        var $target = $($(this).attr('href')),
+            $item = $(this);
+
+        if (!$item.hasClass('disabled')) {
+            navListItems.removeClass('btn-primary').addClass('btn-default');
+            $item.addClass('btn-primary');
+            allWells.hide();
+            $target.show();
+            $target.find('input:eq(0)').focus();
+        }
+    });
+
+    allNextBtn.on('click', function () {
+        var curStep = $(this).closest(".setup-content"),
+            curStepBtn = curStep.attr("id"),
+            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+            curInputs = curStep.find("input[type='text'],input[type='url'],input[type='number'],select,textarea"),
+            isValid = true,
+            firstError = null;
+
+        $(".form-create-class").removeClass("has-error");
+        tinyMCE.triggerSave();
+        var __ret = validateStep(curInputs, firstError, isValid);
+        firstError = __ret.firstError;
+        isValid = __ret.isValid;
+        if (isValid) {
+            changeColorHeader($('.btn-next:visible'));
+            nextStepWizard.removeAttr('disabled').trigger('click');
+            reinitiateMap();
+            $('html, body').animate({
+                scrollTop: $('.stepwizard-step').offset().top
+            }, 500);
+            firstError = null;
+        } else {
+            replaceValidationUI();
+            $('html, body').animate({
+                scrollTop: firstError.offset().top
+            }, 500);
+        }
+    });
+
+    allPrevBtn.click(function () {
+        var curStep = $(this).closest(".setup-content"),
+            curStepBtn = curStep.attr("id"),
+            provStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().prev().children("a"),
+            isValid = true;
+
+        if (isValid) {
+            changeColorHeader($('.btn-prev:visible'));
+            provStepWizard.removeAttr('disabled').trigger('click');
+            reinitiateMap();
+            $('html, body').animate({
+              scrollTop: $('.stepwizard-step').offset().top
+            }, 500);
+        }
+    });
+
+    $('div.setup-panel div a.btn-primary').trigger('click');
+}
+
+function reinitiateMap() {
+  initAutocomplete();
+}

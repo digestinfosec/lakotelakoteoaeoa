@@ -1,0 +1,113 @@
+{% extends 'layout/app/master.twig' %}
+{% set titleName = line('title_14', 'dashboard') %}
+{% set ClassHeader1Color = "bg-sgogo-red" %}
+{% set ClassHeader2Color = "bg-sgogo-red" %}
+{% set ClassBoxRightTitleColor = "red" %}
+{# {% set ClassFixedHeaderSubPage = "scroll-to-fixed main-nav-sub-page" %}
+{% set IdFixedHeaderSubPage = "fixed-top" %} #}
+{% set SubTitleHeader = line('subtitle_9', 'dashboard') %}
+{% set header0, header1, header2, header3 = true, true, true, true %}
+{% set footer = true %}
+
+{% block content %}
+  <div class="mg-t-b-50">
+    <div class="container">
+      <div class="col-md-12">
+        <section class="class-review-info-top">
+          <div class="image-left">
+            <div class="image-wrapper-ratio aspect-ratio _16x9">
+              {% if course.images is not empty %}
+                {% set image = course.images|first %}
+                <img src="{{ base_url() }}images/class/{{ image.title }}" alt="">
+              {% else %}
+                <img src="{{ base_url() }}assets/images/image_default_class_review.png" alt="">
+              {% endif %}
+            </div>
+          <div class="desc-right">
+            <div class="title">{{ course.title }}</div>
+            <div class="name">{{ course.first_name }} {{ course.last_name }}</div>
+            <div class="date-location">
+              {% set schedule = course.schedules|first %}
+              {% set course_date_start = strtotime(schedule.date ~ ' ' ~ schedule.start_time) %}
+              {% set course_date_end = strtotime(schedule.date ~ ' ' ~ schedule.end_time) %}
+              <div class="col-md-6">
+                <i class="fa fa-clock-o"></i>
+                <span>{{ date('j F Y', course_date_start) }} {{ date('g.ia', course_date_start) }}
+                  - {{ date('g.ia', course_date_end) }}</span>
+              </div>
+              <div class="col-md-6">
+                <i class="fa fa-map-marker"></i>
+                <span>{{ schedule.address_line1 }}</span>
+              </div>
+            </div>
+            {#<a href="{{ base_url() }}" class="btn btn-lg-red">#}
+              {#<i class="fa fa-eye"></i>#}
+              {#review#}
+            {#</a>#}
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="container">
+      <div class="col-md-12">
+        <div class="title-listing">
+          <div class="name">{{ line('list_comments_class','dashboard') }}</div>
+        </div>
+        {% if comments %}
+          {% for comment in comments %}
+            <div class="c-r-list-user">
+              <div class="avatar-left">
+                <div class="image">
+                  <img src="{{ base_url() }}images/avatar/{{ comment.profile_pic }}" alt="">
+                </div>
+                <div class="name">
+                  {{ comment.first_name }} {{ comment.last_name }}
+                </div>
+              </div>
+              <div class="description-right">
+                <div class="box-top">
+                  <div class="date">
+                    <i class="fa fa-calendar"></i>
+                    <span>&nbsp;&nbsp;{{ convert_to_timezone(session.ip_address, comment.comment_time)|date("j F Y \\a\\t g:ia") }}</span>
+                  </div>
+                </div>
+                <div class="box-bottom">
+                  {{ url_to_html(comment.comment)|raw }}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+          {% include('dashboard/shareds/_pagination.twig') %}
+        {% else %}
+          <div class="row">
+            <div class="col-md-12">
+              <div class="alert alert-info">
+                {{ line('no-comment', 'public') }}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script src="{{ base_url() }}assets/js/jquery.scolltofixed.js"></script>
+  <script>
+    $(window).scroll(function () {
+      if (screen.width > 1024) {
+        var scroll = $(window).scrollTop();
+        if (scroll > 0) {
+          $('.navbar').addClass('nav-colored-sub-page');
+        } else {
+          $('.navbar').removeClass('nav-colored-sub-page');
+        }
+      }
+    });
+
+    $(document).ready(function () {
+      $('.scroll-to-fixed').scrollToFixed();
+    });
+  </script>
+{% endblock %}

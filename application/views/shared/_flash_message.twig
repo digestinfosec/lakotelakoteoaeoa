@@ -1,0 +1,18 @@
+{% if alert.success or alert.error or alert.form_errors or validation_error %}
+  <div class="container">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      {% if alert.success %}
+        <div class="alert alert-success">{{ alert.success }}</div>
+      {% endif %}
+      {% if alert.error %}
+        <div class="alert alert-danger">{{ alert.error }}</div>
+      {% endif %}
+      {% if alert.form_errors %}
+        <div class="alert alert-danger">{{ alert.form_errors | raw }}</div>
+      {% endif %}
+      {% if validation_error %}
+        <div class="alert alert-danger">{{ validation_error | raw }}</div>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}

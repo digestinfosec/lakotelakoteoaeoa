@@ -1,0 +1,158 @@
+{% extends 'layout/app/master.twig' %}
+{% set titleName = line('title_5', 'dashboard') %}
+{% set ClassHeader1Color = "bg-sgogo-red" %}
+{% set ClassHeader2Color = "bg-sgogo-red" %}
+{% set ClassBoxRightTitleColor = "red" %}
+{% set SubTitleHeader = line('subtitle_4', 'dashboard') %}
+{% set header0, header1, header2, header3 = true, true, true, true %}
+{% set footer = true %}
+
+{% block css %}
+  <link rel="stylesheet" href="{{ base_url() }}assets/css/jquery.rateyo.css">
+{% endblock %}
+
+{% block content %}
+  <section class="class-review-body">
+    <div class="container">
+      <div class="col-md-8">
+        <div class="class-review-content">
+          {#<div class="image-big">#}
+          {#<img src="{{ base_url() }}assets/images/classes-1.jpg" alt="">#}
+          {#</div>#}
+          <div class="flexslider">
+            <ul class="slides">
+              {% if course.images is not empty %}
+                {% for image in course.images %}
+                  <li>
+                    <img src="{{ base_url() }}images/class/{{ image.title }}"/>
+                  </li>
+                {% endfor %}
+              {% else %}
+                <li>
+                  <img src="{{ base_url() }}assets/images/image_default_big.png"/>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+          <div class="class-review-content-desc">
+            <div class="title">
+              {{ course.title }}
+            </div>
+            <div class="sub-title">
+              {{ course.first_name }} {{ course.last_name }}
+            </div>
+            {{ form_open('dashboard/rating/add') }}
+            <div class="title-rating">
+              {{ line('dashboard_126', 'dashboard') }}<br>
+              {{ course.title }}
+            </div>
+            <div class="image-star">
+              <div id="rate-course"></div>
+              <input type="hidden" name="rate" id="rate">
+            </div>
+            <br>
+            <br>
+            <div class="title-rating">
+              {{ line('dashboard_127', 'dashboard') }}<br>
+              {{ course.title }}
+            </div>
+            <input type="hidden" name="class_id" value="{{ course.id }}"/>
+            <textarea name="review" class="form-control textarea-review" cols="10" rows="5"
+                      placeholder="Your Review">{{ set_value('review') }}</textarea>
+            <br>
+            <div class="box-radiocheck-desc">
+              <div class="list-id">
+                <div class="i-left">
+                  <input type="checkbox" name="checkbox" value="check" id="agree" class="checkradios custom-style-3">
+                </div>
+                <div class="i-right">
+                  {{ line('dashboard_45', 'dashboard') }}
+                </div>
+              </div>
+            </div>
+            <div class="text-center">
+              <input type="submit" class="btn btn-next-teacher" value="{{ line('submit','button') }}">
+            </div>
+            {{ form_close() }}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="class-review-sidebar">
+          {% if ratings %}
+            <div class="title-top">
+              <span>{{ line('dashboard_120', 'dashboard') }} <br>{{ course.title }}</span>
+            </div>
+            {% for rating in ratings %}
+              <div class="box-review-sidebar">
+                <div class="image-avatar">
+                  <img src="{{ base_url() }}images/avatar/{{ user_login.avatar }}" alt="">
+                </div>
+                <div class="name">
+                  {{ rating.first_name }} {{ rating.last_name }}
+                </div>
+                <div class="date">
+                  {{ convert_to_timezone(session.ip_address, rating.created_at) }}
+                </div>
+                <div class="box-star">
+                  <div class="star">
+                    {% for i in range(1, rating.rate) %}
+                      <img src="{{ base_url() }}assets/images/rating-active.png" alt="">
+                    {% endfor %}
+                    {% if rating.rate < 5 %}
+                      {% for i in range(rating.rate, 4) %}
+                        <img src="{{ base_url() }}assets/images/rating.png" alt="">
+                      {% endfor %}
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="description">
+                  {{ rating.review|raw }}
+                </div>
+              </div>
+            {% endfor %}
+            <div class="text-center">
+              <a href="{{base_url()}}dashboard/rating/view/{{course.course_id}}" class="btn btn-more-review">
+                {{ line('look_other_reviews','dashboard')}}
+              </a>
+            </div>
+          {% else %}
+            {{ line('dashboard_64', 'dashboard') }}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block script %}
+  <script src="{{ base_url() }}assets/js/jquery.rateyo.js"></script>
+  <script>
+    $(function () {
+      var $rateYo = $("#rate-course").rateYo({
+        fullStar: true,
+        starWidth: "30px",
+        onChange: function (rating, instance) {
+          $("#rate").val(rating);
+        }
+      });
+    });
+  </script>
+  <script src="{{ base_url() }}assets/js/tinymce.min.js"></script>
+  <script>
+    // tinymce.init({
+    //   plugins: "paste",
+    //   paste_as_text: true,
+    //   force_p_newlines: false,
+    //   force_br_newlines: true,
+    //   menubar: false,
+    //   elementpath: false,
+    //   selector: 'textarea',
+    //   setup: function (ed) {
+    //     ed.on('init', function () {
+    //       this.getDoc().body.style.fontSize = '14px';
+    //     });
+    //   }
+    // });
+  </script>
+{% endblock %}

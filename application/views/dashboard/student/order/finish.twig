@@ -1,0 +1,173 @@
+{% extends 'layout/app/master.twig' %}
+{% set titleName = line('title_3', 'dashboard') %}
+{% set ClassHeader1Color = "bg-sgogo-gray-dark" %}
+{% set ClassHeader2Color = "bg-sgogo-gray-dark" %}
+{% set SubTitleHeader = line('subtitle_3', 'dashboard') %}
+{% set header0, header1, header2, header3 = true, true, true, true %}
+{% set footer = true %}
+
+{% block css %}
+  <link href="{{ base_url() }}assets/css/datetimepicker.bootstrap.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+  <section class="checkout-payment">
+    <div class="container">
+      <div class="col-md-12">
+        <div class="payment-finish">
+          <div class="box-finish-thanks">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <div class="title-top">
+                  <span>{{ line('dashboard_23', 'dashboard') }}</span>
+                </div>
+                <table>
+                  {#
+                  <tr>
+                    <td width="150">
+                      {{ line('dashboard_24', 'dashboard') }}
+                    </td>
+                    <td width="20">
+                      :
+                    </td>
+                    <td>
+                      <label class="label label-success code-receipt" for="code_receipt">{{ order.receipt_code }}</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      &nbsp;
+                    </td>
+                    <td>
+                      &nbsp;
+                    </td>
+                    <td>
+                      &nbsp;
+                    </td>
+                  </tr>
+                  #}
+                  <tr>
+                    <td width="150">
+                      {{ line('dashboard_25', 'dashboard') }}
+                    </td>
+                    <td width="20">
+                      :
+                    </td>
+                    <td>
+                      <strong>{{ delimiter_number_dec(session.currency, order.total - payment_detail.credit_amount, 2) }}</strong>
+                    </td>
+                  </tr>
+                </table>
+                {#
+                <div class="break"></div>
+                {{ line('dashboard_26', 'dashboard') }} {{ session.login.email }}
+                #}
+              </div>
+              {#
+              <div class="panel-footer">
+                <a href="{{ base_url() }}dashboard/student/payment/history" class="btn btn-lg-red">
+                  <i class="fa fa-download"></i>
+                  {{ line('dashboard_27', 'dashboard') }}
+                </a>
+              </div>
+              #}
+            </div>
+          </div>
+          <div class="box-collapse-thanks">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                  <a role="button" data-toggle="collapse" href="#payment-finish-1" aria-expanded="false">
+                    <span><i class="fa fa-info-circle"></i>&nbsp;{{ line('dashboard_28', 'dashboard') }}</span>
+                  </a>
+                </div>
+                <div id="payment-finish-1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                  <div class="panel-body">
+                    <div class="box-list-class-finish-payment">
+                      {% for course in order.details %}
+                      <div class="list-class">
+                        <div class="title">
+                          {{ course.title }}
+                        </div>
+                        {% if course.category_parent == 1 %}
+                          {% set colorCategories = "purple" %}
+                        {% elseif course.category_parent == 15 %}
+                          {% set colorCategories = "blue-light" %}
+                        {% elseif course.category_parent == 21 %}
+                          {% set colorCategories = "red" %}
+                        {% elseif course.category_parent == 25 %}
+                          {% set colorCategories = "yellow" %}
+                        {% elseif course.category_parent == 30 %}
+                          {% set colorCategories = "purple-light" %}
+                        {% else %}
+                          {% set colorCategories = "green-dark" %}
+                        {% endif %}
+                        <div class="category bg-sgogo-{{ colorCategories }}">
+                          {{ course.category_name }}
+                        </div>
+                      </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwo">
+                  <a class="collapsed" role="button" data-toggle="collapse" href="#payment-finish-2" aria-expanded="false">
+                    <span>
+                      <i class="fa fa-money"></i>
+                      Mohon transfer ke akun ini
+                    </span>
+                  </a>
+                </div>
+                <div id="payment-finish-2" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+                  <div class="panel-body">
+                    {% if payment == 'bank' %}
+                      <div class="box-account-bank">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                          <div class="list-account">
+                            <div class="image">
+                              <img src="{{ base_url() }}assets/images/bank/bank-bca-n.png"/>
+                            </div>
+                            <div class="description bg-sgogo-gray">
+                              <div class="number">
+                                4451189888
+                              </div>
+                              <div class="name">
+                                Yustiniani Notari, SS
+                              </div>{# 
+                              <div class="location">
+                                Jakarta Selatan, Cilandak
+                              </div> #}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    {% elseif payment == 'paypal' %}
+                      <input type="image" src="{{ base_url('assets/images/btn_buynowCC_LG.gif') }}" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+                      <div class="break"></div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pull-right">
+              <a href="{{ base_url('/') }}" class="btn btn-lg-red btn-finish-checkout">
+                kembali ke halaman utama
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block script %}
+  <script src="{{ base_url() }}assets/js/datetimepicker.bootstrap.js"></script>
+  <script>
+    $('#datetimepicker').datetimepicker({
+      format: 'DD/MM/YYYY'
+    });
+  </script>
+{% endblock %}

@@ -1,0 +1,477 @@
+{% extends 'adminuao3hltbr0/master.twig' %}
+{% set titleName = "edit user page" %}
+{% set bodyClass = "fixed-topbar fixed-sidebar theme-sdtl color-purple" %}
+
+{% block content %}
+  <section>
+    {% include 'adminuao3hltbr0/shareds/sidebar.twig' %}
+    <div class="main-content">
+      {% include 'adminuao3hltbr0/shareds/top_bar.twig' %}
+      <div class="page-content">
+        <div class="header">
+          <h2><strong>Edit User</strong></h2>
+          <div class="breadcrumb-wrapper">
+            <ol class="breadcrumb">
+              <li><a href="{{ base_url() }}/adminuao3hltbr0/home">Dashboard</a></li>
+              <li class="active">Edit user</li>
+            </ol>
+          </div>
+          {% include 'adminuao3hltbr0/shareds/alert.twig' %}
+        </div>
+        <div class="row">
+          <div class="col-lg-12 portlets">
+            <div class="panel">
+              <div class="panel-content">
+                <div class="row">
+                  {{form_open_multipart('')}}
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label class="form-label">Avatar</label>
+                        <input type="file" id="input-file-now" name="avatar" accept="image/*" onchange="readURL(this);" data-default-file="{{ base_url('images/avatar') }}/{{ user.profile_pic }}">
+                        <div class="preview-picture">
+                          <img id="upload-image-user" src="{{ base_url() }}images/avatar/{{user.profile_pic}}">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="row boxed-profile form-group">
+                        <div class="col-md-12">
+                          <h3>{{ line('dashboard_207', 'dashboard') }}</h3>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <label for="email">{{ line('email', 'field') }}<sup class="required-sag">*</sup></label>
+                              {{ sg_field('text', 'email', user, {placeholder: line('email', 'field'), class: 'form-control'}) }}
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <label for="first_name">{{line('first_name', 'field')}}<sup class="required-sag">*</sup></label>
+                              {{ sg_field('text', 'first_name', user, {placeholder: line('first_name', 'field'), class: 'form-control'}) }}
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <label for="last_name">{{line('last_name', 'field')}}<sup class="required-sag">*</sup></label>
+                              {{ sg_field('text', 'last_name', user, {placeholder: line('last_name', 'field'), class: 'form-control'}) }}
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <label for="is_teacher">Is Teacher</label>
+                              {{ sg_field('text', 'is_teacher', user, {placeholder: line('is_teacher', 'field'), class: 'form-control'}) }}
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <label for="gender">{{line('gender', 'field')}}</label>
+                              <div class="select-sgogo">
+                                {% set options = {
+                                '0': { 'label': line('choose_one', 'field'), 'value': 0 },
+                                '1': { 'label': line('male', 'field'), 'value': 1 },
+                                '2': { 'label': line('female', 'field'), 'value': 2 }
+                                } %}
+                                {{ sg_field('select', 'gender', user, {id: 'gender', class: 'form-control'}, 0, options) }}
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <label for="birthday">{{line('birthday', 'field')}}<sup class="required-sag">*</sup></label>
+                              {{ sg_field('text', 'birth_date', user, {
+                                class: 'form-control',
+                                'data-format':'YYYY-MM-DD',
+                                'data-template': 'D MMMM YYYY',
+                                id: 'profile_birth_date'
+                              }) }}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <label for="home_phone">{{line('home_phone', 'field')}}</label>
+                              {{ sg_field('text', 'home_phone', user, {placeholder: line('home_phone', 'field'), class: 'form-control'}) }}
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <label for="mobile_phone">{{line('mobile_phone', 'field')}}<sup class="required-sag">*</sup></label>
+                              {{ sg_field('text', 'mobile_phone', user, {placeholder: line('mobile_phone', 'field'), class: 'form-control'}) }}
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <label for="academic_level">{{line('academic_level', 'field')}}</label>
+                              <div class="select-sgogo">
+                                {% set options = {
+                                '0': { 'label': line('choose_one', 'field'), 'value': '' },
+                                '1': { 'label': line('secondary', 'field'), 'value': 'secondary' },
+                                '2': { 'label': line('post_secondary', 'field'), 'value': 'post_secondary' },
+                                '3': { 'label': line('university', 'field'), 'value': 'university' },
+                                '4': { 'label': line('post_graduate', 'field'), 'value': 'post_graduate' }
+                                } %}
+                                {{ sg_field('select', 'academic_level', user, {id: 'academic_level', class: 'form-control'}, 0, options) }}
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <label for="is_student">Is Student</label>
+                              {{ sg_field('text', 'is_student', user, {placeholder: line('is_student', 'field'), class: 'form-control'}) }}
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <label for="marital_status">{{line('marital_status', 'field')}}</label>
+                              <div class="select-sgogo">
+                                {% set options = {
+                                '0': { 'label': line('choose_one', 'controller_js'), 'value': 0 },
+                                '1': { 'label': line('marital_status1', 'controller_js'), 'value': 1 },
+                                '3': { 'label': line('marital_status2', 'controller_js'), 'value': 3 }
+                                } %}
+                                {{ sg_field('select', 'marital_status', user, {id: 'marital_status', class: 'form-control'},
+                                  0, options) }}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="row boxed-profile">
+                        <div class="col-md-12">
+                          <h3>Password</h3>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="new_password">{{line('new_password', 'field')}}</label>
+                          <input type="password" name="password" class="form-control" placeholder="{{line('new_password', 'field')}}">
+                        </div>
+                        <div class="col-md-6">
+                          <label for="confirm_new_password">{{line('confirm_new_password', 'field')}}</label>
+                          <input type="password" name="confirm_password" class="form-control" placeholder="{{line('confirm_new_password', 'field')}}">
+                        </div>
+                      </div>
+                    </div>
+
+                    {% if is_teacher %}
+                    <div class="col-md-12">
+                      <div class="row boxed-profile form-group">
+                        <div class="col-md-12">
+                          <h3>Professional Info</h3>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <label for="teacher_type">{{line('business_type', 'field')}}</label>
+                              <div class="select-sgogo">
+                                {% set options = {
+                                '0': { 'label': line('choose_one', 'field'), 'value': 0 },
+                                '1': { 'label': line('teacher_detail.personal', 'main'), 'value': 1 },
+                                '2': { 'label': line('teacher_detail.institution', 'main'), 'value': 2 },} %}
+                                {{ sg_field('select', 'teacher_type', teacher_details, {id: 'teacher_type', class: 'form-control'}, '', options) }}
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <label for="bank">{{line('bank', 'field')}}
+                                <span>
+                                </span>
+                              </label>
+                              <div class="select-sgogo">
+                                {{ sg_field('select', 'bank_id', teacher_details, {id: 'bank_id', class: 'form-control'}, '', banks) }}
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <label for="job">{{line('job', 'field')}}<sup class="required-sag">*</sup></label>
+                              {{ sg_field('text', 'job', teacher_details, {placeholder: line('job', 'field'), class: 'form-control'}) }}
+                            </div>
+                            <div class="col-md-6">
+                              <label for="bank_branch_name">{{line('bank_branch_name', 'field')}}</label>
+                              {{ sg_field('text', 'bank_branch_name', teacher_details, {placeholder: line('bank_branch_name', 'field'), class: 'form-control'}) }}
+                            </div>
+                            <div class="col-md-6">
+                              <label for="monthly_class_envisaged">{{line('monthly_class_envisaged', 'field')}}</label>
+                              <div class="select-sgogo">
+                                {% set options = {
+                                '0': { 'label': line('choose_one', 'field'), 'value': 0 },
+                                '1': { 'label': line('teacher_detail.class_option1', 'main'), 'value': 1 },
+                                '2': { 'label': line('teacher_detail.class_option2', 'main'), 'value': 2 },
+                                '3': { 'label': line('teacher_detail.class_option3', 'main'), 'value': 3 },
+                                '4': { 'label': line('teacher_detail.class_option4', 'main'), 'value': 4 },} %}
+                                {{ sg_field('select', 'monthly_class_envisaged', teacher_details, {id: 'monthly_class_envisaged', class: 'form-control'}, '', options) }}
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <label for="bank_account_number">{{line('bank_account_number', 'field')}}</label>
+                              {{ sg_field('text', 'bank_account_number', teacher_details, {placeholder: line('bank_account_number', 'field'), class: 'form-control'}) }}
+                            </div>
+                            <div class="col-md-12">
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <label for="objective">{{line('objective', 'field')}}</label>
+                                  <div class="select-sgogo">
+                                    {% set options = {
+                                    '0': { 'label': line('choose_one', 'field'), 'value': 0 },
+                                    '1': { 'label': line('teacher_detail.objective_share', 'main'), 'value': 1 },
+                                    '2': { 'label': line('teacher_detail.objective_extra_income', 'main'), 'value': 2 },
+                                    '3': { 'label': line('teacher_detail.objective_grow_business', 'main'), 'value': 3 },
+                                    '4': { 'label': line('teacher_detail.objective_more_student', 'main'), 'value': 4 },
+                                    } %}
+                                    {{ sg_field('select', 'objective', teacher_details, {id: 'objective', class: 'form-control'}, '', options) }}
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="paypal_email">{{line('paypal_email', 'field')}}
+                                  </label>
+                                  {{ sg_field('text', 'paypal_email', teacher_details, {placeholder: line('paypal_email', 'field'), class: 'form-control'}) }}
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="website_blog">Website/blog</label>
+                                  {{ sg_field('text', 'website_blog', teacher_details, {placeholder: 'Website/Blog', class: 'form-control'}) }}
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                              <label for="goal">Bio<sup class="required-sag">*</sup></label>
+                              {{ sg_field('textarea', 'bio', teacher_details, {
+                              placeholder: line('enter_bio', 'field'),
+                              class: 'form-control',
+                              rows: '10',
+                              cols: '10',
+                              class: 'tinymce-class'}) }}
+                            </div>
+                          </div>
+                        </div>                     
+                      </div>
+                    </div>
+                    {% endif %}
+
+                    <div class="col-md-12">
+                      <div class="row boxed-profile form-group">
+                        {% if is_teacher %}
+                        <div class="col-md-6">
+                          <h3>{{ line('dashboard_201', 'dashboard') }}</h3>
+                        </div>
+                        <div class="col-md-6">
+                          <h3>{{ line('dashboard_204', 'dashboard') }}</h3>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="notification">{{ line('dashboard_202', 'dashboard') }}</label>
+                          <div class="select-sgogo">
+                            {% set options = {
+                            '0': { 'label': line('no', 'button'), 'value': 0 },
+                            '1': { 'label': line('yes', 'button'), 'value': 1 },
+                            } %}
+                            {{ sg_field('select', 'notification_class_register', teacher_details, {id: 'notification_class_register', class:'form-control'}, '', options) }}
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="notification">{{ line('dashboard_205', 'dashboard') }}</label>
+                          <div class="select-sgogo">
+                            {% set options = {
+                            '0': { 'label': line('no', 'button'), 'value': 0 },
+                            '1': { 'label': line('yes', 'button'), 'value': 1 },
+                            } %}
+                            {{ sg_field('select', 'notification_newsletter', user, {id: 'notification_newsletter', class:'form-control'}, '', options) }}
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="notification">{{ line('dashboard_203', 'dashboard') }}</label>
+                          <div class="select-sgogo">
+                            {% set options = {
+                            '0': { 'label': line('no', 'button'), 'value': 0 },
+                            '1': { 'label': line('yes', 'button'), 'value': 1 },
+                            } %}
+                            {{ sg_field('select', 'notification_class_add_wishlist', teacher_details, {id: 'notification_class_add_wishlist', class:'form-control'}, '', options) }}
+                          </div>
+                        </div>
+                        {% else %}
+                        <div class="col-md-12">
+                          <h3>{{ line('dashboard_204', 'dashboard') }}</h3>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="notification">{{ line('dashboard_205', 'dashboard') }}</label>
+                          <div class="select-sgogo">
+                            {% set options = {
+                            '0': { 'label': line('no', 'button'), 'value': 0 },
+                            '1': { 'label': line('yes', 'button'), 'value': 1 },
+                            } %}
+                            {{ sg_field('select', 'notification_newsletter', user, {id: 'notification_newsletter', class:'form-control'}, '', options) }}
+                          </div>
+                        </div>
+                        {% endif %}     
+                      </div>
+                    </div>  
+
+                    <div class="break"></div>
+
+                    <div class="col-md-12">
+                      <div class="row boxed-profile form-group">
+                        <div class="col-md-12">
+                          <h3>{{ line('dashboard_208', 'dashboard') }}</h3>
+                        </div>
+                        <div class="payment-info-wrapper">
+                          <div class="col-md-6">
+                            <label for="address_line1">{{line('address_1', 'field')}}<sup class="required-sag">*</sup></label>
+                            <input type="text" name="address_line1" class="form-control" placeholder="{{line('enter_address_`1', 'field')}}" value="{{user.address_line1}}">
+                          </div>
+                          <div class="col-md-6">
+                            <label for="address_line2">{{line('address_2', 'field')}}</label>
+                            <input type="text" name="address_line2" class="form-control" placeholder="{{line('enter_address_2', 'field')}}" value="{{user.address_line2}}">
+                          </div>
+                          <div class="col-md-6">
+                            <label for="city">{{line('city', 'field')}}<sup class="required-sag">*</sup></label>
+                            <input type="text" name="city" class="form-control" placeholder="{{line('enter_city', 'field')}}" value="{{user.city}}">
+                          </div>
+                          <div class="col-md-6">
+                            <label for="postal_code">{{line('postal_code', 'field')}}<sup class="required-sag">*</sup></label>
+                            <input type="text" name="postal_code" class="form-control" placeholder="{{line('enter_postal_code', 'field')}}" value="{{user.postal_code}}">
+                          </div>
+                          <div class="col-md-6">
+                            <label for="state">{{line('state', 'field')}}<sup class="required-sag">*</sup></label>
+                              {% set options = {
+                              'Aceh': { 'label': 'Aceh', 'value': 'Aceh'},
+                              'Bali': { 'label': 'Bali', 'value': 'Bali'},
+                              'Banten': { 'label': 'Banten', 'value': 'Banten'},
+                              'Bengkulu': { 'label': 'Bengkulu', 'value': 'Bengkulu'},
+                              'Gorontalo': { 'label': 'Gorontalo', 'value': 'Gorontalo'},
+                              'Jakarta': { 'label': 'Jakarta', 'value': 'Jakarta'},
+                              'Jambi': { 'label': 'Jambi', 'value': 'Jambi'},
+                              'Jawa Barat': { 'label': 'Jawa Barat', 'value': 'Jawa Barat'},
+                              'Jawa Tengah': { 'label': 'Jawa Tengah', 'value': 'Jawa Tengah'},
+                              'Jawa Timur': { 'label': 'Jawa Timur', 'value': 'Jawa Timur'},
+                              'Kalimantan Barat': { 'label': 'Kalimantan Barat', 'value': 'Kalimantan Barat'},
+                              'Kalimantan Selatan': { 'label': 'Kalimantan Selatan', 'value': 'Kalimantan Selatan'},
+                              'Kalimantan Tengah': { 'label': 'Kalimantan Tengah', 'value': 'Kalimantan Tengah'},
+                              'Kalimantan Timur': { 'label': 'Kalimantan Timur', 'value': 'Kalimantan Timur'},
+                              'Kalimantan Utara': { 'label': 'Kalimantan Utara', 'value': 'Kalimantan Utara'},
+                              'Kepulauan Bangka Belitung': { 'label': 'Kepulauan Bangka Belitung', 'value': 'Kepulauan Bangka Belitung'},
+                              'Kepulauan Riau': { 'label': 'Kepulauan Riau', 'value': 'Kepulauan Riau'},
+                              'Lampung': { 'label': 'Lampung', 'value': 'Lampung'},
+                              'Maluku': { 'label': 'Maluku', 'value': 'Maluku'},
+                              'Maluku Utara': { 'label': 'Maluku Utara', 'value': 'Maluku Utara'},
+                              'Nusa Tenggara Barat': { 'label': 'Nusa Tenggara Barat', 'value': 'Nusa Tenggara Barat'},
+                              'Nusa Tenggara Timur': { 'label': 'Nusa Tenggara Timur', 'value': 'Nusa Tenggara Timur'},
+                              'Papua': { 'label': 'Papua', 'value': 'Papua'},
+                              'Papua Barat': { 'label': 'Papua Barat', 'value': 'Papua Barat'},
+                              'Riau': { 'label': 'Riau', 'value': 'Riau'},
+                              'Sulawesi Barat': { 'label': 'Sulawesi Barat', 'value': 'Sulawesi Barat'},
+                              'Sulawesi Selatan': { 'label': 'Sulawesi Selatan', 'value': 'Sulawesi Selatan'},
+                              'Sulawesi Tengah': { 'label': 'Sulawesi Tengah', 'value': 'Sulawesi Tengah'},
+                              'Sulawesi Tenggara': { 'label': 'Sulawesi Tenggara', 'value': 'Sulawesi Tenggara'},
+                              'Sulawesi Utara Sulawesi': { 'label': 'Sulawesi Utara Sulawesi', 'value': 'Sulawesi Utara Sulawesi'},
+                              'Sumatera Barat': { 'label': 'Sumatera Barat', 'value': 'Sumatera Barat'},
+                              'Sumatera Selatan': { 'label': 'Sumatera Selatan', 'value': 'Sumatera Selatan'},
+                              'Sumatera Utara': { 'label': 'Sumatera Utara', 'value': 'Sumatera Utara'},
+                              'Yogyakarta': { 'label': 'Yogyakarta', 'value': 'Yogyakarta'},
+                              'Singapore': { 'label': 'Singapore', 'value': "Singapore" }
+                              } %}
+                              {% set default = "Singapore" %}
+                            <div class="select-sgogo">
+                              {{ sg_field('select', 'state', user, {id: 'state', class: 'form-control'}, default, options) }}
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <label for="country">{{line('country', 'field')}}<sup class="required-sag">*</sup></label>
+                            <div class="select-sgogo">
+                                {% set options = {
+                                'Singapore': { 'label': 'Singapore', 'value': "Singapore" },
+                                'Indonesia': { 'label': 'Indonesia', 'value': "Indonesia" }
+                                } %}
+                                {{ sg_field('select', 'country', user, {id: 'country', class: 'form-control'},
+                                  default, options) }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <input type="submit" class="btn btn-md btn-primary" value="Submit">
+                      </div>
+                    </div>
+                  {{ form_close() }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% include 'adminuao3hltbr0/shareds/footer.twig' %}
+      </div>
+    </div>
+  </section>
+  {# section for sidebar left and searching full #}
+  <div class="loader-overlay">
+    <div class="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <a href="#" class="scrollup"><i class="fa fa-angle-up"></i></a>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery/jquery-1.11.1.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery/jquery-migrate-1.2.1.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery-ui/jquery-ui-1.11.2.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/gsap/main-gsap.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap/js/bootstrap.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery-cookies/jquery.cookies.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery-block-ui/jquery.blockUI.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootbox/bootbox.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/mcustom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap-dropdown/bootstrap-hover-dropdown.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/charts-sparkline/sparkline.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/retina/retina.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/select2/select2.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/icheck/icheck.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/backstretch/backstretch.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/charts-chartjs/Chart.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/sidebar_hover.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/widgets/notes.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/quickview.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/pages/search.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/plugins.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/application.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/pages/table_dynamic.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/layout.js"></script>
+   <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/tinymce/tinymce.min.js"></script>
+  <script>
+    tinymce.init({
+      selector: 'textarea',
+      height: 200,
+      menubar: false,
+      plugins: [
+        'advlist autolink lists link charmap print preview anchor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table contextmenu paste code'
+      ],
+      toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+      content_css: [
+        '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
+        '//www.tinymce.com/css/codepen.min.css'
+      ]
+    });
+  </script>
+  <script>
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          $('#upload-image-user')
+          .attr('src', e.target.result)
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+  </script>
+{% endblock %}

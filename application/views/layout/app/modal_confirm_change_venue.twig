@@ -1,0 +1,40 @@
+<div class="modal fade" id="skillagogo-confirm-change-venue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="vertical-alignment-helper">
+    <div class="modal-dialog vertical-align-center" role="document">
+      <div class="modal-content">
+        <div class="box-newsletter box-cancellation">
+          <div class="body-white">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="pull-right">
+                  <a class="close close-modal" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="txt-pop-up text-center">
+                  {{line('confirm_change_venue','field')}}: <span style="font-family: gotham-bold;">{{ course.title }}</span>.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="footer-cancellation bg-sgogo-red">
+            <div class="pull-right">
+              <button class="btn btn-lg btn-lg-red-dark brd-50" type="submit">
+                <i class="fa fa-send"></i>
+                OK
+              </button>
+            </div>
+            <div class="pull-left">
+              <button class="btn btn-lg btn-lg-yellow-dark brd-50" data-dismiss="modal" aria-hidden="true">
+                <i class="fa fa-times"></i>
+                {{ line('cancel', 'button') }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

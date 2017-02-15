@@ -1,0 +1,16 @@
+{% extends 'layout/app/master.twig' %}
+{% set titleName = line('title_24', 'dashboard') %}
+{% set ClassHeader1Color = "bg-sgogo-gray-dark" %}
+{% set ClassHeader2Color = "bg-sgogo-gray-dark" %}
+{% set SubTitleHeader = line('privacy_policy','static_page') %}
+{% set ClassHiddenSubTitle = "box-hidden" %}
+{% set header0, header1, header2, header3 = true, true, true, true %}
+{% set footer = true %}
+
+{% block content %}
+  {% if session.lang == 'indonesian' %}
+    {% include('public/page/privacy_policy/privacy_policy_id.twig') %}
+  {% else %}
+    {% include('public/page/privacy_policy/privacy_policy_eng.twig') %}
+  {% endif %}
+{% endblock %}

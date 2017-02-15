@@ -1,0 +1,249 @@
+{% extends 'layout/app/master.twig' %}
+{% set titleName = line('title_2', 'dashboard') %}
+{% set ClassHeader1Color = "bg-sgogo-gray-dark" %}
+{% set ClassHeader2Color = "bg-sgogo-gray-dark" %}
+{% set SubTitleHeader = line('subtitle_2', 'dashboard') %}
+{% set header0, header1, header2, header3 = true, true, true, true %}
+{% set footer = true %}
+
+{% block css %}
+  <link href="{{ base_url() }}assets/css/datetimepicker.bootstrap.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+  <section class="checkout-payment">
+    <div class="container">
+      <div class="col-md-12">
+        <div class="box-checkout-wrapper cc-selector">
+          {{ form_open('dashboard/student/order/finish', {id: 'checkout-form'}) }}
+          <div class="box-form-create">
+            <div class="box-title-top">
+              <div class="title">{{ line('dashboard_17', 'dashboard') }}</div>
+            </div>
+            <div class="box-payment-method">
+              {% if session.location == "ID" %}
+              <div class="col-md-3">
+                <div class="box-payment">
+                  <input id="bank" type="radio" name="payment" value="bank" checked/>
+                  <label class="drinkcard-cc bank" for="bank"></label>
+                </div>
+                <div class="text-center">
+                  <div class="title-box-payment">
+                    {{ line('dashboard_18', 'dashboard') }}
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+              {% if session.location == "SG" %}
+                <div class="col-md-3">
+                  <div class="box-payment">
+                    <input id="paypal" type="radio" name="payment" value="paypal" checked/>
+                    <label class="drinkcard-cc paypal" for="paypal"></label>
+                  </div>
+                  <div class="text-center">
+                    <div class="title-box-payment">
+                      {{ line('dashboard_19', 'dashboard') }}<sup>TM</sup>
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+              <div style="display:none" class="box-credit">
+              </div>
+            </div>
+          </div>
+          {{ form_close() }}
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="panel panel-default table-checkout">
+          <div class="panel-heading">
+            <span>
+              <i class="fa fa-shopping-cart"></i>
+              {{ line('dashboard_20', 'dashboard') }}
+            </span>
+          </div>
+          {{ form_open("dashboard/student/order/update-cart", {id: 'update-cart'}) }}
+          <div class="panel-body">
+            {% if credit > 0 %}
+            <div class="row">
+              <div class="col-md-12">
+                <div class="deposit">
+                  <div class="box-deposit">
+                    <div class="description">
+                      {{ line('dashboard_48', 'dashboard') }}<br>
+                      {% if session.deposit and session.credit_usage > 0 %}
+                        (Balance: <span class="bold" style="color:red">{{ delimiter_number(session.currency, credit - session.credit_usage) }}</span>)
+                      {% else %}
+                        (Balance: <span class="bold">{{ delimiter_number(session.currency, credit) }}</span>)
+                      {% endif %}
+                    </div>
+                    <div class="box-price">
+                      <div class="radio-yes">
+                        <input type="checkbox" name="deposit" id="radio-yes-button" {{ session.deposit ? "checked='checked'":"" }}>
+                        &nbsp;{{ line('yes', 'button') }}
+                      </div>
+                      {% if session.deposit %}
+                        <div class="option-price">
+                          <div class="input-group">
+                            <span class="input-group-addon" id="price-deposit">{{ session.currency }}</span>
+                            <input type="text" class="form-control" name="price_deposit" placeholder="E.g : 30000" aria-describedby="price-deposit" id="price_deposit" value="{{ session.credit_usage }}">
+                          </div>
+                        </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+            <div class="row">
+              <div class="col-md-12">
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                    <tr>
+                      <td class="bg-sgogo-gray" width="50%">{{line('class', 'field')}}</td>
+                      <td class="bg-sgogo-gray" width="10%">{{line('pax', 'field')}}</td>
+                      <td class="bg-sgogo-gray" width="20%"><div class="pull-right">{{line('price', 'field')}}</div></td>
+                      <td class="bg-sgogo-gray" width="20%"><div class="pull-right">{{line('total', 'field')}}</div></td>
+                    </tr>
+                    {% for cart in carts %}
+                      {% if cart.name != "credit" %}
+                      <tr>
+                        <input type="hidden" name="rowid[]" value="{{ cart.rowid }}">
+                        <td>- {{ cart.name }}</td>
+                        <td><input type="text" name="pax[]" id="pax" class="pax form-control" value="{{ cart.qty }}"></td>
+                        <td><div class="pull-right"><strong>{{ delimiter_number(session.currency, cart.price) }}</strong></div></td>
+                        <td><div class="pull-right"><strong>{{ delimiter_number(session.currency, cart.price * cart.qty) }}</strong></div></td>
+                      </tr>
+                      {% endif %}
+                    {% endfor %}
+                    {% if session.deposit and session.credit_usage > 0 %}
+                    <tr>
+                      <td colspan="3">
+                        <div class="pull-right">
+                          <h4>{{ line('credit_usage','field') }}:</h4>
+                        </div>
+                      </td>
+                      <td colspan="">
+                        <div class="pull-right">
+                          <strong style="color:red">- {{ delimiter_number(session.currency, session.credit_usage) }}</strong>
+                        </div>
+                      </td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                      <td colspan="3">
+                        <div class="pull-right">
+                          <h4>Total :</h4>
+                        </div>
+                      </td>
+                      <td colspan="">
+                        <div class="pull-right">
+                          <h4><strong>{{ delimiter_number(session.currency, total) }}</strong></h4>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{ form_close() }}
+          <div class="panel-footer">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="pull-left">
+                  <a href="{{ base_url('course') }}" class="btn btn-lg-gray">
+                    {{ line('dashboard_21', 'dashboard') }}
+                  </a>
+                </div>
+                <div class="pull-right submit_button">
+                  <button type="submit" id="btn-finish" class="btn btn-lg-red btn-finish-checkout">
+                    {{ line('dashboard_22', 'dashboard') }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="break"></div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block script %}
+
+  <script>
+    var price_deposit;
+    var pax;
+    var paxes;
+    var condition_pax = false;
+    var condition_price = false;
+
+    $(document).ready(function(){
+
+      price_deposit = "{{ session.credit_usage }}";
+      pax = $('.pax').val();
+
+      paxes = $(".pax").map(function() {
+        return $(this).val();
+      }).get();
+
+      // $(".pax").keyup(function() {
+      //   mustUpdate();
+      // });
+
+      $("#radio-yes-button").click(function() {
+        if (this.checked) {
+          $('.box-price').append('<div class="option-price"><div class="input-group"><span class="input-group-addon" id="price-deposit">{{ session.currency }}</span><input type="text" class="form-control" name="price_deposit" placeholder="E.g : 30000" aria-describedby="price-deposit" id="price_deposit" value="{{ session.credit_usage }}"></div></div>');
+        } else {
+          $('.option-price').remove();
+        }
+        mustUpdate();
+      });
+    });
+
+      function mustUpdate() {
+        condition_pax = false;
+        condition_price = ($('#price_deposit').length || (price_deposit>0 && !$('#price_deposit').length)) && $('#price_deposit').val() != price_deposit && $('#price_deposit').val() != "";
+        var i = 0;
+        $(".pax").each(function() {
+            if ($(this).val() != paxes[i]) condition_pax = true;
+            i += 1;
+        });
+
+        if (condition_pax || condition_price) {
+          $('.btn-update-checkout').remove();
+          $('.btn-finish-checkout').remove();
+          $('.submit_button').append('<button id="btn-update-cart" class="pull-right btn btn-lg-blue btn-update-checkout" type="button">{{line("update_cart", "field")}}</button>');
+        } else {
+          $('.btn-update-checkout').remove();
+          $('.btn-finish-checkout').remove();
+          $('.submit_button').append('<button type="submit" id="btn-finish" class="btn btn-lg-red btn-finish-checkout">{{ line("dashboard_22", "dashboard") }}</button>');          
+        }
+      }
+
+    $(document).on('keyup', '#price_deposit', function() {
+      mustUpdate();
+    });
+
+    $(document).on('keyup', '.pax', function() {
+      mustUpdate();
+    });
+
+    $(document).on('click', '#btn-update-cart', function(){
+      $("#update-cart").submit();
+    })
+
+    $(document).on('click', '#btn-finish', function () {
+      $('.box-credit').append($('.box-deposit').clone());
+      // $('#checkout-form').find('.box-deposit').hide();
+      $('#checkout-form').submit();
+    })
+
+  </script>
+
+{% endblock %}

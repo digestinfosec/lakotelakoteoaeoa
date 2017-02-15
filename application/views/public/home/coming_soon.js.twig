@@ -1,0 +1,121 @@
+/* --------------------------------------------------------
+ Javascript for Project Website
+
+ Version  : 1.0
+ Author   : Fathan Rohman
+ Company  : Apecsa Optima Solusi
+ Email:   : karir.fathan@gmail.com
+ Website  : http://skillagogo.com
+ ----------------------------------------------------------*/
+
+$(document).ready(function () {
+  $.validator.setDefaults({
+    highlight: function (element, errorClass, validClass) {
+      if (element.type === "radio") {
+        this.findByName(element.name).addClass('error-radio');
+      } else {
+        $(element).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+        $(element).closest('.form-group').find('i.fa').remove();
+        $(element).closest('.form-group').append('<i class="fa fa-exclamation fa-lg form-control-feedback"></i>');
+      }
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      if (element.type === "radio") {
+        this.findByName(element.name).removeClass(errorClass).addClass(validClass);
+      } else {
+        $(element).closest('.form-group').removeClass('has-error has-feedback').addClass('has-success has-feedback');
+        $(element).closest('.form-group').find('i.fa').remove();
+        $(element).closest('.form-group').append('<i class="fa fa-check fa-lg form-control-feedback"></i>');
+      }
+    }
+  });
+
+  $.validator.addMethod(
+    "regex",
+    function (value, element, regexp) {
+      var re = new RegExp(regexp);
+      return this.optional(element) || re.test(value);
+    },
+    "Please check your input."
+  );
+
+  $("#form-skillagogo-signup").validate({
+    ignore: [],
+    rules: {
+      'first_name': {
+        required: true,
+        regex: "^[a-zA-Z. ]+$"
+      },
+      'last_name': {
+        required: true,
+        regex: "^[a-zA-Z. ]+$"
+      },
+      'email': {
+        required: true,
+        email: true
+      },
+      'password': {
+        required: true,
+        minlength: 8,
+        regex: "^(?:(?=.*[a-zA-Z])(?:(?=.*[0-9]))).{8,}$"
+      },
+      'password_confirmation': {
+        required: true,
+        equalTo: "#password",
+        regex: "^(?:(?=.*[a-zA-Z])(?:(?=.*[0-9]))).{8,}$"
+      },
+      'role': {
+        required: true
+      },
+      'birth_date': {
+        required: true
+      }
+    },
+    messages: {
+      first_name: {
+        required: "Please enter your valid name without numbers or special characters.",
+        regex: "Please enter your valid name without numbers or special characters."
+      },
+      last_name: {
+        required: "Please enter your valid name without numbers or special characters.",
+        regex: "Please enter your valid name without numbers or special characters."
+      },
+      email: {
+        required: "Email address is invalid."
+      },
+      password: {
+        required: "Password must be at least 8 characters, use a combination of alphabets and numbers.",
+        minlength: "Password must be at least 8 characters, use a combination of alphabets and numbers.",
+        regex: "Password must be at least 8 characters, use a combination of alphabets and numbers."
+      },
+      password_confirmation: {
+        required: "Password must be at least 8 characters, use a combination of alphabets and numbers.",
+        equalTo: "Password doesn’t match.",
+        regex: "Password must be at least 8 characters, use a combination of alphabets and numbers."
+      },
+      role: {
+        required: "Please select your role",
+      },
+      birth_date: {
+        required: "Please select your birthday",
+      }
+    }
+  });
+
+  $('#birth_date').combodate({
+    customClass: 'form-control',
+    firstItem: 'skillagogo',
+    minYear: 1950,
+    maxYear: 1998,
+    smartDays: true
+  });
+
+  $('.checkradios').checkradios({
+    checkbox: {
+      iconClass: 'fa fa-square'
+    },
+    radio: {
+      iconClass: 'fa fa-square'
+    }
+  });
+});

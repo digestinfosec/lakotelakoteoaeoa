@@ -1,0 +1,293 @@
+{% extends 'layout/app/master.twig' %}
+{% set titleName = line('title_16', 'dashboard') %}
+{% set ClassHeader1Color = "bg-sgogo-gray-dark" %}
+{% set ClassHeader2Color = "bg-sgogo-gray-dark" %}
+{% set SubTitleHeader = line('sub_header', 'course') %}
+{% set header0, header1, header2, header3 = true, true, true, true %}
+{% set footer = true %}
+
+{% block content %}
+  <section class="class-directory">
+    <form id="form-directory" action="">
+      <div class="container">
+        <div class="col-md-12">
+          <div class="filter-search">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="text-center">
+                  <div class="title">{{ line('title_classes', 'course') }}</div>
+                  <div class="sub-title">{{ line('sub', 'course') }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-8 col-md-8 col-md-offset-2">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="input-filter">
+                      <label for="sort_by">{{ line('title_sort_by', 'course') }}</label>
+                      <div class="select-icon">
+                        {#% set options = {
+                        '0': { 'label': line('sort_by','field'), 'value': '' },
+                        '1': { 'label': 'Recommendation', 'value': 'recommendation' },
+                        '2': { 'label': line('newest','field'), 'value': 'newest' },
+                        '3': { 'label': line('price_low_to_high','field'), 'value': 'price-asc' },
+                        '4': { 'label': line('price_high_to_low','field'), 'value': 'price-desc' },
+                        } %#}
+                        {% set options = {
+                        '0': { 'label': line('sort_by','field'), 'value': '' },
+                        '1': { 'label': line('newest','field'), 'value': 'newest' },
+                        '2': { 'label': line('price_low_to_high','field'), 'value': 'price-asc' },
+                        '3': { 'label': line('price_high_to_low','field'), 'value': 'price-desc' },
+                        } %}
+                        {{ sg_field('select', 'sort_by', values, {id: 'sort_by', class: 'form-control'}, '', options) }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input-filter">
+                      <label for="sort_by">{{line('search_label','field')}}</label>
+                      <div class="inner-addon left-addon">
+                        <i class="fa fa-search txt-12"></i>
+                        {{ sg_field('text', 'search', values, {
+                          'class': 'form-control input-search-filter', 'placeholder': line('search_name_of_class', 'course')
+                        }) }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-9 col-md-9">
+          <div class="skillagogo-classes-class-directory">
+            <div class="box-listing-classes">
+              <div class="row" id="ajax-course-card">
+              </div>
+            </div>
+          </div>
+          <div class="btn-action-load-more">
+            <div class="text-center">
+              <a href="#" class="btn btn-lg btn-class-directory-more" id="load_more" data-val="0" style="display:none">
+                {{ line('load', 'button') }}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3">
+          <div class="sidebar-class-directory" id="sidebar-to-fixed">
+            <div class="big-title">
+              {{ line('search_filter', 'course') }}
+            </div>
+            <div class="box-list-check">
+              <div class="title">{{ line('title', 'categories') }}</div>
+              <div class="check-list">
+                {% set arrayColorCategories = ['purple', 'blue-light', 'red', 'yellow', 'purple-light', 'green-dark'] %}
+                {% for key, category in categories %}
+                  {% set checkedCategories = "" %}
+                  {% if category.id == values.category %}
+                    {% set checkedCategories = " checked='checked'" %}
+                  {% endif %}
+                  <div class="listing">
+                    <input type="checkbox" {{ set_checkbox('categories[]', category.id, FALSE, 'get') }}
+                           class="parent-checkbox check-{{ arrayColorCategories[key] }}"{{ checkedCategories }} value="{{ category.id }}" name="categories[]">
+                    <a class="color-sgogo-{{ arrayColorCategories[key] }}" data-toggle="collapse" data-parent="#accordion" href=".cSide{{ arrayColorCategories[key] }}" aria-expanded="true">
+                      {{ line('categories_' ~ category.id, 'categories') }}
+                    </a>
+                    <div class="panel-collapse collapse cSide{{ arrayColorCategories[key] }}" role="tabpanel" aria-labelledby="headingOne">
+                      <ul>
+                        {% for child in category.child %}
+                          <li>
+                            <input type="checkbox" {{ set_checkbox('categories[]', child.id, FALSE, 'get') }} class="child-checkbox check-{{ arrayColorCategories[key] }}"{{ checkedCategories }} value="{{ child.id }}" name="categories[]">
+                            <span class="child-span parent-category color-sgogo-{{ arrayColorCategories[key] }}">{{ line('categories_' ~ child.id, 'categories') }}</span>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+            {#
+            <div class="box-list-check">
+              <div class="title">{{ line('location', 'course') }}</div>
+              <div class="check-list">
+                <div class="listing">
+                  <input type="checkbox" checked class="checkradios check-gray-dark" name="language[]">
+                  <span class="color-sgogo-gray-dark">{{ line('singapore', 'course') }}</span>
+                </div>
+                <div class="listing">
+                  <input type="checkbox" checked class="checkradios check-gray-dark" name="language[]">
+                  <span class="color-sgogo-gray-dark">{{ line('indonesia', 'course') }}</span>
+                </div>
+              </div>
+            </div>
+            #}
+            <div class="box-list-check">
+              <div class="title">{{ line('level', 'course') }}</div>
+              <div class="check-list">
+                <div class="listing">
+                  <input type="checkbox" {{ set_checkbox('level[]', 1, FALSE, 'get') }}
+                         class="checkradios check-gray-dark" value="1" name="level[]">
+                  <span class="color-sgogo-gray-dark">{{ line('beginner', 'course') }}</span>
+                </div>
+                <div class="listing">
+                  <input type="checkbox" {{ set_checkbox('level[]', 2, FALSE, 'get') }}
+                         class="checkradios check-gray-dark" value="2" name="level[]">
+                  <span class="color-sgogo-gray-dark">{{ line('intermediate', 'course') }}</span>
+                </div>
+                <div class="listing">
+                  <input type="checkbox" {{ set_checkbox('level[]', 3, FALSE, 'get') }}
+                         class="checkradios check-gray-dark" value="3" name="level[]">
+                  <span class="color-sgogo-gray-dark">{{ line('advanced', 'course') }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="text-center">
+              <button type="submit" href="" class="btn btn-start-filter">
+                {{ line('btn_search', 'button') }}
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="hide-sidebar"></div>
+        </div>
+      </div>
+    </form>
+  </section>
+  <section class="skillagogo-categories">
+    <div class="container">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="box-title-categories text-center">
+          <div class="title-categories">
+            {{ line('title', 'categories') }}
+          </div>
+          <div class="description-categories">
+            {{ line('sub', 'categories') }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="box-listing-categories">
+          <div class="row">
+            {% include('public/categories_card.twig') %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block script %}
+  <script src="{{ base_url() }}assets/js/jquery.scolltofixed.js"></script>
+  <script src="{{ base_url() }}assets/js/handlebars.min.js"></script>
+  <script src="{{ base_url() }}assets/js/typeahead.bundle.js"></script>
+  <script>
+    $('#sort_by').change(function(){
+      $('#form-directory').submit();
+    });
+
+    var get_course = function (page) {
+      var queryString = {{ queryString | raw }};
+      var defaultQuery = {page: page, strict: true}
+      var data = {}
+      $.extend(data, queryString, defaultQuery)
+      $.ajax({
+        url: "{{ base_url() }}course/get_ajax_courses",
+        type: 'GET',
+        data: data
+      }).done(function (response) {
+        var response = JSON.parse(response);
+
+        response[1] ? $('#load_more').show() : $('#load_more').hide();
+
+        if (response[0]) {
+          $("#ajax-course-card").append(response[0]);
+          $('#load_more').data('val', ($('#load_more').data('val') + 1));
+        } else {
+          $("#ajax-course-card").append("{{line('search','controller_js')}}");
+        }
+      });
+    };
+
+    get_course(0);
+
+    $("#load_more").click(function (e) {
+      e.preventDefault();
+      var page = $(this).data('val');
+      get_course(page);
+    });
+
+    $('.parent-checkbox').checkradios({
+      checkbox: {
+        iconClass: 'fa fa-square'
+      },
+      radio: {
+        iconClass: 'fa fa-square'
+      },
+      onChange: function(checked, $element, $realElement){
+        if(checked){
+          $element.closest('.listing').find('div.child-checkbox').trigger('enable');
+          $element.closest('.listing').find('.panel-collapse:not(".in")').collapse('show');
+        }
+        else{
+          $element.closest('.listing').find('div.child-checkbox').trigger('disable')
+          $element.closest('.listing').find('.panel-collapse.in').collapse('hide');
+        }
+      }
+    });
+
+    $('.child-checkbox').checkradios({
+      checkbox: {
+        iconClass: 'fa fa-square'
+      },
+      radio: {
+        iconClass: 'fa fa-square'
+      },
+      onChange: function(checked, $element, $realElement){
+        if(checked){
+          $element.closest('.listing').find('div.parent-checkbox').trigger('enable');
+        }
+        else
+        {
+          var childs = $element.closest('.listing').find('div.child-checkbox').map(function() {
+            return $(this).hasClass('unchecked') ? false : true;
+          }).get();
+          if ($.inArray(true, childs) == -1) {
+            $element.closest('.listing').find('div.parent-checkbox').trigger('disable');
+            $element.closest('.listing').find('.panel-collapse.in').collapse('hide');
+          }
+          // $element.closest('.listing').find('div.parent-checkbox').trigger('disable');
+        }
+      }
+    });
+
+    $('#form-directory').on('submit', function(e) {
+      $('div.child-checkbox').trigger('submitCheckbox');
+    })
+
+    $(document).ready(function() {
+      $('div.parent-checkbox').each(function(index, element) {
+        var childs = $(this).closest('.listing').find('div.child-checkbox').map(function() {
+          return $(this).hasClass('unchecked') ? null : true;
+        }).get();
+
+        if (childs.length > 0) {
+          $(this).closest('.listing').find('.panel-collapse:not(".in")').collapse('show');
+        }
+      })
+
+      $('.child-span').click(function(){
+        $(this).prev().trigger('click')
+      })
+    })
+
+  </script>
+  {% include('shared/app/_include_wishlist_js_script.twig') %}
+{% endblock %}

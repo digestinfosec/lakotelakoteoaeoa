@@ -1,0 +1,89 @@
+{% extends 'email/shared/body.twig' %}
+
+{% block content %}
+  <tr>
+    <td align="center" valign="top" class="fix-box">
+      <table align="center" border="0" cellspacing="0" cellpadding="0" class="container" bgcolor="#FFFFFF" style="background-color: #FFFFFF;">
+        <tbody>
+          <tr>
+            <td valign="top">
+              <table align="center" border="0" cellspacing="0" cellpadding="0" class="full-width" bgcolor="#FFFFFF" style="background-color:#FFFFFF;">
+                <tbody>
+                  <tr>
+                    <td height="50"></td>
+                  </tr>
+                  <tr>
+                    <td valign="top">
+                      <table border="0" cellspacing="0" cellpadding="0" align="left">
+                        <tbody>
+                          <tr>
+                            <td style="font-size:16px;color:#999999;line-height:180%;font-family:Arial;">
+                              <span style="color: #555555; font-weight:300;">
+                                <a href="#" style="text-decoration: none; color: #555555; font-weight: 300;">
+                                  {{ line('a1', 'email') }} {{ first_name }},
+                                </a>
+                              </span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td height="15">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="font-size:16px;color:#999999;line-height:180%;font-family:Arial;">
+                              {{ line('a110', 'email') }} 
+                              <br/>
+                              <ul>
+                                <li>
+                                  <span style="font-size:16px;line-height:22px;color:#999999;font-family:Arial;text-align:left;line-height:28px;">
+                                    {{ line('a112', 'email') }}
+                                  </span>
+                                </li>
+                                <li>
+                                  <span style="font-size:16px;line-height:22px;color:#999999;font-family:Arial;text-align:left;line-height:28px;">
+                                    {{ line('a113', 'email') }}
+                                  </span>
+                                </li>
+                                <li>
+                                  <span style="font-size:16px;line-height:22px;color:#999999;font-family:Arial;text-align:left;line-height:28px;">
+                                    {{ line('a114', 'email') }}
+                                  </span>
+                                </li>
+                                {#<li>
+                                  <span style="font-size:16px;line-height:22px;color:#999999;font-family:Arial;text-align:left;line-height:28px;">
+                                    {{ line('a115', 'email') }}
+                                  </span>
+                                </li>#}
+                                <li>
+                                  <span style="font-size:16px;line-height:22px;color:#999999;font-family:Arial;text-align:left;line-height:28px;">
+                                    {{ line('a116', 'email') }}
+                                  </span>
+                                </li>
+                              </ul>
+                              </td>
+                            </tr>
+                            <td style="font-size:16px;color:#999999;line-height:180%;font-family:Arial;">
+                              {{ line('a117', 'email') }} 
+                              <br>
+                              <br>
+                              {{ line('a4', 'email') }}
+                              <br>
+                              The skillagogo team
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="50"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </td>
+  </tr>
+{% endblock %}

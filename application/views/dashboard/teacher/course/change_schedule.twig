@@ -1,0 +1,214 @@
+{% extends 'layout/app/master.twig' %}
+{% set titleName = line('title_7', 'dashboard') %}
+{% set ClassHeader1Color = "navbar-create-class bg-sgogo-gray" %}
+{% set IdHeader1Color = "header-create-class" %}
+{% set ClassBoxRightTitleColor = "gray" %}
+{% set IdBoxRightTitleColor = "box-head-create-class-profile" %}
+{% set SubTitleHeader = line('subtitle_6', 'dashboard') %}
+{% set header0, header1, header3 = true, true, true %}
+{% set footer = true %}
+
+{% block content %}
+  {{ form_open_multipart('', {id: 'create_class_form'}) }}
+  {% set attr = { 'class': 'form-control' } %}
+
+  <div class="step-create-class">
+    <div class="container">
+      <div class="setup-content">
+        <div class="col-md-12">
+          <div class="box-create-class-wrapper">
+            <div class="box-form-create">
+              <div class="box-title-top">
+                <div class="title">
+                  {{ line('dashboard_116', 'dashboard') }}
+                </div>
+              </div>
+              <div class="box-input">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6 break">
+                      <label for="class_title">
+                        <span>{{ line('type_of_class','create_course') }}</span>
+                        <a tabindex="0" data-trigger="focus"
+                           data-content="Please choose the class type">
+                        </a>
+                      </label>
+                      <label class="">
+                        {% set options = {
+                        '1': 'Single',
+                        '2': 'Repeated',
+                        '3': 'Staged'
+                        } %}
+                        {{ options[course.type] }}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                {% for schedule in schedules %}
+                <div class="box-form-class-schedule-wrapper">
+                  <div class="box-form-class-schedule">
+                    <div class="col-md-12">
+                      <div class="col-md-6 break">
+                        <div class="row form-create-class">
+                          <div class="box-date-wrapper">
+                            <div class="list-date">
+                              <div class="date-name">
+                                <label for="date">
+                                  <span>{{ line('date','create_course') }}</span>
+                                </label>
+                              </div>
+                              <div class="date-form">
+                                <input type="text" class="schedule_date" data-format="YYYY-MM-DD"  required
+                                       data-template="D MMMM YYYY" name="schedule_date[]" id="schedule-date" value="{{ schedule.date }}">
+                              </div>
+                            </div>
+                            {% set schedule_start = (schedule.start_time ? schedule.start_time : "08:00") %}
+                            {% set schedule_end = (schedule.end_time ? schedule.end_time : "09:00") %}
+                            <div class="list-date">
+                              <div class="date-name">
+                                <label for="start">
+                                  <span>Start</span>
+                                </label>
+                              </div>
+                              <div class="date-form">
+                                <input type="text" class="schedule_start" data-format="hh:mm a" required
+                                       data-template="hh mm a" name="schedule_start[]" id="schedule-start" value="{{ date('h:i a', strtotime(schedule_start)) }}">
+                              </div>
+                            </div>
+                            <div class="list-date">
+                              <div class="date-name">
+                                <label for="end">
+                                  <span>End</span>
+                                </label>
+                              </div>
+                              <div class="date-form">
+                                <input type="text" class="schedule_end" data-format="hh:mm a" required
+                                       data-template="hh mm a" name="schedule_end[]" id="schedule-end" value="{{ date('h:i a', strtotime(schedule_end)) }}">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        {#<div id="maps1"></div>#}
+                      </div>
+                    </div>
+                    <input type="hidden" name="schedule_ids[]" value="{{ schedule.schedule_id }}" id="schedule_ids">
+                    <input type="hidden" name="address_ids[]" value="{{ schedule.address_id }}" id="address_ids">
+                    <div class="col-md-6">
+                      <div class="col-md-12 break">
+                        <div class="row">
+                          <label for="end_goal">
+                            <span>{{ line('address','create_course') }}</span>
+                          </label>
+                          {{ schedule.address_line1 }}, {{ schedule.city }}, {{ schedule.state }} {{ schedule.postal_code }}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="row">
+                        {#<button type="button" data-target="#map-dialog" data-toggle="modal">Define location with map</button>#}
+                        <input type="hidden" name="schedule_lat[]" class="form-control" id="maps1-lat"/>
+                        <input type="hidden" name="schedule_long[]" class="form-control" id="maps1-lon"/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="box-button-create">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="text-center">
+                    <button class="btn btn-next-c-class btn-next my-btn-step bg-sgogo-red" id="btn-btm-next-2" type="submit" style="margin-left: 5px;">
+                      <i class="fa fa-save"></i>
+                      &nbsp;{{ line('dashboard_104', 'dashboard') }}
+                    </button>
+                    <a class="btn btn-next-c-class my-btn-step bg-sgogo-yellow" href="{{ base_url('') }}dashboard">
+                      <i class="fa fa-times"></i>
+                      &nbsp;{{ line('dashboard_1044', 'dashboard') }}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% include 'layout/app/modal_confirm_change_schedule.twig' %}
+  </div>
+
+  {{ form_close() }}
+{% endblock %}
+
+{% block script %}
+  <script src="{{ base_url() }}assets/js/duplicate.fields.js"></script>
+  <script src="{{ base_url() }}assets/js/fileinput.js"></script>
+  <script>
+    $(document).ready(function () {
+      dateCreateClass();
+      popover();
+
+      $('.btn-next').click(function(e) {
+        var form_change = $('#create_class_form'),
+          curInputs = form_change.find("input[type='text'],input[type='url'],input[type='number'],select,textarea"),
+          isValid = true,
+          firstError = null;
+
+        $(".form-create-class").removeClass("has-error");
+        for (var i = 0; i < curInputs.length; i++) {
+          console.log(curInputs[i].validity.valid);
+          if (!curInputs[i].validity.valid) {
+            if (firstError == null) firstError = $(curInputs[i]).closest('.form-create-class').find('label');
+            isValid = false;
+            $(curInputs[i]).closest(".form-create-class").addClass("has-error");
+          }
+        }
+
+        if (isValid) {
+          e.preventDefault();
+          $('#skillagogo-confirm-change-schedule').modal('show');
+        } else {
+          $('html, body').animate({
+            scrollTop: firstError.offset().top
+          }, 500);
+        }
+
+      })
+
+      $('#btn-submit').click(function(e) {
+        $('#create_class_form').submit();
+      });
+    });
+
+    function popover() {
+      $('[data-toggle="popover"]').popover()
+    }
+
+    function dateCreateClass() {
+      $('.schedule_date').combodate({
+        customClass: 'form-control',
+        firstItem: 'skillagogo',
+        minYear: 2016,
+        maxYear: 2020,
+        smartDays: true,
+        indonesian: {{ session.location == 'ID' ? 1 : 0 }}
+      });
+
+      $('.schedule_end').combodate({
+        firstItem: 'name',
+        minuteStep: 1,
+        customClass: 'form-control'
+      });
+
+      $('.schedule_start').combodate({
+        firstItem: 'name',
+        minuteStep: 1,
+        customClass: 'form-control'
+      });
+    }
+  </script>
+{% endblock %}

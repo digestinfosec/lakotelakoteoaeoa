@@ -1,0 +1,183 @@
+{% extends 'email/shared/body.twig' %}
+
+{% block content %}
+<!-- START CONTENT BODY -->
+<table cellpadding="0" cellspacing="0" align="center" width="100%" border="0" style="border-spacing: 0;border-collapse: collapse;vertical-align: top">
+  <tbody>
+    <tr style="vertical-align: top">
+      <td width="100%" style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;background-color: transparent">
+        <table cellpadding="0" cellspacing="0" align="center" width="100%" border="0" class="container" style="border-spacing: 0;border-collapse: collapse;vertical-align: top;max-width: 650px;margin: 0 auto;text-align: inherit">
+          <tbody>
+            <tr style="vertical-align: top">
+              <td width="100%" style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
+                <table cellpadding="0" cellspacing="0" width="100%" bgcolor="transparent" class="block-grid " style="border-spacing: 0;border-collapse: collapse;vertical-align: top;width: 100%;max-width: 650px;color: #000000;background-color: transparent">
+                  <tbody>
+                    <tr style="vertical-align: top">
+                      <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;background-color: transparent;text-align: center;font-size: 0">
+                        <div class="col num12" style="display: inline-block;vertical-align: top;width: 100%">
+                          <table cellpadding="0" cellspacing="0" align="center" width="100%" border="0" style="border-spacing: 0;border-collapse: collapse;vertical-align: top">
+                            <tbody>
+                              <tr style="vertical-align: top">
+                                <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;background-color: transparent;padding-top: 5px;padding-right: 15px;padding-bottom: 5px;padding-left: 15px;border-top: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-left: 0px solid transparent">
+                                  <table cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0;border-collapse: collapse;vertical-align: top">
+                                    <tbody>
+                                      <tr style="vertical-align: top">
+                                        <td style="font-size:16px;line-height:22px;color:#999999;font-family:Arial;text-align:left;">
+                                          <table style="text-align: justify;margin-top:20px;margin-bottom:20px;">
+                                            <tbody>
+                                              <tr>
+                                                <td style="width: 250px;">{{ line('a148', 'email') }}</td>
+                                                <td style="font-size:16px;line-height:22px;color:#999999;font-family:Arial;text-align:left;line-height:28px;">
+                                                  {{ course.title }}
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>{{ line('a149', 'email') }}</td>
+                                                <td style="font-size:16px;line-height:22px;color:#999999;font-family:Arial;text-align:left;line-height:28px;">
+                                                  {{ course.first_name }} {{ course.last_name }}
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>{{ line('a150', 'email') }}</td>
+                                                <td style="font-size:16px;line-height:22px;color:#999999;font-family:Arial;text-align:left;line-height:28px;">
+                                                  {% if schedule %}
+                                                  {% set start_time = strtotime(schedule.date ~ ' ' ~ schedule.start_time) %}
+                                                  {{ date('j F Y g.ia', start_time) }} @ {{ schedule.address_line1 }}, {{ schedule.city }}, {{ schedule.state }} {{ schedule.postal_code }}
+                                                  <br>
+                                                  {% endif %}
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>{{ line('a149', 'email') }}</td>
+                                                <td style="font-size:16px;line-height:22px;color:#999999;font-family:Arial;text-align:left;line-height:28px;">
+                                                  {{ course.mobile_phone }}
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>{{ line('a151', 'email') }}</td>
+                                                <td style="font-size:16px;line-height:22px;color:#59595A;font-weight:bold;font-family:Arial;text-align:left;line-height:28px;">
+                                                  {{ delimiter_number(course.currency, course.price) }}
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>{{ line('a152', 'email') }}</td>
+                                                <td style="font-size:16px;line-height:22px;color:#59595A;font-weight:bold;font-family:Arial;text-align:left;line-height:28px;">
+                                                  {{ course.unique_id }}
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                              <td>{{ line('a153', 'email') }}</td>
+                                              <td style="font-size:16px;line-height:22px;color:#59595A;font-family:Arial;text-align:left;line-height:28px;">{{ voucher_code }}</td>
+                                            </tr>
+                                            <tr>
+                                              <td style="vertical-align: top;">QR Code</td>
+                                              <td style="font-size:16px;line-height:22px;color:#59595A;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;text-align:left;line-height:28px;">
+                                                <img src="{{ base_url() }}images/class/{{voucher_code}}.png" style="width: 200px;">
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0;border-collapse: collapse;vertical-align: top">
+                                  <tbody>
+                                    <tr style="vertical-align: top">
+                                      <td align="left" style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;padding-top: 5px;padding-right: 5px;padding-bottom: 5px;padding-left: 5px">
+                                        <div style="height: 1px;">
+                                          <table align="left" border="0" cellspacing="0" style="border-spacing: 0;border-collapse: collapse;vertical-align: top;border-top: 1px solid #BBBBBB;width: 100%">
+                                            <tbody>
+                                              <tr style="vertical-align: top">
+                                                <td align="left" style="word-break: break-word;border-collapse: collapse !important;vertical-align: top"></td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <table cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0;border-collapse: collapse;vertical-align: top">
+                                  <tbody>
+                                    <tr style="vertical-align: top">
+                                      <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;padding-top: 10px;padding-right: 10px;padding-bottom: 10px;padding-left: 10px">
+                                        <div style="color:#555555;line-height:200%;font-family:'Lato', Tahoma, Verdana, Segoe, sans-serif;">
+                                          <div style="font-size:12px;line-height:24px;color:#555555;font-family:'Lato', Tahoma, Verdana, Segoe, sans-serif;text-align:left;">
+                                            <p style="margin: 0;font-size: 12px;line-height: 24px">
+                                              <span style="font-size: 18px; line-height: 36px; color: #59595A;">
+                                                <strong>{{ line('a18', 'email') }}</strong>
+                                              </span>
+                                            </p>
+                                            <ol>
+                                              <li style="font-size:16px;line-height:22px;color:#999999;font-family:Arial;text-align:left;line-height:28px;">
+                                                <span>
+                                                  {{ line('a19', 'email') }}
+                                                </span>
+                                              </li>
+                                              <li style="font-size:16px;line-height:22px;color:#999999;font-family:Arial;text-align:left;line-height:28px;">
+                                                <span>
+                                                  {{ line('a20', 'email') }}
+                                                </span>
+                                              </li>
+                                              <li style="font-size:16px;line-height:22px;color:#999999;font-family:Arial;text-align:left;line-height:28px;">
+                                                <span>
+                                                  {{ line('a3', 'email') }}
+                                                </span>
+                                              </li>
+                                            </ol>
+                                            <p style="margin: 0;font-size: 12px;line-height: 24px">&nbsp;
+                                              <br>
+                                            </p>
+                                            <p style="margin: 0;font-size: 12px;line-height: 24px">
+                                              <span style="font-size:16px;line-height:22px;color:#999999;font-family:Arial;text-align:left;line-height:28px;">
+                                                {{ line('a21', 'email') }}
+                                              </span>
+                                            </p>
+                                            <p style="margin: 0;font-size: 12px;line-height: 24px">
+                                              <span style="font-size:16px;line-height:22px;color:#999999;font-family:Arial;text-align:left;line-height:28px;">
+                                                {{ line('a23', 'email') }}
+                                              </span><br /><br />
+                                            </p>
+                                            <p style="margin: 0;font-size: 12px;line-height: 24px">
+                                              <span style="font-size: 18px; line-height: 36px; color: #59595A;">
+                                                <strong>{{ line('a15', 'email') }}</strong>
+                                              </span>
+                                            </p>
+                                            <ul>
+                                              <li>
+                                                <span style="font-size:16px;line-height:22px;color:#999999;font-family:Arial;text-align:left;line-height:28px;">
+                                                  {{ line('a16', 'email') }}
+                                                </span>
+                                              </li>
+                                              <li>
+                                                <span style="font-size:16px;line-height:22px;color:#999999;font-family:Arial;text-align:left;line-height:28px;">
+                                                  {{ line('a17', 'email') }}
+                                                </span>
+                                              </li>
+                                            </ul>
+                                          </div>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </td>
+  </tr>
+</tbody>
+</table>
+<!-- END CONTENT BODY -->
+{% endblock %}

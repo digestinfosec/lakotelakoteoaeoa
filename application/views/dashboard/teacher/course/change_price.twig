@@ -1,0 +1,120 @@
+{% extends 'layout/app/master.twig' %}
+{% set titleName = line('title_6', 'dashboard') %}
+{% set ClassHeader1Color = "navbar-create-class bg-sgogo-gray" %}
+{% set IdHeader1Color = "header-create-class" %}
+{% set ClassBoxRightTitleColor = "gray" %}
+{% set IdBoxRightTitleColor = "box-head-create-class-profile" %}
+{% set SubTitleHeader = line('subtitle_5', 'dashboard') %}
+{% set header0, header1, header3 = true, true, true %}
+{% set footer = true %}
+
+{% block content %}
+  {{ form_open('', {id: 'create_class_form'}) }}
+  {% set attr = { 'class': 'form-control' } %}
+
+  <div class="step-create-class">
+    <div class="container">
+      <div class="setup-content">
+        <div class="col-md-12">
+          <div class="box-create-class-wrapper">
+            <div class="box-form-create">
+              <div class="box-title-top">
+                <div class="title">
+                  {{ line('dashboard_117', 'dashboard') }}
+                </div>
+              </div>
+
+              <div class="box-input">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="col-md-12 break">
+                      <div class="row form-create-class">
+                        <label for="class_title">
+                          <span>{{ line('old_price','create_course') }}</span>
+                          {#<a tabindex="0" data-toggle="popover" data-trigger="focus" data-content="{{line('old_price_tooltip','field')}}">#}
+                            {#<img src="{{ base_url() }}assets/images/tooltips price.png" alt="">#}
+                          {#</a>#}
+                        </label>
+                        <div class="box-price">
+                          <div class="left">
+                            {{ line('currency','create_course') }}
+                          </div>
+                          <div class="right">
+                            <input type="text" name="" class="form-control" placeholder="0" value="{{ old_price }}" disabled>
+                            <input type="hidden" name="old_price" value="{{ old_price }}"/>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="col-md-12 break">
+                      <div class="row form-create-class">
+                        <label for="class_title">
+                          <span>{{ line('new_price','create_course') }}</span>
+                          <a tabindex="0" data-toggle="popover" data-trigger="focus" data-content="{{line('new_price_tooltip','field')}}">
+                            <img src="{{ base_url() }}assets/images/tooltips price.png" alt="">
+                          </a>
+                        </label>
+                        <div class="box-price">
+                          <div class="left">
+                            {{ line('currency','create_course') }}<sup class="required-sag">*</sup>
+                          </div>
+                          <div class="right">
+                            <input type="text" name="new_price" class="form-control" placeholder="{{line('new_price_tooltip','field')}}" value="" required="required">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="box-button-create">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="text-center">
+                    <button class="btn btn-next-c-class btn-next my-btn-step bg-sgogo-red" id="btn-btm-next-2" type="submit" style="margin-left: 5px;">
+                      <i class="fa fa-save"></i>
+                      &nbsp;{{ line('dashboard_104', 'dashboard') }}
+                    </button>
+                    <a class="btn btn-next-c-class btn-next my-btn-step bg-sgogo-yellow" href="{{ base_url('') }}dashboard">
+                      <i class="fa fa-times"></i>
+                      &nbsp;{{ line('dashboard_1044', 'dashboard') }}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% include 'layout/app/modal_confirm_change_price.twig' %}
+  </div>
+
+  {{ form_close() }}
+{% endblock %}
+
+{% block script %}
+  <script>
+    $(document).ready(function () {
+      popover();
+
+      $('.btn-next').click(function(e) {
+        if ($('#create_class_form')[0].checkValidity()) {
+          e.preventDefault();
+          $('#skillagogo-confirm-change-price').modal('show');
+        }
+      })
+
+      $('#btn-submit').click(function(e) {
+        $('#create_class_form').submit();
+      });
+    });
+
+    function popover() {
+      $('[data-toggle="popover"]').popover()
+    }
+  </script>
+{% endblock %}

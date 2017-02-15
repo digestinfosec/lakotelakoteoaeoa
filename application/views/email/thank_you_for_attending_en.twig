@@ -1,0 +1,80 @@
+{% extends 'email/shared/body.twig' %}
+
+{% block content %}
+  <tr>
+    <td align="center" valign="top" class="fix-box">
+      <table align="center" border="0" cellspacing="0" cellpadding="0" class="container" bgcolor="#ffffff" style="background-color: #ffffff;">
+        <tbody>
+          <tr>
+            <td valign="top">
+              <table align="center" border="0" cellspacing="0" cellpadding="0" class="full-width" bgcolor="#ffffff" style="background-color:#ffffff;">
+                <tbody>
+                  <tr>
+                    <td height="50"></td>
+                  </tr>
+                  <tr>
+                    <td valign="top">
+                      <table border="0" cellspacing="0" cellpadding="0" align="left">
+                        <tbody>
+                          <tr>
+                            <td style="font-size:16px;color:#999999;line-height:180%;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                              <span style="color: #555555; font-weight:300;">
+                                <a href="#" style="text-decoration: none; color: #555555; font-weight: 300;">
+                                  {{ line('a1', 'email') }} {{ student.first_name }},
+                                </a>
+                              </span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td height="15">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="font-size:16px;color:#999999;line-height:180%;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                              {{ line('a91', 'email') }} {{ course.title }} {{ line('a92', 'email') }} {{ teacher.first_name }} {{ teacher.last_name }}. {{ line('a93', 'email') }}
+                              <br>
+                              <br>
+                              {{ line('a94', 'email') }} <a href="{{ base_url('dashboard/rating/new_rating') }}/{{ course.course_id }}" class="btn btn-xs btn-xs-white">{{ line('dashboard_206', 'dashboard') }}</a>
+                              <br>
+                              <br>
+                              {{ line('a95', 'email') }}
+                              <br>
+                              <br>
+                              {{ line('a96', 'email') }}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td height="30">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="font-size:16px;color:#999999;line-height:180%;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                              <b>{{ line('a97', 'email') }}</b>
+                              <br>
+                              <ul>
+                                <li>{{ line('a98', 'email') }}</li>
+                                <li>{{ line('a99', 'email') }}</li>
+                                <li>{{ line('a100', 'email') }}</li>
+                                <li>{{ line('a101', 'email') }}</li>
+                              </ul>
+                              {{ line('a102', 'email') }}
+                              <br>
+                              The skillagogo team
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="50"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </td>
+  </tr>
+{% endblock %}

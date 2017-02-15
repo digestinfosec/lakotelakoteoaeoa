@@ -1,0 +1,169 @@
+{% extends 'email/shared/body.twig' %}
+
+{% block content %}
+  <tr>
+    <td align="center" valign="top" class="fix-box">
+      <table align="center" border="0" cellspacing="0" cellpadding="0" class="container" bgcolor="#ffffff" style="background-color: #ffffff;">
+        <tbody>
+          <tr>
+            <td valign="top">
+              <table align="center" border="0" cellspacing="0" cellpadding="0" class="full-width" bgcolor="#ffffff" style="background-color:#ffffff;">
+                <tbody>
+                  <tr>
+                    <td height="50"></td>
+                  </tr>
+                  <tr>
+                    <td valign="top">
+                      <table border="0" cellspacing="0" cellpadding="0" align="left">
+                        <tbody>
+                          <tr>
+                            <td style="font-size:16px;color:#333333;line-height:180%;font-family:arial;font-weight: bold; border-bottom: 2px solid #ffbb75;">
+                              <span>
+                                PENDAFTARAN ANDA TELAH KAMI TERIMA
+                              </span>
+                              <br>
+                              <br>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="font-size:16px;color:#999999;line-height:180%;font-family:arial;">
+                              <span>
+                                <br>
+                                <a href="#" style="text-decoration: none; color: #555555; font-weight: 300;">
+                                  {{ line('a1', 'email') }} {{ student.first_name }},
+                                </a>
+                              </span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td height="15">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="font-size:16px;color:#999999;line-height:180%;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                              Terima kasih telah mendaftarkan diri Anda melalui skillagogo. Pendaftaran Anda telah kami terima. Pendaftaran akan berlaku setelah Anda melakukan pembayaran dalam waktu 1 hari (24 jam) setelah pendaftaran ini ke akun pembayaran skillagogo. Setelah melakukan pembayaran, mohon konfirmasikan pembayaran bank transfer Anda <a href="{{ base_url() }}dashboard/student/payment/confirmation/{{ order.id }}">di sini</a>.
+                              <br>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td height="25">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td valign="middle">
+                              <table align="left" border="0" cellspacing="0" cellpadding="0" class="container2" width="auto" style="mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                                <tr>
+                                  <td valign="top" style="font-size:16px;width: 240px; float: left; text-align: justify; color:#999999;line-height:180%;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                    Informasi Pendaftaran
+                                  </td>
+                                </tr>
+                              </table>
+                              {#
+                              <table align="right" border="0" cellspacing="0" cellpadding="0" class="container2" width="auto" style="mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                                <tr>
+                                  <td valign="top" style="width: 240px; float: left; text-align: justify; color:#999999;line-height:180%;font-family:Arial;">
+                                    Informasi Tagihan
+                                    <br>
+                                    Bank tujuan: BCA, Bank Mandiri
+                                  </td>
+                                </tr>
+                              </table>
+                              #}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td height="20">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <table align="left" border="1" cellspacing="1" cellpadding="5" class="container2" width="auto" style="mso-table-lspace:0pt; mso-table-rspace:0pt; border-color: #F5F5F5;width: 100%;">
+                                <tr style="font-size:16px; line-height: 22px; font-family:arial; color:#333333; font-weight:300; text-align:left; font-weight: bold; padding: 15px;">
+                                  <td width="100">Nama kelas</td>
+                                  <td width="100">Nama penyelenggara kelas</td>
+                                  <td width="10">Jumlah peserta</td>
+                                  <td width="100">Harga</td>
+                                </tr>
+                                {% for detail in order.details %}
+                                  <tr style="font-size:16px; line-height: 22px; font-family:arial; color:#a3a2a2; font-weight:300; text-align:left;">
+                                    <td style="">{{detail.title}}</td>
+                                    <td>{{ detail.teacher_first_name ~ " " ~ detail.teacher_last_name }}</td>
+                                    <td style="text-align: center;">{{ detail.pax }}</td>
+                                    <td style="text-align:right">{{ delimiter_number(detail.currency, detail.price * detail.pax) }}</td>
+                                  </tr>
+                                {% endfor %}
+                                <tr style="font-size:16px; line-height: 22px; font-family:arial; color:#a3a2a2; font-weight:300; text-align:left;">
+                                  <td colspan="1" rowspan="3"></td>
+                                  <td colspan="2">
+                                    Subtotal
+                                  </td>
+                                  <td style="color: #000000; text-align:right">
+                                    <b >{{ delimiter_number(order.currency, total) }}</b>
+                                  </td>
+                                </tr>
+                                <tr style="font-size:16px; line-height: 22px; font-family:Arial,Tahoma, Helvetica, sans-serif; color:#a3a2a2; font-weight:300; text-align:left;">
+                                  <td colspan="2">
+                                    Kredit skillagogo
+                                  </td>
+                                  <td style="color: red; text-align:right">
+                                    <b>- {{ delimiter_number(order.currency, credit_usage) }}</b>
+                                  </td>
+                                </tr>
+                                <tr style="font-size:16px; line-height: 22px; font-family:Arial,Tahoma, Helvetica, sans-serif; color:#a3a2a2; font-weight:300; text-align:left;">
+                                  <td colspan="2">
+                                    TOTAL
+                                  </td>
+                                  <td style="color: #000000; text-align:right">
+                                    <b>{{ delimiter_number(order.currency, total - credit_usage) }}</b>
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td height="20">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td height="20">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="font-size:16px;color:#999999;line-height:180%;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                              Klik <a href="{{ base_url() }}dashboard/student/payment/history">di sini</a> untuk mengakses akun dan melihat detail pendaftaran Anda. Pendaftaran Anda akan kami proses setelah kami menerima konfirmasi pembayaran. dari Anda. Jika Anda telah melakukan pembayaran, silakan kilk konfirmasi pembayaran Anda <a href="{{ base_url() }}dashboard/student/payment/confirmation/{{ payment.order_id }}">di sini</a>.
+                              <br>
+                              <br>
+                              Jika Anda tidak melakukan pembayaran ke salah satu akun kami berikut ini dalam waktu 24 jam setelah penerimaan order ini, maka pendaftaran Anda otomatis akan dibatalkan dan tempat Anda di kelas akan kami berikan kepada peserta lain.
+                              <br>
+                              <br>
+                              Informasi rekening bank skillagogo:
+                              <br/>
+                              <br>
+                              <strong>Bank BCA</strong>
+                              <br>
+                              No Rek : 4451189888
+                              <br/>
+                              Atas nama: Yustiniani Notari, SS
+                              <br>
+                              <br>
+                              Terima kasih!
+                              <br>
+                              The skillagogo team
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="50"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </td>
+  </tr>
+{% endblock %}

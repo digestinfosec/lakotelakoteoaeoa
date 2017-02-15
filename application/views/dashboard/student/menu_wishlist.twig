@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="horizontal-menu">
+      <a href="{{ base_url() }}dashboard/student/wishlist" class="list-h-top active">
+        <div class="title">
+          {{ line('wishlist', 'homepage') }}
+        </div>
+        <div
+			tabindex="0"
+			data-toggle="popover"
+			data-content="{{line('wishlist_tooltip', 'field')}}"
+			class="btnInfoPopover img-tooltip-top">
+			<img src="{{ base_url() }}assets/images/tooltips other.png">
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

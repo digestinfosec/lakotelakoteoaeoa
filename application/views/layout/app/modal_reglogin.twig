@@ -1,0 +1,198 @@
+<div class="modal fade" id="skillagogo-signup" tabindex="-1" role="dialog" aria-labelledby="...">
+  <div class="vertical-alignment-helper">
+    <div class="modal-dialog vertical-align-center" role="document">
+      <div class="modal-content">
+        <div class="box-join-now box-join-register modal-reglog">
+          <div class="box-close close" data-dismiss="modal" aria-label="Close">
+            <i class="fa fa-times"></i>
+          </div>
+          <div class="box-header-join modal-reglog bg-sgogo-white">
+            <div class="logo-join">
+              <img src="{{ base_url() }}assets/images/logo-teacher.png" alt="">
+            </div>
+            <div class="title-join title-register">
+              {{ line('join', 'modal') }}
+            </div>
+          </div>
+          <div class="box-body-join">
+            <div class="col-md-12">
+              <div class="text-center">
+
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="text-center">
+                <a href="{{ loginUrl }}">
+                  <button class="btn btn-register-facebook">
+                    <i class="fa fa-facebook"></i>
+                    |
+                    {{ line('reg-fb', 'modal') }}
+                  </button>
+                </a>
+                <div class="break10"></div>
+                <div class="desc-btm-facebook">
+                  {{ line('reg-email', 'modal') }}
+                </div>
+              </div>
+              <div class="break"></div>
+            </div>
+            <div class="clearfix"></div>
+            {{ form_open('register', {id: 'form-skillagogo-modal-signup'}) }}
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="text" class="form-control" name="first_name" placeholder="{{line('first_name', 'field')}}">
+                <label for="first_name" class="error" style="display: none;"></label>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="last_name" placeholder="{{line('last_name', 'field')}}">
+                <label for="last_name" class="error" style="display: none;"></label>
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control" name="email" placeholder="{{line('email', 'field')}}">
+                <label for="email" class="error" style="display: none;"></label>
+              </div>
+              <div class="form-group" id="passStrength">
+                <input type="password" id="password" class="form-control password" name="password" placeholder="{{line('password', 'field')}}">
+                <label for="password" class="error" style="display: none;"></label>
+                <div id="password-text" style="display: none;"></div>
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" name="password_confirmation" placeholder="{{line('password_confirmation', 'field')}}">
+                <label for="password_confirmation" class="error" style="display: none;"></label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="radio-registering">
+                <div class="desc">
+                  {{ line('reg-as', 'modal') }}&nbsp;
+                  <br>
+                </div>
+                <div class="radio-option" style="float:left;">
+                  <input type="radio" value="student" name="role"
+                  class="checkradios custom-style"> {{ line('student', 'modal') }}<br>
+                  <input type="radio" value="teacher" name="role"
+                  class="checkradios custom-style"> {{ line('teacher', 'modal') }}<br>
+                </div>
+              </div>
+              <label for="role" class="error" style="display: none;"></label>
+              <div class="date-registering">
+                <div class="birthday">{{line('birthday', 'field')}}</div>
+                <input type="text" id="birth_date" class="validate[required,custom[date]]" data-format="YYYY-MM-DD" data-template="D MMMM YYYY" name="birth_date" value=""/>
+              </div>
+              <label for="birth_date" class="error error-date" style="display: none;"></label>
+              <div class="desc-registering">
+                <br/>
+                {#<span class="all-field"><em>* {{ line('mandatory', 'modal') }}</em></span><br>#}
+                <div class="txt-link mg-top-5">
+                  {{ line('reg-agree', 'modal') }}
+                </div>
+                <div class="txt-link">
+                  <a href="{{ base_url() }}page/terms_of_service" target="_blank">
+                    {{ line('terms', 'footer') }}
+                  </a>
+                  {#<a href="#" data-toggle="modal" data-target="#modalTos">{{ line('terms', 'footer') }}</a>#}
+                  &
+                  <a href="{{ base_url() }}page/privacy_policy" target="_blank">
+                    {{ line('privacy', 'footer') }}
+                  </a>
+                  {#<a href="#" data-toggle="modal" data-target="#modalPrivacy">{{ line('privacy', 'footer') }}</a>#}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <input type="checkbox" value="1" checked class="checkradios checkbox-apporve custom-style-2 break5" name="send_updates">
+              <span class="all-check color-sgogo-yellow font-monserat">{{ line('update', 'modal') }}</span>
+              <div class="text-center box-btn-register">
+                <input class="btn btn-register" type="submit" value="{{ line('sign_up','button') }}">
+                <div class="break10"></div>
+                <span class="desc-link">{{ line('no-email', 'modal') }}</span>
+                <a href="{{ base_url('resend-confirmation') }}" class="desc-link">{{ line('resend', 'modal') }}</a>
+                <div class="break10"></div>
+                <span class="desc-link">{{ line('already', 'modal') }}</span>
+                <a href="{{ base_url('login') }}" class="desc-link">{{ line('sign_in', 'button') }}</a>
+              </div>
+            </div>
+            {{ form_close() }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="skillagogo-signin" tabindex="-1" role="dialog" aria-labelledby="...">
+  <div class="vertical-alignment-helper">
+    <div class="modal-dialog vertical-align-center" role="document">
+      <div class="modal-content">
+        <div class="col-md-10 col-md-offset-1">
+          <div class="box-join-now box-join-register modal-reglog">
+            <div class="box-close close" data-dismiss="modal" aria-label="Close">
+              <i class="fa fa-times"></i>
+            </div>
+            <div class="box-header-join modal-reglog bg-sgogo-white">
+              <div class="logo-join">
+                <img src="{{ base_url() }}assets/images/logo-teacher.png" alt="">
+              </div>
+              <div class="title-join title-register">
+                {{ line('sign-to', 'modal') }}
+              </div>
+            </div>
+            <div class="box-body-join">
+              <div class="col-md-12">
+                <div class="text-center">
+                  <a href="{{ loginUrl }}">
+                    <button class="btn btn-register-facebook">
+                      <i class="fa fa-facebook"></i>
+                      |
+                      {{ line('sign-fb', 'modal') }}
+                    </button>
+                  </a>
+                  <div class="break10"></div>
+                  <div class="desc-btm-facebook">
+                    {{ line('sign-email', 'modal') }}
+                  </div>
+                </div>
+                <div class="break"></div>
+              </div>
+              <div class="clearfix"></div>
+              {{ form_open('login', {id: "form-skillagogo-modal-signin"}) }}
+              <div class="col-md-8 col-md-offset-2">
+                <div class="form-group">
+                  <input type="email" class="form-control" name="email" placeholder="{{line('email', 'field')}}">
+                  <label for="email" class="error" style="display: none;">{{line('email', 'field')}}</label>
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" name="password" placeholder="{{line('password', 'field')}}">
+                  <label for="password" class="error" style="display: none;">{{line('password', 'field')}}</label>
+                </div>
+                <input type="checkbox" value="1" class="checkradios checkbox-apporve-2 custom-style-4 break5" name="remember_me">
+                <span class="all-check color-sgogo-purple font-monserat">{{ line('remember', 'modal') }}</span>
+              </div>
+              <div class="col-md-8 col-md-offset-2">
+                <div class="text-center box-btn-register">
+                  <input class="btn btn-register-2" type="submit" value="{{ line('sign_in', 'button') }}">
+                </div>
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="forgot-pass">
+                      <a href="{{ base_url('forgot-password') }}" class="color-sgogo-purple">
+                        {{ line('forgot', 'modal') }}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="dont-have-account">
+                  {{ line('no-acc', 'modal') }}
+                  <a href="{{ base_url('register') }}">
+                    <strong class="color-sgogo-purple">{{ line('sign_up', 'button') }}</strong>
+                  </a>
+                </div>
+              </div>
+              {{ form_close() }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

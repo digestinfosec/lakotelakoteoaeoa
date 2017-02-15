@@ -1,0 +1,142 @@
+<div class="sidebar">
+  <div class="logopanel">
+    <h1>
+      <a href="{{ base_url() }}adminuao3hltbr0/home"></a>
+    </h1>
+  </div>
+  <div class="sidebar-inner">
+    <div class="sidebar-top">
+      <div class="userlogged clearfix">
+        <i class="icon icons-faces-users-01"></i>
+        <div class="user-details">
+          <h4>Administrator</h4>
+        </div>
+      </div>
+    </div>
+    <div class="menu-title">
+      Navigation
+    </div>
+    <ul class="nav nav-sidebar">
+      <li class= "{% if page == 'dashboard' %} active {% endif %}">
+        <a href="{{ base_url() }}adminuao3hltbr0/home">
+          <i class="icon-home"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      {% if user_login_admin.type == type_admin or user_login_admin.type == type_marketing %}
+        <li class="nav-parent {% if page == 'page' %} active {% endif %}">
+          <a href="">
+            <i class="fa fa-globe"></i>
+            <span>Pages</span>
+            <span class="fa arrow"></span>
+          </a>
+          <ul class="children collapse">
+            <li class= "{% if sidebar == 'static about us' %} active {% endif %}">
+              <a href="{{ base_url() }}adminuao3hltbr0/static_page/about_us"> About Us</a>
+            </li>
+            <li class= "{% if sidebar == 'static faq' %} active {% endif %}">
+              <a href="{{ base_url() }}adminuao3hltbr0/static_page/faq"> FAQ</a>
+            </li>
+            <li class= "{% if sidebar == 'static career' %} active {% endif %}">
+              <a href="{{ base_url() }}adminuao3hltbr0/static_page/career"> Career</a>
+            </li>
+            <li class= "{% if sidebar == 'static term of service' %} active {% endif %}">
+              <a href="{{ base_url() }}adminuao3hltbr0/static_page/term_of_service"> Terms of Service</a>
+            </li>
+            <li class= "{% if sidebar == 'static privacy policy' %} active {% endif %}">
+              <a href="{{ base_url() }}adminuao3hltbr0/static_page/privacy_policy"> Privacy Policy</a>
+            </li>
+            <li class= "{% if sidebar == 'static how to teach' %} active {% endif %}">
+              <a href="{{ base_url() }}adminuao3hltbr0/static_page/how_to_teach"> How to Teach</a>
+            </li>
+            <li class= "{% if sidebar == 'static how to learn' %} active {% endif %}">
+              <a href="{{ base_url() }}adminuao3hltbr0/static_page/how_to_learn"> How to Learn</a>
+            </li>
+          </ul>
+        </li>
+      {% endif %}
+
+      {% if user_login_admin.type == type_admin or user_login_admin.type == type_review %}
+        <li class= "{% if page == 'page comment' %} active {% endif %}">
+          <a href="{{ base_url() }}adminuao3hltbr0/page_comment">
+            <i class="fa fa-comments"></i>
+            <span>Comments</span>
+          </a>
+        </li>
+        <li class= "{% if page == 'page rating' %} active {% endif %}">
+          <a href="{{ base_url() }}adminuao3hltbr0/page_rating">
+            <i class="icon-star"></i>
+            <span>Ratings</span>
+          </a>
+        </li>
+        <li class= "{% if page == 'page classes review' %} active {% endif %}">
+          <a href="{{ base_url() }}adminuao3hltbr0/page_classes_review">
+            <i class="icon-bag"></i>
+            <span>Classes Review </span>
+          </a>
+        </li>
+      {% endif %}
+
+      {% if user_login_admin.type == type_admin %}
+        <li class= "{% if page == 'page users' %} active {% endif %}">
+          <a href="{{ base_url() }}adminuao3hltbr0/page_users" class="testing-users-menu">
+            <i class="icon-users"></i>
+            <span>Users </span>
+          </a>
+        </li>
+        <li class= "{% if page == 'page administrator' %} active {% endif %}">
+          <a href="{{ base_url() }}adminuao3hltbr0/page_administrators">
+            <i class="icon-user"></i>
+            <span>Administrator </span>
+          </a>
+        </li>
+      {% endif %}
+      {#
+      <li class= "{% if page == 'page settings' %} active {% endif %}">
+        <a href="{{ base_url() }}adminuao3hltbr0/page_settings">
+          <i class="icon-settings"></i>
+          <span>Settings </span>
+        </a>
+      </li>
+      #}
+
+      {% if user_login_admin.type == type_admin %}
+        <li class= "{% if page == 'page receipt' %} active {% endif %}">
+          <a href="{{ base_url() }}adminuao3hltbr0/page_listing_receipt">
+            <i class="icon-envelope-letter"></i>
+            <span>Receipt</span>
+          </a>
+        </li>
+        <li class= "{% if page == 'page teacher fees' %} active {% endif %}">
+          <a href="{{ base_url() }}adminuao3hltbr0/page_teacher_fees_payment">
+            <i class="icon-folder-alt"></i>
+            <span>Teacher's fee payment </span>
+          </a>
+        </li>
+        <li class= "{% if page == 'page commission' %} active {% endif %}">
+          <a href="{{ base_url() }}adminuao3hltbr0/page_skillagogo_commission">
+            <i class="icon-folder-alt"></i>
+            <span>Payout and Commission </span>
+          </a>
+        </li>
+        <li class= "{% if page == 'page vouchers' %} active {% endif %}">
+          <a href="{{ base_url() }}adminuao3hltbr0/page_vouchers">
+            <i class="icon-credit-card"></i>
+            <span>Vouchers</span>
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+    <div class="sidebar-footer clearfix">
+      <a class="pull-left footer-settings" href="{{ site_url('adminuao3hltbr0/page_administrators/edit/' ~ user_login_admin.admin_id) }}" data-rel="tooltip" data-placement="top" data-original-title="Account Settings">
+        <i class="icon-settings"></i>
+      </a>
+      <a class="pull-left toggle_fullscreen" href="#" data-rel="tooltip" data-placement="top" data-original-title="Fullscreen">
+        <i class="icon-size-fullscreen"></i>
+      </a>
+      <a class="pull-left btn-effect" href="{{ base_url() }}adminuao3hltbr0/logout" data-modal="modal-1" data-rel="tooltip" data-placement="top" data-original-title="Logout">
+        <i class="icon-power"></i>
+      </a>
+    </div>
+  </div>
+</div>

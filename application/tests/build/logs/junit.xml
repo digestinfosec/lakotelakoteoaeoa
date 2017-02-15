@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+    <testsuite name="CodeIgniter Application Test Suite" tests="6" assertions="7" failures="0" errors="0"
+               time="0.589658">
+        <testsuite name="Welcome_test"
+                   file="/home/vagrant/project/apecsa/skillagogo/application/tests/controllers/Welcome_test.php"
+                   tests="3" assertions="3" failures="0" errors="0" time="0.214328">
+            <testcase name="test_index" class="Welcome_test"
+                      file="/home/vagrant/project/apecsa/skillagogo/application/tests/controllers/Welcome_test.php"
+                      line="13" assertions="1" time="0.111833"/>
+            <testcase name="test_method_404" class="Welcome_test"
+                      file="/home/vagrant/project/apecsa/skillagogo/application/tests/controllers/Welcome_test.php"
+                      line="19" assertions="1" time="0.094594"/>
+            <testcase name="test_APPPATH" class="Welcome_test"
+                      file="/home/vagrant/project/apecsa/skillagogo/application/tests/controllers/Welcome_test.php"
+                      line="25" assertions="1" time="0.007901"/>
+        </testsuite>
+        <testsuite name="Admin_login_test"
+                   file="/home/vagrant/project/apecsa/skillagogo/application/tests/migrations/Admin_login_test.php"
+                   tests="3" assertions="4" failures="0" errors="0" time="0.375330">
+            <testcase name="test_login_index" class="Admin_login_test"
+                      file="/home/vagrant/project/apecsa/skillagogo/application/tests/migrations/Admin_login_test.php"
+                      line="14" assertions="1" time="0.133884"/>
+            <testcase name="test_login_success" class="Admin_login_test"
+                      file="/home/vagrant/project/apecsa/skillagogo/application/tests/migrations/Admin_login_test.php"
+                      line="20" assertions="2" time="0.111764"/>
+            <testcase name="test_login_failure" class="Admin_login_test"
+                      file="/home/vagrant/project/apecsa/skillagogo/application/tests/migrations/Admin_login_test.php"
+                      line="26" assertions="1" time="0.129682"/>
+        </testsuite>
+    </testsuite>
+</testsuites>

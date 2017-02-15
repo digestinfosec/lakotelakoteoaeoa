@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>skillagogo - coming soon</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- START SEO META SHARE FACEBOOK -->
+  <meta property="og:url" content="http://www.skillagogo.com"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:title" content="skillagogo - coming soon"/>
+  <meta property="og:description" content="YOUR DESCRIPTION"/>
+  <meta property="og:image" content="URL IMAGE WEBSITE"/>
+  <!-- END SEO META SHARE FACEBOOK -->
+
+  <!-- START SEO META SHARE TWITTER -->
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:site" content="apecsa"/>
+  <meta name="twitter:title" content="Apecsa title">
+  <meta name="twitter:description" content="Apecsa Project"/>
+  <meta name="twitter:creator" content="ApecsaOS"/>
+  <meta name="twitter:image:src" content="https://website.com/image250X250.png"/>
+  <meta name="twitter:domain" content="website.com"/>
+  <!-- END SEO META SHARE TWITTER -->
+
+  <!-- START SEO META SHARE GOOGLE PLUS -->
+  <meta itemprop="name" content="ApecsaOS"/>
+  <meta itemprop="description" content="Website Description"/>
+  <meta itemprop="image" content="https://website.com/image250X250.png"/>
+  <!-- END SEO META SHARE GOOGLE PLUS -->
+
+  <!-- Twitter Bootstrap -->
+  <link href="{{ base_url() }}assets/css/bootstrap.css" rel="stylesheet">
+
+  <!-- Font Awesome Icon -->
+  <link href="{{ base_url() }}assets/css/font-awesome.css" rel="stylesheet">
+
+  <!-- Customize CSS -->
+  <link href="{{ base_url() }}assets/css/jquery.checkradios.css" rel="stylesheet">
+  <link href="{{ base_url() }}assets/css/main.css" rel="stylesheet">
+  <link href="{{ base_url() }}assets/css/main-responsive.css" rel="stylesheet">
+</head>
+<body>
+<!-- Modal -->
+<section class="body-commingsoon">
+  <div class="body-commingsoon-signup">
+    <div class="container">
+      <div class="body-center">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="txt-big">
+              Hello!<br> Thank You for<br> Checking in
+            </div>
+            <div class="txt-small">
+              an exciting experience<br> is coming your way<br> real soon
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="box-join-now">
+              <div class="box-header-join">
+                <div class="logo-join">
+                  <img src="{{ base_url() }}assets/images/logo.png" alt="">
+                </div>
+                <div class="title-join">
+                  Join skillagogo now
+                </div>
+              </div>
+              <div class="box-body-join">
+                <div class="col-md-12">
+                  <div class="text-center">
+
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="text-center">
+                    <a href="{{ loginUrl }}">
+                      <button class="btn btn-register-facebook">
+                        <i class="fa fa-facebook"></i>
+                        |
+                        register with facebook
+                      </button>
+                    </a>
+                    <div class="break10"></div>
+                    <div class="desc-btm-facebook">
+                      - or register using your email address -
+                    </div>
+                  </div>
+                  <div class="break"></div>
+                </div>
+                <div class="clearfix"></div>
+                <!--  {% if error %}
+                  <div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ error|raw }}
+                  </div>
+                  {% endif %} -->
+                {{ form_open('coming-soon', {'id':'form-skillagogo-signup'}) }}
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input type="text" class="form-control" value="{{ set_value('first_name') }}"
+                           name="first_name" placeholder="first name">
+                    <label for="first_name" class="error"
+                           style="display: none;">{{ form_error('first_name') }}</label>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control" value="{{ set_value('last_name') }}"
+                           name="last_name" placeholder="last name">
+                    <label for="last_name" class="error"
+                           style="display: none;">{{ form_error('last_name') }}</label>
+                  </div>
+                  <div class="form-group">
+                    <input type="email" class="form-control" value="{{ set_value('email') }}"
+                           name="email" placeholder="{{line('email', 'field')}}">
+                    <label for="email" class="error"
+                           style="display: none;">{{ form_error('email') }}</label>
+                  </div>
+                  <div class="form-group">
+                    <input type="password" id="password" class="form-control"
+                           value="{{ set_value('password') }}" name="password"
+                           placeholder="password">
+                    <label for="password" class="error"
+                           style="display: none;">{{ form_error('password') }}</label>
+                  </div>
+                  <div class="form-group">
+                    <input type="password" class="form-control"
+                           value="{{ set_value('password_confirmation') }}"
+                           name="password_confirmation" placeholder="confirm password">
+                    <label for="password_confirmation" class="error"
+                           style="display: none;">{{ form_error('password_confirmation') }}</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="radio-registering">
+                    <div class="desc">
+                      I'm registering as a &nbsp;
+                      <br>
+                    </div>
+                    <div class="radio-option" style="float:left;">
+                      <input type="radio" value="student" {{ set_radio('role', 'student') }}
+                             name="role" class="checkradios custom-style"> student<br>
+                      <input type="radio" value="teacher" {{ set_radio('role', 'teacher') }}
+                             name="role" class="checkradios custom-style"> teacher
+                    </div>
+                  </div>
+                  <label for="role" class="error"
+                         style="display: none;">{{ form_error('role') }}</label>
+                  <div class="date-registering">
+                    <div class="birthday">birthday</div>
+                    <input type="text" id="birth_date" class="validate[required,custom[date]]"
+                           data-format="YYYY-MM-DD" data-template="D MMMM YYYY" name="birth_date"
+                           value="{{ set_value('birth_date') }}"/>
+                  </div>
+                  <label for="birth_date" class="error error-date"
+                         style="display: none;">{{ form_error('birth_date') }}</label>
+                  <div class="desc-registering">
+                    <span class="all-field"><em>* all fields are mandatory</em></span><br>
+                    <div class="txt-link mg-top-5">
+                      by registering, I agree to skillagogo's
+                    </div>
+                    <div class="txt-link">
+                      <a href="#" data-toggle="modal" data-target="#modalTos">terms of service</a>
+                      &
+                      <a href="#" data-toggle="modal" data-target="#modalPrivacy">privacy
+                        policy</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <input type="checkbox" value="1" checked
+                         class="checkradios checkbox-apporve custom-style-2 break5"
+                         name="send_updates">
+                  <span
+                    class="all-check color-sgogo-yellow font-monserat">Please send me updates about skillagogo</span>
+                  <div class="text-center box-btn-register">
+                    <input class="btn btn-register" type="submit" value="Register">
+                  </div>
+                </div>
+                {{ form_close() }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL TOS -->
+<div class="modal fade" id="modalTos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content modal-coming-soon">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="fa fa-times i-size"></i>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Terms of service</h4>
+      </div>
+      <div class="modal-body">
+        <div>
+          <div class="title-modal">
+            <h2>DEFINITIONS</h2>
+            <div class="title-highlight"></div>
+          </div>
+          <p>
+            This website (the “Website”) is operated by skillagogo Pte. Ltd., a Singapore private company
+            (Reg. no.&nbsp;201507746N).
+          </p>
+          <ol>
+            <li>
+              <p>
+                The classes on the Website are offered for users who wish to attend classes, courses,
+                workshops from the class provider or their legal representative (“the Teacher”) to the
+                learner (“the Student”) under the following Terms of Service. Some classes also have Courses
+                Specific Terms of Service, available on the class provider’s page or the
+                school/institution’s page on the Website. When booking a seat on the Website and/or
+                making inquiry on the Website or via email or telephone, the Student accepts and agrees
+                to these Terms of Service and to the Courses Specific Terms of Service.
+              </p>
+            </li>
+            <li>
+              <p>
+                The Website provides an online platform through which the Teachers can<br>
+                advertise their classes, courses and workshops. By booking a seat through the Website,
+                the Students enters into a direct, legally binding, contractual relationship with the
+                relevant Teachers. The Website acts solely as an intermediary between the Student and
+                the Teacher, sending the booking and payment details to the Teacher and sending
+                the Student a confirmation email for and on behalf of the Teacher.
+              </p>
+            </li>
+          </ol>
+          <br/>
+          <div class="title-modal">
+            <h2>BOOKING</h2>
+            <div class="title-highlight"></div>
+          </div>
+          <ol start="3">
+            <li>
+              <p>
+                To book a seat on the class offered by the Teacher, the Student must pay to the Website
+                a class full price as advertised on the Website (unless otherwise specified in the
+                Courses Specific Terms of Service). Upon reception of the confirmation email and
+                payment, the Website, on behalf of the Teacher, will send a class confirmation email and
+                an attendance voucher. The booking will be effective immediately after the confirmation
+                email has been sent to the Student.
+              </p>
+            </li>
+            <li>
+              <p>
+                Class booking can only be accepted from the user aged 18 or over at the time of the
+                booking time.
+              </p>
+            </li>
+          </ol>
+          <br/>
+          <div class="title-modal">
+            <h2>PRICE AND PAYMENTS</h2>
+            <div class="title-highlight"></div>
+          </div>
+          <ol start="5">
+            <li>
+              <p>The Student is responsible for the payments of the class cost and for compliance with
+                these Terms of Service.</p>
+            </li>
+            <li>
+              <p>The class prices include the following: </p>
+              <ul>
+                <li>Class/course/workshop content offered by the Teacher</li>
+                <li>Use of class facilities (if any)</li>
+                <li>Certificate of Completion (if any)</li>
+              </ul>
+            </li>
+            <li>
+              <p>Prices DO NOT include the following: </p>
+              <ul>
+                <li>Other additional specific tools and/or equipment needed for the class as specified
+                  in the Class Profile Page
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p>
+                For classes in Singapore, the class prices are all in Singapore Dollars (S$). For
+                classes in Indonesia, the class prices are all in Indonesia Rupiah (Rp). Payment can be
+                made only in respective currencies.
+              </p>
+            </li>
+            <li>
+              <p>Payments can be made by Paypal (S$ only), bank/ATM transfer (Rp only).</p>
+            </li>
+          </ol>
+          <br/>
+          <div class="title-modal">
+            <h2>CANCELLATION</h2>
+            <div class="title-highlight"></div>
+          </div>
+          <ol start="10">
+            <li>
+              <p>
+                If the cancellation is made by the Student, the payment will be revised into skillagogo
+                credits which can be used to attend other class. skillagogo credits has a validity of 12
+                months after opening.
+              </p>
+            </li>
+            <li>
+              <p>
+                If the cancellation is made by the Teacher, the Student will be offered an opportunity
+                to change her/his schedule. In the event that there is no available new class schedule,
+                the Student will be given skillagogo credits. Class cancellation made by the Teacher is
+                subject to admin fees as stated in the Teacher Cancellation scheme.
+              </p>
+            </li>
+          </ol>
+          <br/>
+          <div class="title-modal">
+            <h2>REVIEWS</h2>
+            <div class="title-highlight"></div>
+          </div>
+          <ol start="12">
+            <li>
+              <p>
+                The Student reviews may be uploaded onto the Teacher’s website and/or his/her social
+                media accounts, as well as on our website for the sole purpose of informing future
+                Students of other opinions of the service level and quality of the class and/or the
+                Teacher.
+              </p>
+            </li>
+            <li>
+              <p>The Website reserves the right to accept, refuse or remove reviews at our sole
+                discretion.</p>
+            </li>
+          </ol>
+          <br/>
+          <div class="title-modal">
+            <h2>LIABILITY</h2>
+            <div class="title-highlight"></div>
+          </div>
+          <ol start="14">
+            <li>
+              <p>
+                Neither Teacher nor the Website shall be liable for events beyond their control which
+                may interfere with the Student’s scheduled occupancy, including but not limited to Acts
+                of God, acts of governmental agencies, fire, strikes, terrorism, war, inclement weather,
+                flooding, disturbance or noise coming from outside the class premises such as private or
+                public construction, traffic, animals or neighbours. No rebate of refund will be offered
+                in these circumstances.
+              </p>
+            </li>
+            <li>
+              <p>
+                The Website assumes no liability for property loss or damages, nor liability for injury,
+                accidents, delay, or irregularity which may be occasioned during the class session.
+              </p>
+            </li>
+            <li>
+              <p>
+                Any exception to these Terms of Service granted by the Website for the Student’s benefit in
+                no way modifies the present Terms of Service. Complete or partial nullity of any clause in
+                the Terms of Service does not entail the nullity of the other Terms of Service
+              </p>
+            </li>
+          </ol>
+          <br/>
+          <div class="title-modal">
+            <h2>LANGUAGE AND APPLICABLE LAW</h2>
+            <div class="title-highlight"></div>
+          </div>
+          <ol start="17">
+            <li>
+              <p>
+                These Terms of Service are written in English. The English writing will prevail over any
+                translation available.
+              </p>
+            </li>
+            <li>
+              <p>
+                These Terms of Service are submitted to the exclusive jurisdiction of the Singapore courts
+                under Singapore laws.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-register" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PRIVACY -->
+<div class="modal fade" id="modalPrivacy" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content modal-coming-soon">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="fa fa-times i-size"></i>
+        </button>
+        <h4 class="modal-title" id="modalPrivacyLabel">Privacy Policy</h4>
+      </div>
+      <div class="modal-body">
+        <div>
+          <p>
+            Your privacy is our priority. This privacy policy sets out how skillagogo.com uses and protects
+            any information that you give skillagogo.com when you use this website. skillagogo.com is
+            committed to ensuring that your privacy is protected. Should we ask you to provide certain
+            information by which you can be identified when using this website, then you can be assured that
+            it will only be used in accordance with this privacy statement.
+          </p>
+          <p>
+            skillagogo.com may change this policy by updating this page. You should check this page from
+            time to time to ensure that you are happy with any changes. This policy is effective from 20
+            April 2016.
+          </p>
+          <br/>
+          <div class="title-modal">
+            <h2>WHAT WE COLLECT</h2>
+            <div class="title-highlight"></div>
+          </div>
+          <p>We may collect the following information:</p>
+          <ul class="list-modal-body">
+            <li class="check">Personal information including name, age, gender, and job title</li>
+            <li class="check">Contact information including telephone numbers and email address</li>
+            <li class="check">Demographic information including postcode, home address, office address</li>
+            <li class="check">Other information relevant to customer surveys and/or offers including
+              preferences and interests
+            </li>
+          </ul>
+          <br/>
+          <div class="title-modal">
+            <h2>WHAT WE DO WITH THE INFORMATION WE GATHER</h2>
+            <div class="title-highlight"></div>
+          </div>
+          <p>
+            We require this information to understand your needs and provide you with a better service, and
+            in particular for the following reasons:
+          </p>
+          <ul class="list-modal-body">
+            <li class="check">Internal record keeping.</li>
+            <li class="check">We may use the information to improve our products and services.</li>
+            <li class="check">We may periodically send promotional emails about new products, special offers
+              or other information which we think you may find interesting using the email address which
+              you have provided.
+            </li>
+            <li class="check">From time to time, we may also use your information to contact you for market
+              research purposes. We may contact you by email, phone, fax or mail. We may use the
+              information to customise the website according to your interests.
+            </li>
+          </ul>
+          <br/>
+          <div class="title-modal">
+            <h2>SECURITY</h2>
+            <div class="title-highlight"></div>
+          </div>
+          <p>
+            We are committed to ensuring that your information is secure. In order to prevent unauthorised
+            access or disclosure, we have put in place suitable physical, electronic and managerial
+            procedures to safeguard and secure the information we collect online.
+          </p>
+          <br/>
+          <div class="title-modal">
+            <h2>HOW WE USE COOKIES</h2>
+            <div class="title-highlight"></div>
+          </div>
+          <p>
+            A cookie is a small file that asks permission to be placed on your computer’s hard drive. Once
+            you agree, the file is added and the cookie helps analyse web traffic or lets you know when you
+            visit a particular site. Cookies allow web applications to respond to you as an individual. The
+            web application can tailor its operations to your needs, likes and dislikes by gathering and
+            remembering information about your preferences.
+          </p>
+          <p>
+            We may use traffic log cookies to identify which pages are being used. This helps us analyse
+            data about web page traffic and improve our website in order to tailor it to customer needs. We
+            only use this information for statistical analysis purposes and then the data is removed from
+            the system.
+          </p>
+          <p>
+            Overall, cookies help us provide you with a better website, by enabling us to monitor which
+            pages you find useful and which you do not. A cookie in no way gives us access to your computer
+            or any information about you, other than the data you choose to share with us.
+          </p>
+          <p>
+            You can choose to accept or decline cookies. Most web browsers automatically accept cookies, but
+            you can usually modify your browser setting to decline cookies if you prefer. This may prevent
+            you from taking full advantage of the website.
+          </p>
+          <br/>
+          <div class="title-modal">
+            <h2>LINKS TO OTHER WEBSITES</h2>
+            <div class="title-highlight"></div>
+          </div>
+          <p>
+            Our website may contain links to other websites of interest. However, once you have used these
+            links to leave our site, you should note that we do not have any control over that other
+            website. Therefore, we cannot be responsible for the protection and privacy of any information
+            which you provide whilst visiting such sites and such sites are not governed by this privacy
+            statement. You should exercise caution and look at the privacy statement applicable to the
+            website in question.
+          </p>
+          <p>
+            We will not sell, distribute or lease your personal information to third parties unless we have
+            your permission or are required by law to do so. We may use your personal information to send
+            you promotional information about third parties which we think you may find interesting if you
+            tell us that you wish this to happen.
+          </p>
+          <p>
+            If you believe that any information we are holding on you is incorrect or incomplete, please
+            write to or email us as soon as possible at contact@skillagogo.com. We will promptly correct any
+            information found to be incorrect.
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-register" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Jquery  -->
+<script src="{{ base_url() }}assets/js/jquery.min.js"></script>
+<!-- Twitter Bootstrap -->
+<script src="{{ base_url() }}assets/js/bootstrap.js"></script>
+<script src="{{ base_url() }}assets/js/jquery.validate.min.js"></script>
+<script src="{{ base_url() }}assets/js/jquery.checkradios.js"></script>
+<script src="{{ base_url() }}assets/js/moment.min.js"></script>
+<script src="{{ base_url() }}assets/js/combodate.js"></script>
+
+<!-- Customize Javascript -->
+<script type="text/javascript">
+  {% include "public/home/coming_soon.js.twig" %}
+</script>
+
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-76555862-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

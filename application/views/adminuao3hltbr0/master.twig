@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>skillagogo backoffice - {{ titleName }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta content="skillagogo course marketplace of singapore" name="description" />
+  <meta content="ApecsaOS" name="author" />
+
+  <link rel="shortcut icon" href="{{ base_url() }}assets/adminuao3hltbr0/images/favicon.ico">
+  <link href="{{ base_url() }}assets/adminuao3hltbr0/css/style.css" rel="stylesheet">
+  <link href="{{ base_url() }}assets/adminuao3hltbr0/css/theme.css" rel="stylesheet">
+  <link href="{{ base_url() }}assets/adminuao3hltbr0/css/ui.css" rel="stylesheet">
+  <link href="{{ base_url() }}assets/adminuao3hltbr0/css/layout.css" rel="stylesheet">
+  <link href="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap-loading/lada.min.css" rel="stylesheet">
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/modernizr/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
+  {% block css %}{% endblock %}
+  </head>
+  <body class="{{ bodyClass }}" data-page="{{ dataPage }}">
+    {% block content %}{% endblock %}
+
+    {% block script %}{% endblock %}
+
+  </body>
+</html>

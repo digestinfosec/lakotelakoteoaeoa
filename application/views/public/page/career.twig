@@ -1,0 +1,17 @@
+{# {% extends 'layout/app/layout_career.twig' %} #}
+{% extends 'layout/app/master.twig' %}
+{% set titleName = line('title_19', 'dashboard') %}
+{% set ClassHeader1Color = "bg-sgogo-gray-dark" %}
+{% set ClassHeader2Color = "bg-sgogo-gray-dark" %}
+{% set ClassHiddenSubTitle = "box-hidden" %}
+{% set SubTitleHeader = line('subtitle_10', 'dashboard') %}
+{% set header0, header1, header2, header3 = true, true, true, true %}
+{% set footer = true %}
+
+{% block content %}
+  {% if session.lang == 'indonesian' %}
+    {% include('public/page/career/career_id.twig') %}
+  {% else %}
+    {% include('public/page/career/career_eng.twig') %}
+  {% endif %}
+{% endblock %}

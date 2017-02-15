@@ -1,0 +1,44 @@
+{% extends 'layout/app/master.twig' %}
+{% set titleName = line('title_23', 'dashboard') %}
+{% set ClassHeader1Color = "bg-sgogo-gray-dark" %}
+{% set ClassHeader2Color = "bg-sgogo-gray-dark" %}
+{% set SubTitleHeader = line('how_to_teach','static_page') %}
+{% set header0, header1, header2, header3 = true, true, true, true %}
+{% set footer = true %}
+
+{% block content %}
+  {% if session.lang == 'indonesian' %}
+      {{ content_id_new|raw }}
+  {% else %}
+    {{ content_en_new|raw }}
+  {% endif %}
+{#   <section class="static-how-to-teach-wrapper bg-sgogo-blue-light">
+    <div class="container">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="title">1. Create</div>
+            <div class="image">
+              <img src="../assets/images/how_it_works_create.png" alt="">
+            </div>
+            <div class="description">Pick a topic, write a description, set a price and pick a date</div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="title">2. publish</div>
+            <div class="image">
+              <img src="../assets/images/how_it_works _publish.png" alt="">
+            </div>
+            <div class="description">Let the world know about your amazing class</div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="title">3. teach</div>
+            <div class="image">
+              <img src="../assets/images/how_it_works_teach.png" alt="">
+            </div>
+            <div class="description">Share your skill and knowledge and collect your payout</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> #}
+{% endblock %}

@@ -1,0 +1,49 @@
+<script>
+  $(document).ready(function () {
+
+    // WISHLIST
+    $(document).on("click", '.heart, .box-wishlist', function () {
+      var heart = $(this).data('id');
+      var current_heart = $(this);
+      current_heart.toggleClass('active')
+      $.ajax({
+        method: "POST",
+        url: base_url + "/dashboard/student/wishlist/change",
+        data: {
+          id: heart
+        }
+      }).done(function (data) {
+        {% if (dashboard_wishlist) %}
+        location.reload();
+        {% else %}
+        if (data.status) {
+          if (data.success) {
+            if (data.status == "add") {
+              current_heart.addClass("active");
+              $('.box-wishlist').addClass("active");
+              if (current_heart.hasClass('box-wishlist')) {
+                $('.heart:first').addClass("active")
+              }
+            } else {
+              current_heart.removeClass("active");
+              $('.box-wishlist').removeClass("active");
+              if (current_heart.hasClass('box-wishlist')) {
+                $('.heart:first').removeClass("active")
+              }
+            }
+            toastr.success(data.message)
+          }
+          else {
+            current_heart.toggleClass('active')
+            toastr.error(data.message)
+          }
+        } else {
+          var json = JSON.parse(data);
+          window.location.href = "{{ base_url() }}login?referrer=" + json["referrer"];
+        }
+        {% endif %}
+      });
+    });
+
+  });
+</script>

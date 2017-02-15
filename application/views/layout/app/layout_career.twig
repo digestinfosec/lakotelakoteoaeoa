@@ -1,0 +1,54 @@
+{% include('shared/_doctype.twig') %}
+<html lang="en">
+<head>
+  {% include('shared/app/_page_title.twig') %}
+  {% include('shared/app/_include_meta_tags.twig') %}
+  {% include('shared/app/_include_css_assets.twig') %}
+  {% block css %}{% endblock %}
+  {% include('shared/_shim.twig') %}
+  <script>
+    var base_url = '{{ base_url() }}';
+  </script>
+  <link rel="icon" type="image/ico" href="{{ base_url() }}assets/images/favicon.ico"/>
+</head>
+
+<body class="{{ bodyClass }}">
+  <div class="skillagogo-wrapper">
+    
+    {% include('layout/app/navbar_static_career.twig') %}
+    {% include('shared/_flash_message.twig') %}
+
+    {% block content %}{% endblock %}
+
+    <footer class="footer-static-career">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <hr>
+            2016 &copy; skillagogo. All right reserved
+          </div>
+        </div>
+      </div>
+    </footer>
+    <a class="scrollup"></a>
+  </div>
+
+  {% include('shared/app/_include_js_scripts.twig') %}
+  {% block script %}
+    <script src="{{ base_url() }}assets/js/jquery.scolltofixed.js"></script>
+    <script>
+      $(document).ready(function () {
+        $('.navbar-career-fixed').scrollToFixed();
+      });
+
+      $('a.anchor-career-to').click(function(){
+        $('html, body').animate({
+          scrollTop: $( $(this).attr('href') ).offset().top
+        }, 500);
+        return false;
+      });
+    </script>
+  {% endblock %}
+
+</body>
+</html>

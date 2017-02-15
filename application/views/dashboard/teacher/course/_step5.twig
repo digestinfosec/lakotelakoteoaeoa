@@ -1,0 +1,41 @@
+<div class="setup-content" id="step-5">
+  <div class="col-md-12">
+    <div class="box-create-class-wrapper">
+      <div class="box-form-create">
+        <div class="box-title-top">
+          <div class="title">
+            {{ line('step_terms_of_service','create_course') }}
+          </div>
+        </div>
+        <div class="box-input">
+          <div class="row">
+            <div class="col-md-12 break">
+              <div class="desc-tos">
+                {{line('desc-tos','field')}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="box-button-create">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <button class="btn btn-prev-c-class btn-prev my-btn-step bg-sgogo-yellow" data-color="yellow" type="button">
+              {{ line('dashboard_110', 'dashboard') }}
+            </button>
+            <button class="btn btn-c-next-1 no-border btn-preview btn-lg bg-sgogo-purple-light enabled-action-preview4" type="button">
+              {{ line('dashboard_106', 'dashboard') }}
+            </button>
+            &nbsp;
+            {% if not session.class_admin_edit %}
+            <button class="btn btn-c-next-1 no-border btn-save-draft btn-lg bg-sgogo-purple-light enabled-action-draft4" type="button" value="draft">
+              {{ line('dashboard_107', 'dashboard') }}
+            </button>
+            {% endif %}
+            <button class="btn btn-c-publish btn-lg pull-right enabled-publish" value="publish">{{line('publish','field')}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

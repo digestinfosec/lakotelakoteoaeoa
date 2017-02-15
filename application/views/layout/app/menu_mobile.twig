@@ -1,0 +1,138 @@
+{# MENU MOBILE #}
+<div id="sidebar">
+  {% if user_login %}
+  <div class="profile-user">
+    <div class="box-profile text-center">
+      <div class="avatar">
+        <img src="{{ base_url() }}images/avatar/{{ user_login.avatar }}" alt="">
+      </div>
+      <div class="name">
+        {{ user_login.name }}
+      </div>
+      <div class="box-country">
+        <div class="btn-group" role="group">
+          <a href="{{base_url()}}change-location?lang=SG" class="btn btn-default btn-xs {{ session.location == 'SG' ? 'active' : ''}}">Singapore</a>
+          <a href="{{base_url()}}change-location?lang=ID" class="btn btn-default btn-xs {{ session.location == 'ID' ? 'active' : ''}}">Indonesia</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <div class="box-profile text-center">
+  <div class="box-country">
+    <div class="btn-group" role="group">
+      <a href="{{base_url()}}change-location?lang=SG" class="btn btn-default btn-xs {{ session.location == 'SG' ? 'active' : ''}}">Singapore</a>
+      <a href="{{base_url()}}change-location?lang=ID" class="btn btn-default btn-xs {{ session.location == 'ID' ? 'active' : ''}}">Indonesia</a>
+    </div>
+  </div>
+  <br/>
+  </div>
+  {% endif %}
+  <ul>
+    {% if user_login %}
+    <li>
+      <a href="{{ base_url() }}dashboard">
+        <div class="icon">
+          <i class="fa fa-dashboard"></i>
+        </div>
+        &nbsp;&nbsp;{{ line('menu_dashboard', 'main') }}
+      </a>
+    </li>
+    {%  if user_login['is_teacher'] == '1' %}
+    <li>
+      <a href="{{ dashboard_url('teacher/course/new_course') }}">
+        <div class="icon">
+          <i class="fa fa-dashboard"></i>
+        </div>
+        &nbsp;&nbsp;{{ line('create', 'button') }}
+      </a>
+    </li>
+    {% endif %}
+    <li>
+      <a href="{{ base_url() }}dashboard">
+        <div class="icon">
+          <i class="fa fa-edit"></i>
+        </div>
+        &nbsp;&nbsp;{{ line('menu_profile', 'main') }}
+      </a>
+    </li>
+    <li>
+      <a href="{{ base_url() }}course">
+        <div class="icon">
+          <i class="fa fa-users"></i>
+        </div>
+        &nbsp;&nbsp;{{ line('browse', 'button') }}
+      </a>
+    </li>
+    {% if user_login['is_student'] == '1' %}
+    <li>
+      <a href="{{ base_url() }}dashboard/student/wishlist">
+        <div class="icon">
+          <i class="fa fa-edit"></i>
+        </div>
+        &nbsp;&nbsp;{{ line('wishlist', 'homepage') }}
+      </a>
+    </li>
+    {% endif %}
+    {% if user_login['is_student'] == '1' %}    
+    <li>
+      <a href="{{ base_url() }}dashboard/student/order/cart">
+        <div class="icon">
+          <i class="fa fa-shopping-cart"></i>
+        </div>
+        &nbsp;&nbsp;{{ line('menu_cart', 'main') }}
+      </a>
+    </li>
+    {% endif %}
+    <li>
+      <a href="{{ base_url() }}logout">
+        <div class="icon">
+          <i class="fa fa-edit"></i>
+        </div>
+        &nbsp;&nbsp;{{ line('menu_logout', 'main') }}
+      </a>
+    </li>
+    {% else %}
+    <li>
+      <a href="{{ base_url() }}">
+        <div class="icon">
+          <i class="fa fa-dashboard"></i>
+        </div>
+        &nbsp;&nbsp;{{ line('menu_dashboard', 'main') }}
+      </a>
+    </li>
+    <li>
+      <a href="{{ base_url() }}login">
+        <div class="icon">
+          <i class="fa fa-sign-in"></i>
+        </div>
+        &nbsp;&nbsp;{{ line('sign_in', 'button') }}
+      </a>
+    </li>
+    <li>
+      <a href="{{ base_url() }}register">
+        <div class="icon">
+          <i class="fa fa-users"></i>
+        </div>
+        &nbsp;&nbsp;{{ line('sign_up', 'button') }}
+      </a>
+    </li>
+    <li>
+      <a href="{{ base_url() }}page/how_to_learn">
+        <div class="icon">
+          <i class="fa fa-book"></i>
+        </div>
+        &nbsp;&nbsp;{{ line('how_to_learn', 'footer') }}
+      </a>
+    </li>
+    <li>
+      <a href="{{ base_url() }}page/how_to_teach">
+        <div class="icon">
+          <i class="fa fa-book"></i>
+        </div>
+        &nbsp;&nbsp;{{ line('how_to_teach', 'footer') }}
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+</div>

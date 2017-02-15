@@ -1,0 +1,28 @@
+<script>
+  // LOAD MORE AJAX
+  var sort_by = $('#sort_by').val();
+  var search = $('#search').val();
+
+  var get_course = function (page, sort_by, search) {
+    $.ajax({
+      url: "{{ base_url() }}course/get_ajax_courses",
+      type: 'GET',
+      data: {page: page, sort_by: sort_by, search: search}
+    }).done(function (response) {
+      var response = JSON.parse(response);
+
+      response[1] ? $('#load_more').show() : $('#load_more').hide();
+
+      $("#ajax-course-card").append(response[0]);
+      $('#load_more').data('val', ($('#load_more').data('val') + 1));
+    });
+  };
+
+  get_course(0, sort_by, search);
+
+  $("#load_more").click(function (e) {
+    e.preventDefault();
+    var page = $(this).data('val');
+    get_course(page, sort_by, search);
+  });
+</script>

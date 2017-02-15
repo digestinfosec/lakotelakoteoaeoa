@@ -1,0 +1,16 @@
+{% include 'public/course/course_card.twig' %}
+<div class="box-action-btm">
+  {# <div class="box-number-pack">
+    <div class="name">
+      Number of Pax
+    </div>
+    <div class="input">
+      <input type="number" name="number_of_pax" class="form-control" disabled value="{{ carts[course.rowid].qty }}">
+    </div>
+  </div> #}
+  <a {# href="{{ base_url('dashboard/student/order/delete') }}?id={{ course.rowid }}" #} class="box-delete-wrapper" onclick="confirmDeleteModal('{{ course.rowid }}')">
+    <div class="box-delete-cart color-sgogo-yellow">
+      <i class="fa fa-trash"></i>
+    </div>
+  </a>
+</div>

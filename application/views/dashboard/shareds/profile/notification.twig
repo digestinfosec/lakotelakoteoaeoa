@@ -1,0 +1,74 @@
+{% extends 'layout/app/teacher_dashboard.twig' %}
+{% set titleName = line('dashboard_shared_title', 'dashboard') %}
+{% set menu = "dashboard/shareds/menu_profile.twig" %}
+
+{% block dashboard_content %}
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content-body">
+        {{ form_open('') }}
+          <div class="profile-form-wrapper">
+            {% if session.login.is_teacher %}
+            <div class="col-md-6">
+              <h4>{{ line('dashboard_201', 'dashboard') }}</h4>
+            </div>
+            <div class="col-md-6">
+              <h4>{{ line('dashboard_204', 'dashboard') }}</h4>
+            </div>
+            <div class="col-md-6">
+              <label for="notification">{{ line('dashboard_202', 'dashboard') }}</label>
+              <div class="select-sgogo">
+                {% set options = {
+                '0': { 'label': line('no', 'button'), 'value': 0 },
+                '1': { 'label': line('yes', 'button'), 'value': 1 },
+                } %}
+                {{ sg_field('select', 'notification_class_register', teacher_details, {id: 'notification_class_register', class:'form-control'}, '', options) }}
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="notification">{{ line('dashboard_205', 'dashboard') }}</label>
+              <div class="select-sgogo">
+                {% set options = {
+                '0': { 'label': line('no', 'button'), 'value': 0 },
+                '1': { 'label': line('yes', 'button'), 'value': 1 },
+                } %}
+                {{ sg_field('select', 'notification_newsletter', user_details, {id: 'notification_newsletter', class:'form-control'}, '', options) }}
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="notification">{{ line('dashboard_203', 'dashboard') }}</label>
+              <div class="select-sgogo">
+                {% set options = {
+                '0': { 'label': line('no', 'button'), 'value': 0 },
+                '1': { 'label': line('yes', 'button'), 'value': 1 },
+                } %}
+                {{ sg_field('select', 'notification_class_add_wishlist', teacher_details, {id: 'notification_class_add_wishlist', class:'form-control'}, '', options) }}
+              </div>
+            </div>
+            {% else %}
+            <div class="col-md-12">
+              <h4>{{ line('dashboard_204', 'dashboard') }}</h4>
+            </div>
+            <div class="col-md-6">
+              <label for="notification">{{ line('dashboard_205', 'dashboard') }}</label>
+              <div class="select-sgogo">
+                {% set options = {
+                '0': { 'label': line('no', 'button'), 'value': 0 },
+                '1': { 'label': line('yes', 'button'), 'value': 1 },
+                } %}
+                {{ sg_field('select', 'notification_newsletter', user_details, {id: 'notification_newsletter', class:'form-control'}, '', options) }}
+              </div>
+            </div>
+            {% endif %}
+            <div class="col-md-12">
+              <div class="break5"></div>
+              <input type="submit" class="btn btn-md-gray" value="{{ line('dashboard_104', 'dashboard') }}">
+            </div>          
+            <div class="break-notification"></div>
+          </div>
+        {{ form_close() }}  
+      </div>
+      <div class="break"></div>
+    </div>
+  </div>
+{% endblock %}

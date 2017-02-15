@@ -1,0 +1,35 @@
+{% extends 'layout/app/student_dashboard.twig' %}
+{% set titleName = line('dashboard_shared_title', 'dashboard') %}
+{% set menu = "dashboard/student/menu_credit.twig" %}
+
+{% block dashboard_content %}
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content-body">
+        <div class="payment-history-wrapper">
+          <div class="table-responsive">
+            <table class="table table-hover table-striped">
+              <tr>
+                <td>{{line('date', 'field')}}</td>
+                <td>{{line('debit', 'field')}}</td>
+                <td>{{line('credit', 'field')}}</td>
+                <td>{{line('note', 'field')}}</td>
+              </tr>
+              {% for history in histories %}
+                <tr>
+                  <td>{{ history.created_at|date('j F Y') }}</td>
+                  <td>
+                    {{delimiter_number(currency, history.debit)}}</td>
+                  <td>
+                    {{delimiter_number(currency, history.credit)}}
+                  </td>
+                  <td>{{ line(history.description, 'dashboard' ) }}</td>
+                </tr>
+              {% endfor %}
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

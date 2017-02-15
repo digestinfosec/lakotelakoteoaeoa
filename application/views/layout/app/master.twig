@@ -1,0 +1,96 @@
+{% include('shared/_doctype.twig') %}
+<html lang="en" class="no-js">
+<head>
+  {% include('shared/app/_page_title.twig') %}
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- SEARCH ENGINE OPTIMATION -->
+  <meta name="description" content="{{ (meta_description ?: "skillagogo is all about learning, teaching and having a great time. We are social education platform with a simple objective to bring together passionate teachers and passionate learners. At skillagogo, we want to make the whole learning process become more social and more interactive.") | striptags }}">
+  <meta name="google" content="sitelinkssearchbox" />
+  <meta name="robots" content="nofollow" />
+
+  <!-- MOBILE VERSION RESPONSIVE -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0"/>
+
+  <!-- Add to homescreen And color theme-->
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-title" content="skillagogo">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+
+  <!-- Theme color for chrome, firefox and opera-->
+  <meta name="theme-color" content="#8186C1"/>
+
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#8186C1">
+
+  <!-- iOS Safari -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="HandheldFriendly" content="true"/>
+
+  {% block seo_fb %}
+    <!-- START SHARE FACEBOOK -->
+    <meta property="og:url" content="{{ current_url() }}"/>
+    <meta property="og:type" content="product"/>
+    <meta property="og:title" content="{{ meta_title ?: "skillagogo" }}"/>
+    <meta property="og:description" content="{{ (meta_description ?: "skillagogo is all about learning, teaching and having a great time. We are social education platform with a simple objective to bring together passionate teachers and passionate learners. At skillagogo, we want to make the whole learning process become more social and more interactive.") | striptags }}"/>
+    <meta property="og:image" content="{{ meta_image ?: base_url() ~ 'assets/images/home-logo.png' }}"/>
+    <meta property="fb:app_id" content="275035462828886"/>
+    <meta property="fb:admins" content="1406217450"/>
+  {% endblock %}
+
+  {% block seo_tw %}
+    <!-- START SHARE TWITTER -->
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@skillagogo"/>
+    <meta name="twitter:title" content="{{ meta_title ?: "skillagogo" }}">
+    <meta name="twitter:description" content="{{ (meta_description ?: "skillagogo is all about learning, teaching and having a great time. We are social education platform with a simple objective to bring together passionate teachers and passionate learners. At skillagogo, we want to make the whole learning process become more social and more interactive.") | striptags }}"/>
+    <meta name="twitter:creator" content="@skillagogo"/>
+    <meta name="twitter:image:src" content="{{ meta_image ?: '' }}"/>
+    <meta name="twitter:domain" content="skillagogo.com"/>
+  {% endblock seo_tw %}
+
+  {% block seo_gg %}
+    <!-- START SHARE GOOGLE PLUS -->
+    <meta itemprop="url" content="{{ current_url() }}"/>
+    <meta itemprop="name" content="{{ meta_title ?: "skillagogo" }}"/>
+    <meta itemprop="description" content="{{ (meta_description ?: "skillagogo is all about learning, teaching and having a great time. We are social education platform with a simple objective to bring together passionate teachers and passionate learners. At skillagogo, we want to make the whole learning process become more social and more interactive.") | striptags }}"/>
+    <meta itemprop="image" content="{{ meta_image ?: '' }}"/>
+  {% endblock seo_gg %}
+
+  {% include('shared/app/_include_css_assets.twig') %}
+  {% block css %}{% endblock %}
+  {% include('shared/_shim.twig') %}
+  <script>
+    var base_url = '{{ base_url() }}';
+  </script>
+  <link rel="icon" type="image/ico" href="{{ base_url() }}assets/images/favicon.ico"/>
+</head>
+
+<body class="{{ bodyClass }}">
+  <div class="skillagogo-wrapper">
+
+    {{ header0 ? include('layout/app/header_0.twig') }}
+    {{ header1 ? include('layout/app/header_1.twig') }}
+    {{ header2 ? include('layout/app/header_2.twig') }}
+    {{ header3 ? include('layout/app/header_3.twig') }}
+
+    {% include('shared/_flash_message.twig') %}
+
+    {% block content %}{% endblock %}
+
+    {{ footer ? include('layout/app/footer.twig') }}
+  <a class="scrollup"></a>
+  </div>
+
+  {% include('shared/app/_include_js_scripts.twig') %}
+  {% block script %}{% endblock %}
+  {% include('layout/app/zopim.twig') %}
+  {% include('layout/app/hotjar.twig') %}
+  {% if user_login is null %}
+    {% include 'shared/app/_include_modal_reg_js_script.twig' %}
+  {% endif %}
+
+</body>
+</html>

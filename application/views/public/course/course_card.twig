@@ -1,0 +1,125 @@
+
+{% if course.category_parent == 1 %}
+  {% set colorCategories = "purple" %}
+{% elseif course.category_parent == 15 %}
+  {% set colorCategories = "blue-light" %}
+{% elseif course.category_parent == 21 %}
+  {% set colorCategories = "red" %}
+{% elseif course.category_parent == 25 %}
+  {% set colorCategories = "yellow" %}
+{% elseif course.category_parent == 30 %}
+  {% set colorCategories = "purple-light" %}
+{% else %}
+  {% set colorCategories = "green-dark" %}
+{% endif %}
+<div class="list-classes card-{{ colorCategories }}">
+  <a class="heart {% if course.wishlist_status == true %}active{% endif %}" data-id="{{ course.course_id }}">
+    <i class="fa fa-heart"></i>
+  </a>
+  <a href="{{ site_url('course/detail/' ~ course.unique_id ~ '-' ~ course.slug) }}" class="overlay-blur">
+    <div class="box-image">
+      <div class="image-wrapper-ratio aspect-ratio _16x9">
+        {% if course.images is not empty %}
+          {% set image = course.images|first %}
+          <img src="{{ base_url() }}images/class/{{ image.title }}" alt="">
+        {% else %}
+          <img src="{{ base_url() }}assets/images//image_default_class_review.png" alt="">
+        {% endif %}
+      </div>
+      <div class="pricing">
+        <div class="text-center">
+          <div class="box-pricing">
+            {{ delimiter_number(course.currency, course.price) }}
+          </div>
+        </div>
+      </div>
+      {% set last_schedule = course.schedules|last %}
+      {% if course.publish_status == 1 %}
+      <div class="label-card bg-sgogo-gray">
+        Draft
+      </div>
+      {% elseif 'now'|date('Y-m-d') > last_schedule.date %}
+      <div class="label-card bg-sgogo-red">
+        <span>Finished</span>
+      </div>
+      {% endif %}
+    </div>
+    <div class="box-info">
+      <div class="box-middle">
+        <div class="title">
+          {{ course.title }}
+        </div>
+        {% if button_add_rating %}
+          <a href="{{ site_url('dashboard/rating/new_rating/' ~ course.course_id) }}">
+            <button type="button">Add rating</button>
+          </a>
+        {% endif %}
+      </div>
+      <div class="box-bottom">
+        <div class="box-location-time">
+          <div class="col-lg-12">
+            <div class="description-teacher">
+              {{ course.first_name }} {{ course.last_name }}
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="list-locatime">
+              <div class="icon color-sgogo-gray-clear">
+                <i class="fa fa-clock-o"></i>
+              </div>
+              <div class="desc color-sgogo-gray-clear2">
+                {% if is_cart %}
+                {% set start_time = strtotime(course.date ~ ' ' ~ course.start_time) %}
+                {{ date('j M Y', start_time) }}
+                {% else %}
+                {% set schedule = course.schedules|first %}
+                {% set start_time = strtotime(schedule.date ~ ' ' ~ schedule.start_time) %}
+                {{ date('j M Y', start_time) }}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="list-locatime">
+              <div class="icon color-sgogo-gray-clear">
+                <i class="fa fa-map-marker"></i>
+              </div>
+              <div class="desc color-sgogo-gray-clear2">
+                {% if is_cart %}
+                {{ course.city }}
+                {% else %}
+                {{ schedule.city }}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="box-bottom-second">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <i class="fa fa-comments color-sgogo-gray-clear"></i>
+            &nbsp;&nbsp;<span class="counting color-sgogo-gray-clear2">{{ course.comment_count }}</span>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <div class="box-rating">
+              {% set rate = course.rate.rate_avg|number_format %}
+              {% if rate %}
+                {% for i in range(1, rate) %}
+                  <img src="{{ base_url() }}assets/images/rating-active.png" alt="">
+                {% endfor %}
+                {% if rate < 5 %}
+                  {% for i in range(rate, 4) %}
+                    <img src="{{ base_url() }}assets/images/rating.png" alt="">
+                  {% endfor %}
+                {% endif %}
+              {% else %}
+                {% for i in range(1, 5) %}
+                  <img src="{{ base_url() }}assets/images/rating.png" alt="">
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>

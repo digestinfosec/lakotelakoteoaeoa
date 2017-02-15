@@ -1,0 +1,76 @@
+{% extends 'layout/app/student_dashboard.twig' %}
+{% set titleName = line('dashboard_shared_title', 'dashboard') %}
+{% set menu = "dashboard/student/menu_comment.twig" %}
+
+{% block dashboard_content %}
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content-body">
+        {% if courses %}
+          {% for course in courses %}
+            {% set schedule = course.schedules|first %}
+            {% set course_date_start = strtotime(schedule.date ~ ' ' ~ schedule.start_time) %}
+            {% set course_date_end = strtotime(schedule.date ~ ' ' ~ schedule.end_time) %}
+            <div class="comments-wrapper">
+              <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                  {% include('dashboard/shareds/_class_schedule.twig') %}
+                </div>
+                <div class="col-md-6"></div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="box-title-comment">
+                    <div class="title-big">
+                      {{ line('dashboard_12', 'dashboard') }} {{ course.title }}
+                    </div>
+                    {% if course.comment_count > 3 %}
+                      <a href="{{ site_url('dashboard/comment/view/' ~ course.course_id) ~ '/index' }}"
+                         class="title-small color-sgogo-red">
+                        {{ line('dashboard_47', 'dashboard') }}
+                      </a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  {% if course.comment_count > 0 %}
+                  {% for comment in course.comments %}
+                    <div class="list-comment">
+                      <div class="date-title">
+                        <div class="title">
+                          {{ comment.first_name }} {{ comment.last_name }}
+                        </div>
+                        <div class="date">
+                          {{ convert_to_timezone(session.ip_address, comment.comment_time)|date("j F Y \\a\\t g.ia") }}
+                        </div>
+                      </div>
+                      <div class="description">
+                        {{ url_to_html(comment.comment)|raw }}
+                      </div>
+                    </div>
+                  {% endfor %}
+                  {% else %}
+                  <div class="alert alert-info">
+                    {{ line('dashboard_56', 'dashboard') }}
+                  </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+          {% include('dashboard/shareds/_pagination.twig') %}
+        {% else %}
+          <div class="row">
+            <div class="col-md-12">
+              <div class="alert alert-info">
+                {{ line('dashboard_13', 'dashboard') }}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

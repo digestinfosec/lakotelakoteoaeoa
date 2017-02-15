@@ -1,0 +1,565 @@
+{% extends 'layout/app/master.twig' %}
+{% set titleName = "" %}
+{% set header0 = true %}
+{% set footer = true %}
+
+{% block css %}
+  <link href="{{ base_url() }}assets/css/animate.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+  <header class="header-mobile-skillagogo header-mobile-skillagogo-home">
+    <div class="box-element">
+      <div class="swipe-area"></div>
+      <a data-toggle=".skillagogo-wrapper" id="sidebar-toggle">
+        <button class="c-hamburger c-hamburger--htx">
+          <span>toggle menu</span>
+        </button>
+      </a>
+      <div class="logo">
+        <a href="{{ base_url() }}"> <span class="logo-skillagogo"></span> </a>
+      </div>
+    </div>
+  </header>
+
+  {% include('layout/app/menu_mobile.twig') %}
+
+  <div class="navbar navbar-inverse scroll-to-fixed main-nav">
+    <div class="container">
+      <div class="col-md-12">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-skillagogo"
+                  aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{ base_url() }}">
+            <img alt="Brand" src="{{ base_url() }}assets/images/home-logo.png" class="logo-navbar-homepage"> </a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-skillagogo">
+          <ul class="nav navbar-nav navbar-right">
+            {% if user_login %}
+              <li>
+                <a data-toggle="collapse" data-parent="#home-accordion" href="#collapseOne" aria-expanded="false"
+                   aria-controls="collapseOne" class="btn-hitwork">{{ line('how', 'button') }}</a>
+              </li>
+              <li>
+                <div id="basic" data-input-name="country" data-selected-country="{{ session.location }}"
+                       data-countries='{"SG": "Singapore","ID": "Indonesia"}'></div>
+              </li>
+              {# <li>
+                <div class="box-bell dropdown">
+                  <div class="box-icon-rounded dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="true">
+                    <div class="icon">
+                      <i class="fa fa-bell-o"></i>
+                    </div>
+                  </div>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu0">
+                    <div class="bell-header">
+                      <div class="title">12 pending notifications</div>
+                    </div>
+                    <div class="bell-body">
+                      <div class="listing-notifications">
+                        <div class="info-left">
+                          <div class="avatar">
+                            <img src="{{ base_url() }}assets/images/fathan.jpg" alt="">
+                          </div>
+                        </div>
+                        <div class="info-right">
+                          <div class="info-one">
+                            <div class="name">Fathan R</div>
+                            <div class="time">
+                              <div class="desc">
+                                <i class="fa fa-clock-o"></i>
+                                <span>12 Mins ago</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="info-two">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="listing-notifications">
+                        <div class="info-left">
+                          <div class="avatar">
+                            <img src="{{ base_url() }}assets/images/febri.jpg" alt="">
+                          </div>
+                        </div>
+                        <div class="info-right">
+                          <div class="info-one">
+                            <div class="name">Febryan</div>
+                            <div class="time">
+                              <div class="desc">
+                                <i class="fa fa-clock-o"></i>
+                                <span>12 Mins ago</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="info-two">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="listing-notifications">
+                        <div class="info-left">
+                          <div class="avatar">
+                            <img src="{{ base_url() }}assets/images/maulana.jpg" alt="">
+                          </div>
+                        </div>
+                        <div class="info-right">
+                          <div class="info-one">
+                            <div class="name">Maulana M</div>
+                            <div class="time">
+                              <div class="desc">
+                                <i class="fa fa-clock-o"></i>
+                                <span>12 Mins ago</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="info-two">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="listing-notifications">
+                        <div class="info-left">
+                          <div class="avatar">
+                            <img src="{{ base_url() }}assets/images/afif.jpg" alt="">
+                          </div>
+                        </div>
+                        <div class="info-right">
+                          <div class="info-one">
+                            <div class="name">Afif Akbar I</div>
+                            <div class="time">
+                              <div class="desc">
+                                <i class="fa fa-clock-o"></i>
+                                <span>12 Mins ago</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="info-two">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="bell-footer">
+                      <div class="title">see all messages</div>
+                    </div>
+                  </ul>
+                </div>
+              </li> #}
+              <li class="wd-270">
+                <div class="box-user-profile">
+                  <div class="box-avatar dropdown">
+                    <div class="avatar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                         aria-expanded="true">
+                      <img src="{{ base_url() }}images/avatar/{{ user_login.avatar }}" alt="">
+                    </div>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                      <li>
+                        <a href="{{ base_url() }}dashboard"> <i
+                            class="fa fa-dashboard"></i> {{ line('menu_dashboard', 'main') }} </a>
+                      </li>
+                      <li>
+                      {% if user_login['is_student'] == '1' and session.carts|length > 0 %}
+                      <li>
+                        <a href="{{ base_url() }}dashboard/student/order/cart"> <i
+                            class="fa fa-shopping-cart"></i> {{ line('menu_cart', 'main') }} </a>
+                      </li>
+                      {% endif %}
+                      </li>
+                      <li>
+                        <a href="{{ base_url() }}dashboard/profile"> <i
+                            class="fa fa-edit"></i> {{ line('menu_profile', 'main') }} </a>
+                      </li>
+                      <li>
+                        <a href="{{ base_url() }}logout"> <i
+                            class="fa fa-sign-out"></i> {{ line('menu_logout', 'main') }} </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="name-country">
+                    <div class="name">{{ user_login.first_name }}</div>
+                  </div>
+                </div>
+              </li>
+            {% else %}
+              <li>
+                <a data-toggle="collapse" data-parent="#home-accordion" href="#collapseOne" aria-expanded="false"
+                   aria-controls="collapseOne" class="btn-hitwork">{{ line('how', 'button') }}</a></li>
+              <li><a href="#" data-toggle="modal"
+                     data-target="#skillagogo-signin">{{ line('sign_in', 'button') }}</a></li>
+              <li><a href="#" data-toggle="modal"
+                     data-target="#skillagogo-signup">{{ line('sign_up', 'button') }}</a></li>
+              <li>
+                <div id="basic" data-input-name="country" data-selected-country="{{ session.location }}"
+                     data-countries='{"SG": "Singapore","ID": "Indonesia"}'></div>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+        {% if user_login is null %}
+          {% include('layout/app/modal_reglogin.twig') %}
+          {% include 'layout/app/modal_tospp.twig' %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div id="count-indocators" class="carousel-skillagogo carousel slide" data-ride="carousel" data-interval="5000">
+    <ol class="carousel-indicators">
+      <li data-target="#count-indocators" data-slide-to="0" class="active"></li>
+      <li data-target="#count-indocators" data-slide-to="1"></li>
+      <li data-target="#count-indocators" data-slide-to="2"></li>
+      <li data-target="#count-indocators" data-slide-to="3"></li>
+      <li data-target="#count-indocators" data-slide-to="4"></li>
+    </ol>
+    {% if session.login.is_teacher == true or session.login is not defined %}
+      {% set create_class %}
+        <a href="{{ dashboard_url('teacher/course/new_course') }}" class="btn btn-create-class"> {{ line('create', 'button') }} </a>
+      {% endset %}
+    {% else %}
+      {% set create_class %}
+        <a href="#" class="btn btn-create-class" data-toggle="modal" data-target="#QuestionCreateClass"> {{ line('create', 'button') }} </a>
+      {% endset %}
+    {% endif %}
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <div class="overlay-transparent-slider"></div>
+        <img src="{{ base_url() }}assets/images/banner/new_version/banner-dance2-min.jpg">
+        <div class="container">
+          <div class="col-md-12">
+            <div class="carousel-caption">
+              <div class="title">
+                {{ line('head_1', 'homepage') }}
+              </div>
+              <div class="description">
+                {{ line('sub_1', 'homepage') }}
+              </div>
+              {{ create_class }}
+              <a href="{{ base_url('course') }}" class="btn btn-browse-class"> {{ line('browse', 'button') }} </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="overlay-transparent-slider"></div>
+        <img src="{{ base_url() }}assets/images/banner/new_version/banner-pottery2-min.jpg">
+        <div class="container">
+          <div class="col-md-12">
+            <div class="carousel-caption">
+              <div class="title">
+                {{ line('head_2', 'homepage') }}
+              </div>
+              <div class="description">
+                {{ line('sub_2', 'homepage') }}
+              </div>
+              {{ create_class }}
+              <a href="{{ base_url('course') }}" class="btn btn-browse-class"> {{ line('browse', 'button') }} </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="overlay-transparent-slider"></div>
+        <img src="{{ base_url() }}assets/images/banner/new_version/banner-photo2-min.jpg">
+        <div class="container">
+          <div class="col-md-12">
+            <div class="carousel-caption">
+              <div class="title">
+                {{ line('head_3', 'homepage') }}
+              </div>
+              <div class="description">
+                {{ line('sub_3', 'homepage') }}
+              </div>
+              {{ create_class }}
+              <a href="{{ base_url('course') }}" class="btn btn-browse-class"> {{ line('browse', 'button') }} </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="overlay-transparent-slider"></div>
+        <img src="{{ base_url() }}assets/images/banner/banner-music-min.jpg">
+        <div class="container">
+          <div class="col-md-12">
+            <div class="carousel-caption">
+              <div class="title">
+                {{ line('head_4', 'homepage') }}
+              </div>
+              <div class="description">
+                {{ line('sub_4', 'homepage') }}
+              </div>
+              {{ create_class }}
+              <a href="{{ base_url('course') }}" class="btn btn-browse-class"> {{ line('browse', 'button') }} </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="overlay-transparent-slider"></div>
+        <img src="{{ base_url() }}assets/images/banner/new_version/banner-student2-min.jpg">
+        <div class="container">
+          <div class="col-md-12">
+            <div class="carousel-caption">
+              <div class="title">
+                {{ line('head_5', 'homepage') }}
+              </div>
+              <div class="description">
+                {{ line('sub_5', 'homepage') }}
+              </div>
+              {{ create_class }}
+              <a href="{{ base_url('course') }}" class="btn btn-browse-class"> {{ line('browse', 'button') }} </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="box-search-slider">
+      <div class="container">
+        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+          <div class="inner-addon left-addon">
+            <i class="fa fa-search"></i>
+            <form id="search-class" method="get" action="{{ base_url('course') }}">
+            <input type="text" id="course-search" autocomplete="off" name="search"
+                   class="form-control input-search-slider search-class"
+                   placeholder="{{ line('search', 'button') }}">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="skillagogo-categories">
+    <div class="container">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="box-title-categories text-center">
+          <div class="title-categories">
+            {{ line('title', 'categories') }}
+          </div>
+          <div class="description-categories">
+            {{ line('sub', 'categories') }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="box-listing-categories">
+          <div class="row">
+            {% include('public/categories_card.twig') %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="browse-class" class="skillagogo-classes">
+    <div class="container">
+      <div class="col-md-12">
+        <div class="box-title-classes text-center">
+          <div class="title-classes">
+            {{ line('title_classes', 'course') }}
+          </div>
+          <div class="description-classes">
+            {{ line('sub', 'course') }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="col-md-12">
+        <div class="box-listing-classes">
+          <div class="row">
+            {% for course in courses %}
+              <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                {% include('public/course/course_card.twig') %}
+              </div>
+              <!-- col -->
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="col-ld-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="text-center">
+          <a href="{{ base_url('course') }}" class="btn btn-load-more"> {{ line('browse', 'button') }} </a>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block script %}
+  <script src="{{ base_url() }}assets/js/jquery.scolltofixed.js"></script>
+  <script src="{{ base_url() }}assets/js/handlebars.min.js"></script>
+  <script src="{{ base_url() }}assets/js/typeahead.bundle.js"></script>
+  <script>
+    $(window).scroll(function () {
+      // SCROLL TO BOTTOM CHANGE COLOR NAVBAR TOP
+      var scroll = $(window).scrollTop();
+      if (scroll > 0) {
+        $('.main-nav').addClass('nav-colored');
+      } else {
+        $('.main-nav').removeClass('nav-colored');
+      }
+    });
+
+    $(window).load(function () {
+      // setTimeout(function () {
+      //   $('#skillagogo-newsletter').modal('show');
+      // }, 10000);
+    });
+
+    $(document).ready(function () {
+      $('.carousel-skillagogo .item').each(function(){
+        var topSlider = $('.carousel-skillagogo').outerWidth() / 2.1;
+        $(this).css('height', topSlider);
+      });
+
+      // AUTO HEIGHT CAROUSEL
+      $(document).ready(sizeContent);
+      $(window).resize(sizeContent);
+      function sizeContent() {
+        var newHeight = $(window).height() + "px";
+        $("img.autoHeight").css("height", newHeight);
+        $('.carousel-skillagogo .item').each(function(){
+          var topSlider = $('.carousel-skillagogo').outerWidth() / 2.1;
+          $(this).css('height', topSlider);
+        });
+      }
+
+      $('.scroll-to-fixed').scrollToFixed();
+
+//      $('a[href^="#"]').on('click', function (e) {
+//        e.preventDefault();
+//
+//        var target = this.hash,
+//          $target = $(target);
+//
+//        $('html, body').stop().animate({
+//          'scrollTop': $target.offset().top
+//        }, 900, 'swing', function () {
+//          window.location.hash = target;
+//        });
+//      });
+
+      $('#birth_date').combodate({
+        customClass: 'form-control',
+        firstItem: 'skillagogo',
+        minYear: 1950,
+        maxYear: 1998,
+        smartDays: true,
+        indonesian: {{ session.location == 'ID' ? 1 : 0 }}
+      });
+
+      // $(".btn-hitwork").click(function () {
+      //   $("#fixed-top").css("position", "inherit");
+      //   $("#fixed-top").css("background", "#F05150");
+      // });
+
+      // $("#btn-close-slide").click(function () {
+      //   $("#fixed-top").css("position", "fixed");
+      //   $("#fixed-top").css("background", "transparent");
+      // });
+
+      $.validator.setDefaults({
+        highlight: function (element, errorClass, validClass) {
+          if (element.type === "radio") {
+            this.findByName(element.name).addClass('error-radio');
+          } else {
+            $(element).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+            $(element).closest('.form-group').find('i.fa').remove();
+            $(element).closest('.form-group').append('<i class="fa fa-exclamation fa-lg form-control-feedback"></i>');
+          }
+        },
+        unhighlight: function (element, errorClass, validClass) {
+          if (element.type === "radio") {
+            this.findByName(element.name).removeClass(errorClass).addClass(validClass);
+          } else {
+            $(element).closest('.form-group').removeClass('has-error has-feedback').addClass('has-success has-feedback');
+            $(element).closest('.form-group').find('i.fa').remove();
+            $(element).closest('.form-group').append('<i class="fa fa-check fa-lg form-control-feedback"></i>');
+          }
+        }
+      });
+
+      // EFFECT ANIMATION CSS
+      (function ($) {
+        function doAnimations(elems) {
+          var animEndEv = 'webkitAnimationEnd animationend';
+          elems.each(function () {
+            var $this = $(this),
+              $animationType = $this.data('animation');
+            $this.addClass($animationType).one(animEndEv, function () {
+              $this.removeClass($animationType);
+            });
+          });
+        }
+
+        var $myCarousel = $('#count-indocators'),
+          $firstAnimatingElems = $myCarousel.find('.item:first').find("[data-animation ^= 'animated']");
+        $myCarousel.carousel();
+        doAnimations($firstAnimatingElems);
+        $myCarousel.carousel('pause');
+        $myCarousel.on('slide.bs.carousel', function (e) {
+          var $animatingElems = $(e.relatedTarget).find("[data-animation ^= 'animated']");
+          doAnimations($animatingElems);
+        });
+      })(jQuery);
+
+      // TYPEAHEAD
+      var classes = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('title'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+          url: "{{ base_url() }}course/get_course_title?query=%QUERY",
+          wildcard: '%QUERY'
+        }
+      });
+
+      $('.search-class').typeahead({
+          highlight: true
+        },
+        {
+          name: 'course',
+          display: 'title',
+          source: classes,
+          templates: {
+//            header: '<h3 class="league-name">Class</h3>',
+            suggestion: Handlebars.compile('<div><div href="#" class="box-sgogo-typeahead"><div class="box-image"><div class="image"><img src="{{ (images is not empty) ? (base_url() ~ 'images/class/' ~ images|first) : (base_url() ~ 'assets/images/image_default_skillagogo_small.png') }}" alt=""></div></div><div class="box-description"><div class="title">{{ '{{ title }}' }}</div><div class="teacher-name">{{ '{{ first_name }} {{ last_name }}' }}</div><div class="price">{{ '{{ currency_with_price }}' }}</div></div></div></div>'),
+            notFound: "<span style='margin-left: 20px'>Your search returned 0 results.</span>"
+          }
+        })
+
+        .on('typeahead:select', function (event, selection) {
+          window.location = "{{ base_url('course/detail/') }}/" + selection.id;
+        })
+
+        .on('keypress', function(e){
+          if (e.which == 13) {
+            $('form#search-class').submit()
+          }
+        });
+
+      // Click auto search move to down
+      function scrollToAnchor(aid) {
+        var aTag = $(aid);
+        $('html,body').animate({scrollTop: aTag.offset().top}, 'slow');
+      }
+
+      $("#course-search").click(function () {
+        scrollToAnchor('.btn-browse-class:visible');
+      });
+
+      $(".btn-hitwork").mouseup(function() {
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        return false;
+      });
+
+    });
+  </script>
+
+  {#{% include('shared/app/_include_loadmore_js_script.twig') %}#}
+  {% include('shared/app/_include_wishlist_js_script.twig') %}
+{% endblock %}

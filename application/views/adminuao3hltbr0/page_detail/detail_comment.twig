@@ -1,0 +1,105 @@
+{% extends 'adminuao3hltbr0/master.twig' %}
+{% set titleName = "Comment detail" %}
+  {% set bodyClass = "fixed-topbar fixed-sidebar theme-sdtl color-purple" %}
+
+    {% block css %}
+      <link href="{{ base_url() }}assets/adminuao3hltbr0/plugins/datatables/dataTables.min.css" rel="stylesheet">
+    {% endblock %}
+
+    {% block content %}
+      <section>
+        {% include 'adminuao3hltbr0/shareds/sidebar.twig' %}
+        <div class="main-content">
+          {% include 'adminuao3hltbr0/shareds/top_bar.twig' %}
+          <div class="page-content">
+            <div class="header">
+              <h2><strong>Detail</strong> comment</h2>
+              <div class="breadcrumb-wrapper">
+                <ol class="breadcrumb">
+                  <li><a href="{{ base_url() }}/adminuao3hltbr0/home">Dashboard</a></li>
+                  <li class="active">Page detail comment</li>
+                </ol>
+              </div>
+              {% include 'adminuao3hltbr0/shareds/alert.twig' %}
+            </div>
+            <div class="row">
+              <div class="col-md-12 p-t-0">
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                    <h2>Comment from : <strong>{{ comment.first_name }} {{ comment.last_name }}</strong></h2>
+                    <h4>Published : {{ convert_to_timezone(session.ip_address, comment.created_at) }}</h4>
+                    <br>
+                    <blockquote>
+                      {{ comment.comment|raw }}
+                    </blockquote>
+                    <br>
+                    {{ form_open('') }}
+                    <div class="pull-left">
+                      {% if comment.status == status_pending %}
+                        <button name="publish" type="submit" value="publish" class="btn btn-success">
+                          <i class="fa fa-check"></i> Publish
+                        </button>
+                      {% elseif comment.status == status_accepted %}
+                        <button name="unpublish" type="submit" value="unpublish" class="btn btn-warning">
+                          <i class="fa fa-info-circle"></i> Unpublish
+                        </button>
+                      {% endif %}
+                      <button name="delete" type="submit" value="delete" class="btn btn-danger">
+                        <i class="fa fa-trash-o"></i> Delete
+                      </button>
+                    </div>
+                    {{ form_close() }}
+                    <div class="pull-right">
+                      <a href="{{ base_url() }}adminuao3hltbr0/page_comment" class="btn btn-default">
+                        <i class="fa fa-bars"></i>
+                        Back to List Comment
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% include 'adminuao3hltbr0/shareds/footer.twig' %}
+          </div>
+        </div>
+      </section>
+      {# section for sidebar left and searching full #}
+      <div class="loader-overlay">
+        <div class="spinner">
+          <div class="bounce1"></div>
+          <div class="bounce2"></div>
+          <div class="bounce3"></div>
+        </div>
+      </div>
+    {% endblock %}
+
+    {% block script %}
+      <a href="#" class="scrollup"><i class="fa fa-angle-up"></i></a>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery/jquery-1.11.1.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery/jquery-migrate-1.2.1.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery-ui/jquery-ui-1.11.2.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/gsap/main-gsap.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap/js/bootstrap.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery-cookies/jquery.cookies.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery-block-ui/jquery.blockUI.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootbox/bootbox.min.js"></script>
+      <script
+        src="{{ base_url() }}assets/adminuao3hltbr0/plugins/mcustom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap-dropdown/bootstrap-hover-dropdown.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/charts-sparkline/sparkline.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/retina/retina.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/select2/select2.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/icheck/icheck.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/backstretch/backstretch.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/charts-chartjs/Chart.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/js/sidebar_hover.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/js/widgets/notes.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/js/quickview.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/js/pages/search.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/js/plugins.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/js/application.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/datatables/jquery.dataTables.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/js/pages/table_dynamic.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/js/layout.js"></script>
+    {% endblock %}

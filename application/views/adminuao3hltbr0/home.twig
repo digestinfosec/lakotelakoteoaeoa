@@ -1,0 +1,131 @@
+{% extends 'adminuao3hltbr0/master.twig' %}
+{% set titleName = "home" %}
+{% set bodyClass = "fixed-topbar fixed-sidebar theme-sdtl color-purple" %}
+{% block content %}
+  <section>
+    {% include 'adminuao3hltbr0/shareds/sidebar.twig' %}
+    <div class="main-content">
+      {% include 'adminuao3hltbr0/shareds/top_bar.twig' %}
+      <div class="page-content">
+        <div class="header">
+          <h2><strong>Dashboard</strong></h2>
+        </div>
+        <div class="row m-t-10">
+          <div class="col-xlg-2 col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="panel">
+              <div class="panel-content widget-info">
+                <div class="row">
+                  <div class="left">
+                    <i class="fa fa-umbrella bg-green"></i>
+                  </div>
+                  <div class="right">
+                    {% if count_comments %}
+                    <p class="number countup" data-from="0" data-to="{{count_comments}}">0</p>
+                    {% else %}
+                    <p class="number">0</p>
+                    {% endif %}
+                    <p class="text">Comments</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xlg-2 col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="panel">
+              <div class="panel-content widget-info">
+                <div class="row">
+                  <div class="left">
+                    <i class="fa fa-bug bg-blue"></i>
+                  </div>
+                  <div class="right">
+                    {% if count_courses %}
+                    <p class="number countup" data-from="0" data-to="{{count_courses}}">0</p>
+                    {% else %}
+                    <p class="number">0</p>
+                    {% endif %}
+                    <p class="text">Classes</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xlg-2 col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="panel">
+              <div class="panel-content widget-info">
+                <div class="row">
+                  <div class="left">
+                    <i class="fa fa-fire-extinguisher bg-red"></i>
+                  </div>
+                  <div class="right">
+                    {% if count_teachers %}
+                    <p class="number countup" data-from="0" data-to="{{count_teachers}}">0</p>
+                    {% else %}
+                    <p class="number">0</p>
+                    {% endif %}
+                    <p class="text">Teacher</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xlg-2 col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="panel">
+              <div class="panel-content widget-info">
+                <div class="row">
+                  <div class="left">
+                    <i class="icon-microphone bg-purple"></i>
+                  </div>
+                  <div class="right">
+                    {% if count_students %}
+                    <p class="number countup" data-from="0" data-to="{{count_students}}">0</p>
+                    {% else %}
+                    <p class="number">0</p>
+                    {% endif %}
+                    <p class="text">Student</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% include 'adminuao3hltbr0/shareds/footer.twig' %}
+      </div>
+    </div>
+  </section>
+  <div class="loader-overlay">
+    <div class="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <a href="#" class="scrollup"><i class="fa fa-angle-up"></i></a>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery/jquery-1.11.1.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery/jquery-migrate-1.2.1.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery-ui/jquery-ui-1.11.2.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/gsap/main-gsap.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap/js/bootstrap.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery-cookies/jquery.cookies.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery-block-ui/jquery.blockUI.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootbox/bootbox.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/mcustom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap-dropdown/bootstrap-hover-dropdown.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/charts-sparkline/sparkline.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/retina/retina.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/select2/select2.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/icheck/icheck.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/backstretch/backstretch.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/charts-chartjs/Chart.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/sidebar_hover.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/widgets/notes.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/quickview.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/pages/search.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/plugins.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/countup/countUp.min.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/application.js"></script>
+  <script src="{{ base_url() }}assets/adminuao3hltbr0/js/layout.js"></script>
+{% endblock %}

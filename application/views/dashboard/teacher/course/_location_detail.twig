@@ -1,0 +1,90 @@
+<div class="location-detail">
+  <div class="col-md-6">
+    <div class="col-md-12 break">
+      <div class="form-create-class">
+        <div class="row">
+          <label for="end_goal">
+            <span>{{ line('address_line_1','create_course') }}<sup class="required-sag">*</sup></span>
+          </label>
+          <input type="hidden" name="schedule_ids[]" value="{{ schedule.schedule_id }}" id="schedule_ids" class="schedule_ids">
+          <input type="hidden" name="address_ids[]" value="{{ schedule.address_id }}" id="address_ids" class="address_ids">
+          <input type="text" class="map-field form-control venue-name" placeholder="{{ line('enter_address_1', 'field') }}"
+                 required rows="8" name="schedule_address_1[]" value="{{ schedule.address_line1 }}">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="col-md-12 break">
+      <div class="form-create-class">
+        <div class="row">
+          <label for="end_goal">
+            <span>{{ line('address_line_2','create_course') }}</span>
+          </label>
+          <input type="text" class="form-control route" placeholder="{{ line('enter_address_2', 'field') }}" rows="8"
+                 name="schedule_address_2[]" value="{{ schedule.address_line2 }}">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="col-md-12 break">
+      <div class="row form-create-class">
+        <label for="class_leader">
+          <span>{{ line('unit_number','create_course') }}</span>
+        </label>
+        <input type="text" class="map-field form-control" placeholder=""
+               name="schedule_unit_number[]" value="{{ schedule.unit_number }}">
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="col-md-12 break">
+      <div class="row form-create-class">
+        <label for="class_leader">
+          <span>{{ line('postal_code','create_course') }}<sup class="required-sag">*</sup></span>
+        </label>
+        <input type="text" class="map-field form-control postal_code" placeholder=""
+               name="schedule_postal_code[]" required value="{{ schedule.postal_code }}">
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="col-md-12 break">
+      <div class="row form-create-class">
+        <label for="class_leader">
+          <span>{{ line('city','create_course') }}<sup class="required-sag">*</sup></span>
+        </label>
+        <input type="text" class="map-field form-control locality administrative_area_level_2" placeholder=""
+               name="schedule_city[]" required value="{{ schedule.city }}">
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="col-md-12 break">
+      <div class="row form-create-class">
+        <label for="class_leader">
+          <span>{{ line('state','create_course') }}<sup class="required-sag">*</sup></span>
+        </label>
+        <input type="text" class="map-field form-control locality administrative_area_level_1"
+               placeholder="" name="schedule_state[]" required
+               value="{{ schedule.state }}">
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 break">
+    <div class="form-create-class">
+      <label for="class_leader">
+        <span>{{ line('country','create_course') }}<sup class="required-sag">*</sup></span>
+      </label>
+      <input type="text" class="map-field form-control country" placeholder=""
+             name="schedule_country[]" value="{{ schedule.country }}">
+    </div>
+  </div>
+</div>
+<div class="col-md-12">
+  <div class="row">
+    <input type="hidden" name="schedule_lat[]" class="form-control latitude" id="maps1-lat" value="{{ schedule.latitude ?: ''}}"/>
+    <input type="hidden" name="schedule_long[]" class="form-control longitude" id="maps1-lon" value="{{ schedule.longitude ?: '' }}"/>
+  </div>
+</div>

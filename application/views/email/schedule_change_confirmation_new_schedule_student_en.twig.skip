@@ -1,0 +1,77 @@
+{% extends 'email/shared/body.twig' %}
+
+
+{% block content %}
+    <tr>
+      <td align="center" valign="top" class="fix-box">
+        <table align="center" border="0" cellspacing="0" cellpadding="0" class="container" bgcolor="#ffffff" style="background-color: #ffffff; border-bottom:1px solid #c7c7c7; ">
+          <tbody>
+            <tr>
+              <td valign="top">
+                <table align="center" border="0" cellspacing="0" cellpadding="0" class="full-width" bgcolor="#ffffff" style="background-color:#ffffff;">
+                  <tbody>
+                    <tr>
+                      <td height="50"></td>
+                    </tr>
+                    <tr>
+                      <td valign="top">
+                        <table border="0" cellspacing="0" cellpadding="0" align="left">
+                          <tbody>
+                            <tr>
+                              <td style="font-size: 18px; line-height: 22px; font-family:Roboto,Open Sans, Arial,Tahoma, Helvetica, sans-serif; color:#555555; font-weight:300; text-align:left;">
+                                <span style="color: #555555; font-weight:300;">
+                                  <a href="#" style="text-decoration: none; color: #555555; font-weight: 300;">
+                                    {{ line('a1', 'email') }} {{first_name}},
+                                  </a>
+                                </span>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="15">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="font-size: 13px; line-height: 22px; font-family:Arial,Tahoma, Helvetica, sans-serif; color:#a3a2a2; font-weight:300; text-align:left; ">
+                                {{ line('a78', 'email') }}
+                                <br>
+                                <br>
+                                <b>Name of class </b> : {{ course.title }}
+                                <br>
+                                <b>New class schedule</b> : <br/>
+                                {% for schedule in schedules %}
+                                  {% set start_time = strtotime(schedule.date ~ ' ' ~ schedule.start_time) %}
+                                  - {{ date('j F Y g.ia', start_time) }}
+                                  <br>
+                                {% endfor %}                                
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="25">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="font-size: 13px; line-height: 22px; font-family:Arial,Tahoma, Helvetica, sans-serif; color:#a3a2a2; font-weight:300; text-align:left; ">
+                                {{ line('a79', 'email') }}
+                                <br>
+                                <br>
+                                {{ line('a3', 'email') }}
+                                <br>
+                                The skillagogo team
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td height="50"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+{% endblock %}

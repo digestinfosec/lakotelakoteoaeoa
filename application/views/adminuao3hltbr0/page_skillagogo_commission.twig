@@ -1,0 +1,129 @@
+{% extends 'adminuao3hltbr0/master.twig' %}
+{% set titleName = "teacher fee payment" %}
+{% set bodyClass = "fixed-topbar fixed-sidebar theme-sdtl color-purple" %}
+
+{% block css %}
+<link href="{{ base_url() }}assets/adminuao3hltbr0/plugins/datatables/dataTables.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<section>
+  {% include 'adminuao3hltbr0/shareds/sidebar.twig' %}
+  <div class="main-content">
+    {% include 'adminuao3hltbr0/shareds/top_bar.twig' %}
+    <div class="page-content">
+      <div class="header">
+        <h2><strong>All Payout and Payment</strong> </h2>
+        <div class="breadcrumb-wrapper">
+          <ol class="breadcrumb">
+            <li><a href="{{ base_url() }}/adminuao3hltbr0/home">Dashboard</a></li>
+            <li class="active">All Payout and Payment</li>
+          </ol>
+        </div>
+        {% include 'adminuao3hltbr0/shareds/alert.twig' %}
+      </div>
+      <div class="row">
+        <div class="col-lg-12 portlets">
+          <h2> Payout and Commission</h2>
+          <div class="panel">
+            <div class="panel-content pagination2 table-responsive">
+              {{ form_open('') }}
+              <div class="pull-left">
+                <button name="download" type="submit" value="download" class="btn btn-default">
+                  <i class="fa fa-download"></i> Download Excel
+                </button>
+              </div>
+              <table id="table3" class="table table-hover dataTable">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Teacher's Name</th>
+                    <th>Currency</th>
+                    <th>Class ID</th>
+                    <th>Payment Date</th>
+                    <th>Quantity</th>
+                    <th>Payout Amount</th>
+                    <th>Commission</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% set i=1 %}
+                  {% for payout in payouts %}
+                    <tr>
+                      <input type="hidden" name="currency" value="{{ currency }}"/>
+                      <td>{{i}}</td>
+                      <td>{{ payout.teacher_first_name ~ " " ~ payout.teacher_last_name }}</td>
+                      <td>{{ payout.currency }}</td>
+                      <td>{{ payout.unique_id }}</td>
+                      <td>
+                        {% if payout.payment_date == "0000-00-00" %}
+                          -
+                        {% else %}
+                          {{ payout.payment_date }}
+                        {% endif %}
+                      </td>
+                      <td>{{ payout.total_pax }}</td>
+                      <td>{{ delimiter_number_dec(payout.currency, payout.amount * payout.total_pax, 2) }}</td>
+                      <td>{{ delimiter_number_dec(payout.currency, payout.skillagogo_commission * payout.total_pax, 2) }}</td>
+                      <td>{{ delimiter_number_dec(payout.currency, (payout.skillagogo_commission + payout.amount) * payout.total_pax, 2) }}</td>
+                      <td>
+                        <a href="{{ site_url('adminuao3hltbr0/page_skillagogo_commission/detail/' ~ payout.class_id) }}" class="btn btn-default btn-sm">
+                          <i class="fa fa-eye"></i> View
+                        </a>
+                      </td>
+                    </tr>
+                  {% set i=i+1 %}
+                  {% endfor %}
+                </tbody>
+              </table>
+              {{ form_close() }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% include 'adminuao3hltbr0/shareds/footer.twig' %}
+    </div>
+  </div>
+</section>
+{# section for sidebar left and searching full #}
+<div class="loader-overlay">
+  <div class="spinner">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<a href="#" class="scrollup"><i class="fa fa-angle-up"></i></a>
+<script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery/jquery-1.11.1.min.js"></script>
+<script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery/jquery-migrate-1.2.1.min.js"></script>
+<script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery-ui/jquery-ui-1.11.2.min.js"></script>
+<script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/gsap/main-gsap.min.js"></script>
+<script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery-cookies/jquery.cookies.min.js"></script>
+<script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery-block-ui/jquery.blockUI.min.js"></script>
+<script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootbox/bootbox.min.js"></script>
+<script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/mcustom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap-dropdown/bootstrap-hover-dropdown.min.js"></script>
+<script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/charts-sparkline/sparkline.min.js"></script>
+<script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/retina/retina.min.js"></script>
+<script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/select2/select2.min.js"></script>
+<script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/icheck/icheck.min.js"></script>
+<script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/backstretch/backstretch.min.js"></script>
+<script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+<script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/charts-chartjs/Chart.min.js"></script>
+<script src="{{ base_url() }}assets/adminuao3hltbr0/js/sidebar_hover.js"></script>
+<script src="{{ base_url() }}assets/adminuao3hltbr0/js/widgets/notes.js"></script>
+<script src="{{ base_url() }}assets/adminuao3hltbr0/js/quickview.js"></script>
+<script src="{{ base_url() }}assets/adminuao3hltbr0/js/pages/search.js"></script>
+<script src="{{ base_url() }}assets/adminuao3hltbr0/js/plugins.js"></script>
+<script src="{{ base_url() }}assets/adminuao3hltbr0/js/application.js"></script>
+<script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="{{ base_url() }}assets/adminuao3hltbr0/js/pages/table_dynamic.js"></script>
+<script src="{{ base_url() }}assets/adminuao3hltbr0/js/layout.js"></script>
+{% endblock %}

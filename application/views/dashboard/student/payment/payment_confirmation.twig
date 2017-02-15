@@ -1,0 +1,120 @@
+{% extends 'layout/app/master.twig' %}
+{% set titleName = line('title_4', 'dashboard') %}
+{% set ClassHeader1Color = "bg-sgogo-purple" %}
+{% set ClassHeader2Color = "bg-sgogo-purple" %}
+{% set ClassBoxRightTitleColor = "purple" %}
+{% set SubTitleHeader = line('dashboard_401', 'dashboard') %}
+{% set header0, header1, header2, header3 = true, true, true, true %}
+{% set footer = true %}
+
+{% block css %}
+    <link href="{{ base_url() }}assets/css/datetimepicker.bootstrap.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<section class="static-contact-us-wrapper">
+	<div class="container">
+		<div class="col-md-12">
+			<div class="form-contact">
+				<div class="box-form">
+					<div class="title">{{ line('dashboard_402', 'dashboard') }}</div>
+					<div class="sub-title">
+						{{ line('dashboard_403', 'dashboard') }}
+                        {% set i=0 %}
+                        {% for class in order_class %}
+                            {% set i=i+1 %}
+                            <span style="font-family:gotham-bold">{{ class.class_title }}</span>
+                            {% if order_class|length > 1 and i < order_class|length -1 %}
+                                ,
+                            {% elseif i == order_class|length -1 %}
+                                , dan
+                            {% else %}
+                                .
+                            {% endif %}
+                        {% endfor %}
+                        {{ line('dashboard_404', 'dashboard') }}
+                    </div>
+                    <div class="break"></div>
+                    <div class="break"></div>
+                    {{ form_open_multipart('') }}
+                    <div class="row">
+                     <div class="col-md-6">
+                        <input type="hidden" name="id" value="{{ order.payment_id }}">
+                        <label>{{ line('dashboard_405', 'dashboard') }}</label>
+                        {{ sg_field('text', 'transaction_code', order.transaction_code, {class: 'form-control'}) }}
+                    </div>
+                    <div class="col-md-6">
+                        <label>{{ line('dashboard_406', 'dashboard') }}<sup class="required-sag">*</sup></label>
+                        {{ sg_field('text', 'bank_destination_name', order.bank_destination_name, {class: 'form-control'}) }}
+                    </div>
+                    <div class="col-md-6">
+                        <label>{{ line('dashboard_407', 'dashboard') }}<sup class="required-sag">*</sup></label>
+                        {{ sg_field('text', 'bank_name', order.bank_name, {class: 'form-control'}) }}
+                    </div>
+                    <div class="col-md-6">
+                        <label>{{ line('dashboard_408', 'dashboard') }}<sup class="required-sag">*</sup></label>
+                        {{ sg_field('text', 'bank_account_name', order.bank_account_name, {class: 'form-control'}) }}
+                    </div>
+                    <div class="col-md-6">
+                        <label>{{ line('dashboard_409', 'dashboard') }}<sup class="required-sag">*</sup></label>
+                        {{ sg_field('text', 'amount', order.amount - order.credit_amount, {class: 'form-control'}) }}
+                    </div>
+                    <div class="col-md-6">
+                        <label>{{ line('dashboard_410', 'dashboard') }}</label>
+                        {{ sg_field('text', 'payment_date', order.payment_date, {class: 'form-control datetimepicker'}) }}
+                    </div>
+                    <div class="col-md-12">
+                        <label for="photo">{{ line('dashboard_411', 'dashboard') }}</label>
+                        <input type="file" id="input-file-now" name="photo" accept="image/*" onchange="readURL(this);" data-default-file="{{ base_url() }}images/transaction_bank/{{ order.photo }}">
+                        {% if order.photo %}
+                            <br>
+                            <div class="preview-picture" style="width: 40%; overflow: hidden;">
+                            <img id="upload-image-user" style="width: 100%; height: auto;" src="{{ base_url() }}images/transaction_bank/{{order.photo}}">
+                        </div>
+                        {% else %}
+                            <br>
+                            <div class="preview-picture" style="width: 40%; overflow: hidden;">
+                            <img id="upload-image-user" style="width: 100%; height: auto;">
+                        </div>
+                        {% endif %}
+                        <br>
+                    </div>
+                    <div class="col-md-12">
+                        <input type="submit" value="Kirim" class="btn btn-lg-gray">
+                    </div>
+                </div>
+                {{ form_close() }}
+            </div>
+        </div>
+    </div>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+{% endblock %}
+
+{% block script %}
+    <script>
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          $('#upload-image-user')
+          .attr('src', e.target.result)
+      };
+
+      reader.readAsDataURL(input.files[0]);
+    }
+    }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script src="{{ base_url() }}assets/js/datetimepicker.bootstrap.js"></script>
+    <script>
+        $('.datetimepicker').datetimepicker({
+            format: 'YYYY/MM/DD'
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,160 @@
+{% extends 'adminuao3hltbr0/master.twig' %}
+{% set titleName = "Comment detail" %}
+  {% set bodyClass = "fixed-topbar fixed-sidebar theme-sdtl color-purple" %}
+
+    {% block css %}
+      <link href="{{ base_url() }}assets/adminuao3hltbr0/plugins/datatables/dataTables.min.css" rel="stylesheet">
+    {% endblock %}
+
+    {% block content %}
+      <section>
+        {% include 'adminuao3hltbr0/shareds/sidebar.twig' %}
+        <div class="main-content">
+          {% include 'adminuao3hltbr0/shareds/top_bar.twig' %}
+          <div class="page-content">
+            <div class="header">
+              <h2><strong>Detail</strong> Receipt</h2>
+              <div class="breadcrumb-wrapper">
+                <ol class="breadcrumb">
+                  <li><a href="{{ base_url() }}/adminuao3hltbr0/home">Dashboard</a></li>
+                  <li class="active">Detailed Receipt</li>
+                </ol>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 p-t-0">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="pull-left">
+                      <h4 class="w-500 c-gray f-14"><strong>FROM</strong></h4>
+                      <address>
+                        <p class="width-300 m-t-10"><strong>{{orders[0].customer_first_name}} {{orders[0].customer_last_name}}</strong></p>
+                      </address>
+                    </div>
+                    {#
+                    <div class="pull-right">
+                      <h4 class="w-500 c-gray f-14"><strong>TO</strong></h4>
+                      <address>
+                        <p class="width-300 m-t-10"><strong>Maxime.</strong></p>
+                        <p class="width-300">Singapore</p>
+                        <abbr title="Phone">P:</abbr> (123) 456-789
+                      </address>
+                    </div>
+                    #}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-12 m-t-20 m-b-20">
+                        <p><strong>Receipt Date:</strong> <span>{{ order.created_at|date("j M Y")}}</span></p>
+                        {#<p><strong>Due Date:</strong> <span></span></p>#}
+                      </div>
+                    </div>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th class="text-left">Class ID</th>
+                          <th class="text-left">Class Name</th>
+                          <th class="text-left">Teacher</th>
+                          <th class="text-left">Category</th>
+                          <th class="text-left">PAX</th>
+                          <th style="" class="text-right">TOTAL</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for order in orders %}
+                          <tr class="item-row">
+                            <td>
+                              <div class="text-primary">
+                                <a href="{{ site_url('course/detail/' ~ order.class_id) }}">
+                                  <p><strong>{{order.unique_id}}</strong></p>
+                                </a>
+                              </div>                            
+                            </td>
+                            <td>
+                                <p><strong>{{order.class_title}}</strong></p>
+                            </td>
+                            <td>
+                              <p class="cost">{{order.teacher_first_name}} {{order.teacher_last_name}}</p>
+                            </td>
+                            <td>
+                              <p class="cost">{{order.category_name}}</p>
+                            </td>
+                            <td>
+                              <p class="cost">{{order.pax}}</p>
+                            </td>
+                            <td class="text-right price">{{ delimiter_number(order.currency, order.price * order.pax) }}</td>
+                          </tr>
+                        {% endfor %}
+                        {% if orders[0].with_credit %}
+                        <tr>
+                          <td colspan="4"</td>
+                          <td class="text-right">
+                            <div>
+                              Credit Usage
+                            </div>
+                          </td>
+                          <td>
+                            <div class="text-right">
+                              <strong style="color:red">- {{ delimiter_number(orders[0].currency, orders[0].credit_amount) }}</strong>
+                            </div>
+                          </td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                          <td colspan="4" rowspan="3"></td>
+                          <td class="text-right">
+                            <div><strong>Total</strong></div>
+                          </td>
+                          <td class="text-right" id="total">{{ delimiter_number(orders[0].currency, orders[0].total - orders[0].credit_amount) }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% include 'adminuao3hltbr0/shareds/footer.twig' %}
+          </div>
+        </div>
+      </section>
+      {# section for sidebar left and searching full #}
+      <div class="loader-overlay">
+        <div class="spinner">
+          <div class="bounce1"></div>
+          <div class="bounce2"></div>
+          <div class="bounce3"></div>
+        </div>
+      </div>
+    {% endblock %}
+
+    {% block script %}
+      <a href="#" class="scrollup"><i class="fa fa-angle-up"></i></a>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery/jquery-1.11.1.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery/jquery-migrate-1.2.1.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery-ui/jquery-ui-1.11.2.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/gsap/main-gsap.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap/js/bootstrap.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery-cookies/jquery.cookies.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/jquery-block-ui/jquery.blockUI.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootbox/bootbox.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/mcustom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap-dropdown/bootstrap-hover-dropdown.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/charts-sparkline/sparkline.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/retina/retina.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/select2/select2.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/icheck/icheck.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/backstretch/backstretch.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/charts-chartjs/Chart.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/js/sidebar_hover.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/js/widgets/notes.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/js/quickview.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/js/pages/search.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/js/plugins.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/js/application.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/plugins/datatables/jquery.dataTables.min.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/js/pages/table_dynamic.js"></script>
+      <script src="{{ base_url() }}assets/adminuao3hltbr0/js/layout.js"></script>
+    {% endblock %}
